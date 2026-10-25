@@ -1,0 +1,2499 @@
+{
+    "schema_version":  1,
+    "language":  "de",
+    "description":  "Lokale Formulierungen. Parametergrammatiken für Mathe, Winkel, Timer und Notizen bleiben in intents.py. Kein unsicheres Fuzzy-Ausführen.",
+    "intents":  [
+                    {
+                        "intent":  "confirmation",
+                        "phrases":  [
+                                        "ja",
+                                        "bestätigen",
+                                        "bestätige"
+                                    ],
+                        "args":  {
+
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  false,
+                        "requires":  [
+                                         "dialogue.pending_confirmation"
+                                     ],
+                        "negative_examples":  [
+                                                  "nicht bestätigen"
+                                              ]
+                    },
+                    {
+                        "intent":  "stop",
+                        "phrases":  [
+                                        "stopp",
+                                        "stop",
+                                        "stoppe sofort",
+                                        "hör sofort auf",
+                                        "bleib stehen",
+                                        "keine bewegung mehr",
+                                        "bewege dich nicht",
+                                        "beweg dich nicht",
+                                        "hör auf dich zu bewegen",
+                                        "halte deinen kopf an",
+                                        "stoppe deine bewegungen",
+                                        "sofort anhalten"
+                                    ],
+                        "args":  {
+
+                                 },
+                        "risk":  "medium",
+                        "negation_safe":  true,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+                                                  "nicht stopp"
+                                              ]
+                    },
+                    {
+                        "intent":  "cancel",
+                        "phrases":  [
+                                        "abbrechen",
+                                        "nein",
+                                        "vergiss es",
+                                        "doch nicht",
+                                        "anmeldung abbrechen",
+                                        "gesichtsanmeldung abbrechen",
+                                        "stoppe die registrierung",
+                                        "ich möchte nicht registriert werden",
+                                        "speichere mein gesicht nicht"
+                                    ],
+                        "args":  {
+
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  true,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+
+                                              ]
+                    },
+                    {
+                        "intent":  "tracking.disable",
+                        "phrases":  [
+                                        "hör auf mir zu folgen",
+                                        "verfolge mich nicht mehr",
+                                        "folge mir nicht mehr",
+                                        "schalte die gesichtsverfolgung aus",
+                                        "deaktiviere face-tracking",
+                                        "deaktiviere die gesichtsverfolgung",
+                                        "stell das tracking ab",
+                                        "tracking aus"
+                                    ],
+                        "args":  {
+
+                                 },
+                        "risk":  "medium",
+                        "negation_safe":  true,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+                                                  "nicht hör auf mir zu folgen"
+                                              ]
+                    },
+                    {
+                        "intent":  "camera.disable",
+                        "phrases":  [
+                                        "schalte die kamera aus",
+                                        "stoppe die kamera",
+                                        "kamera aus",
+                                        "deaktiviere deine kamera",
+                                        "deaktiviere die kamera",
+                                        "beende die kamera"
+                                    ],
+                        "args":  {
+
+                                 },
+                        "risk":  "medium",
+                        "negation_safe":  true,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+                                                  "nicht schalte die kamera aus"
+                                              ]
+                    },
+                    {
+                        "intent":  "privacy.enable",
+                        "phrases":  [
+                                        "aktiviere den privatsphäre-modus",
+                                        "hör auf zuzuhören",
+                                        "mikrofon aus",
+                                        "schalte dein mikrofon aus",
+                                        "schalte kamera und mikrofon aus",
+                                        "privatsphäre an"
+                                    ],
+                        "args":  {
+
+                                 },
+                        "risk":  "medium",
+                        "negation_safe":  true,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+                                                  "nicht aktiviere den privatsphäre-modus"
+                                              ]
+                    },
+                    {
+                        "intent":  "llm.disable",
+                        "phrases":  [
+                                        "keine cloud-ki verwenden",
+                                        "nutze nur lokale antworten",
+                                        "schalte cloud-ki aus",
+                                        "schalte die cloud-ki aus",
+                                        "verwende nur lokale antworten",
+                                        "beantworte meine fragen lokal",
+                                        "deaktiviere die ki",
+                                        "schalte in den offline-modus"
+                                    ],
+                        "args":  {
+
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  true,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+
+                                              ]
+                    },
+                    {
+                        "intent":  "greeting",
+                        "phrases":  [
+                                        "hallo",
+                                        "hey",
+                                        "guten morgen",
+                                        "guten tag",
+                                        "guten abend",
+                                        "bist du da",
+                                        "bist du wach",
+                                        "schön dich zu sehen",
+                                        "ich bin wieder da",
+                                        "hallo jemand zu hause",
+                                        "lange nicht gesehen"
+                                    ],
+                        "args":  {
+
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+
+                                              ]
+                    },
+                    {
+                        "intent":  "thanks",
+                        "phrases":  [
+                                        "danke",
+                                        "vielen dank",
+                                        "gut gemacht",
+                                        "das hast du gut gemacht",
+                                        "danke dir",
+                                        "dankeschön",
+                                        "besten dank"
+                                    ],
+                        "args":  {
+
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+
+                                              ]
+                    },
+                    {
+                        "intent":  "about",
+                        "phrases":  [
+                                        "wer bist du",
+                                        "wie heißt du",
+                                        "was bedeutet rovo",
+                                        "wofür steht rovo",
+                                        "wofür steht dein name",
+                                        "was bist du",
+                                        "bist du ein roboter",
+                                        "stell dich vor",
+                                        "erzähle etwas über dich"
+                                    ],
+                        "args":  {
+
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+
+                                              ]
+                    },
+                    {
+                        "intent":  "capabilities",
+                        "phrases":  [
+                                        "was kannst du",
+                                        "welche funktionen hast du",
+                                        "was kannst du alles machen",
+                                        "was funktioniert offline",
+                                        "was kannst du offline",
+                                        "was kannst du nicht",
+                                        "welche funktionen sind gerade aktiv"
+                                    ],
+                        "args":  {
+
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+
+                                              ]
+                    },
+                    {
+                        "intent":  "persona",
+                        "phrases":  [
+                                        "hast du gefühle",
+                                        "kannst du fühlen",
+                                        "bist du traurig",
+                                        "bist du lebendig",
+                                        "hast du echte emotionen"
+                                    ],
+                        "args":  {
+
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+
+                                              ]
+                    },
+                    {
+                        "intent":  "time.now",
+                        "phrases":  [
+                                        "wie spät ist es",
+                                        "wie viel uhr haben wir",
+                                        "uhrzeit",
+                                        "sag mir die uhrzeit",
+                                        "welche uhrzeit haben wir",
+                                        "wie viel uhr ist es",
+                                        "hast du die uhrzeit"
+                                    ],
+                        "args":  {
+
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+
+                                              ]
+                    },
+                    {
+                        "intent":  "date.today",
+                        "phrases":  [
+                                        "welches datum ist heute",
+                                        "welcher wochentag ist heute",
+                                        "welchen tag haben wir",
+                                        "welcher tag ist heute",
+                                        "sag mir das datum",
+                                        "was für ein tag ist heute",
+                                        "heutiges datum"
+                                    ],
+                        "args":  {
+
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+
+                                              ]
+                    },
+                    {
+                        "intent":  "date.week",
+                        "phrases":  [
+                                        "welche kalenderwoche haben wir",
+                                        "in welcher kalenderwoche sind wir",
+                                        "aktuelle kalenderwoche",
+                                        "welche woche ist heute"
+                                    ],
+                        "args":  {
+
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+
+                                              ]
+                    },
+                    {
+                        "intent":  "system.status",
+                        "phrases":  [
+                                        "systemstatus",
+                                        "mach einen systemcheck",
+                                        "hast du fehler",
+                                        "geht es deinem system gut",
+                                        "wie geht es deinem system",
+                                        "zeige deinen systemstatus",
+                                        "sind alle komponenten verbunden"
+                                    ],
+                        "args":  {
+
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+
+                                              ]
+                    },
+                    {
+                        "intent":  "battery.status",
+                        "phrases":  [
+                                        "wie viel akku hast du",
+                                        "wie voll ist dein akku",
+                                        "wie ist dein akkustand",
+                                        "wie viel prozent akku hast du",
+                                        "wie lange hält dein akku noch",
+                                        "wirst du gerade geladen",
+                                        "bist du am strom angeschlossen",
+                                        "wie hoch ist deine akkuspannung"
+                                    ],
+                        "args":  {
+
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+
+                                              ]
+                    },
+                    {
+                        "intent":  "llm.status",
+                        "phrases":  [
+                                        "welches ki-modell benutzt du",
+                                        "welches modell nutzt du",
+                                        "welches ki-modell ist eingestellt",
+                                        "welche ki verwendest du",
+                                        "welches modell ist ausgewählt",
+                                        "ist die ki gerade aktiv"
+                                    ],
+                        "args":  {
+
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+
+                                              ]
+                    },
+                    {
+                        "intent":  "motion.home",
+                        "phrases":  [
+                                        "kopf in die mitte",
+                                        "geh in die startposition",
+                                        "schau geradeaus",
+                                        "home",
+                                        "schau nach vorne",
+                                        "geh zur ausgangsposition",
+                                        "nimm deine startposition ein",
+                                        "schau wieder geradeaus"
+                                    ],
+                        "args":  {
+
+                                 },
+                        "risk":  "medium",
+                        "negation_safe":  false,
+                        "requires":  [
+                                         "motion.calibrated"
+                                     ],
+                        "negative_examples":  [
+                                                  "nicht kopf in die mitte"
+                                              ]
+                    },
+                    {
+                        "intent":  "motion.repeat",
+                        "phrases":  [
+                                        "noch ein stück",
+                                        "noch ein bisschen",
+                                        "etwas weiter",
+                                        "noch etwas weiter",
+                                        "noch ein kleines stück"
+                                    ],
+                        "args":  {
+
+                                 },
+                        "risk":  "medium",
+                        "negation_safe":  false,
+                        "requires":  [
+                                         "motion.context"
+                                     ],
+                        "negative_examples":  [
+                                                  "nicht noch ein stück"
+                                              ]
+                    },
+                    {
+                        "intent":  "motion.relative",
+                        "phrases":  [
+                                        "schau nach links",
+                                        "guck nach links",
+                                        "sieh nach links",
+                                        "dreh deinen kopf nach links",
+                                        "guck mal nach links"
+                                    ],
+                        "args":  {
+                                     "axis":  "pan",
+                                     "delta":  -180
+                                 },
+                        "risk":  "medium",
+                        "negation_safe":  false,
+                        "requires":  [
+                                         "motion.calibrated"
+                                     ],
+                        "negative_examples":  [
+                                                  "nicht schau nach links"
+                                              ]
+                    },
+                    {
+                        "intent":  "motion.relative",
+                        "phrases":  [
+                                        "schau nach rechts",
+                                        "guck nach rechts",
+                                        "sieh nach rechts",
+                                        "dreh deinen kopf nach rechts",
+                                        "guck mal nach rechts"
+                                    ],
+                        "args":  {
+                                     "axis":  "pan",
+                                     "delta":  180
+                                 },
+                        "risk":  "medium",
+                        "negation_safe":  false,
+                        "requires":  [
+                                         "motion.calibrated"
+                                     ],
+                        "negative_examples":  [
+                                                  "nicht schau nach rechts"
+                                              ]
+                    },
+                    {
+                        "intent":  "motion.relative",
+                        "phrases":  [
+                                        "schau nach oben",
+                                        "guck nach oben",
+                                        "sieh nach oben"
+                                    ],
+                        "args":  {
+                                     "axis":  "tilt",
+                                     "delta":  -180
+                                 },
+                        "risk":  "medium",
+                        "negation_safe":  false,
+                        "requires":  [
+                                         "motion.calibrated"
+                                     ],
+                        "negative_examples":  [
+                                                  "nicht schau nach oben"
+                                              ]
+                    },
+                    {
+                        "intent":  "motion.relative",
+                        "phrases":  [
+                                        "schau nach unten",
+                                        "guck nach unten",
+                                        "sieh nach unten"
+                                    ],
+                        "args":  {
+                                     "axis":  "tilt",
+                                     "delta":  180
+                                 },
+                        "risk":  "medium",
+                        "negation_safe":  false,
+                        "requires":  [
+                                         "motion.calibrated"
+                                     ],
+                        "negative_examples":  [
+                                                  "nicht schau nach unten"
+                                              ]
+                    },
+                    {
+                        "intent":  "tracking.enable",
+                        "phrases":  [
+                                        "schau mich an",
+                                        "sieh mich an",
+                                        "guck mich an",
+                                        "sieh zu mir",
+                                        "guck mal zu mir",
+                                        "schau zu mir",
+                                        "folge mir",
+                                        "verfolge mein gesicht",
+                                        "folge meinem gesicht",
+                                        "aktiviere face-tracking",
+                                        "verfolge mich",
+                                        "halte mich in der mitte",
+                                        "folge meinen bewegungen",
+                                        "schau wieder zu mir"
+                                    ],
+                        "args":  {
+
+                                 },
+                        "risk":  "medium",
+                        "negation_safe":  false,
+                        "requires":  [
+                                         "camera",
+                                         "motion.calibrated"
+                                     ],
+                        "negative_examples":  [
+                                                  "nicht schau mich an"
+                                              ]
+                    },
+                    {
+                        "intent":  "camera.enable",
+                        "phrases":  [
+                                        "aktiviere deine kamera",
+                                        "schalte die kamera ein",
+                                        "starte die kamera",
+                                        "kamera an",
+                                        "aktiviere die kamera",
+                                        "schalte deine kamera an"
+                                    ],
+                        "args":  {
+
+                                 },
+                        "risk":  "medium",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+                                                  "nicht aktiviere deine kamera"
+                                              ]
+                    },
+                    {
+                        "intent":  "camera.status",
+                        "phrases":  [
+                                        "kannst du mich sehen",
+                                        "wie viele gesichter siehst du",
+                                        "ist deine kamera an",
+                                        "siehst du mein gesicht",
+                                        "hast du mich gefunden",
+                                        "siehst du jemanden",
+                                        "ist jemand vor dir",
+                                        "funktioniert deine kamera",
+                                        "ist deine kamera eingeschaltet",
+                                        "ist deine kamera aktiv",
+                                        "ist deine kamera verbunden"
+                                    ],
+                        "args":  {
+
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+
+                                              ]
+                    },
+                    {
+                        "intent":  "display.face",
+                        "phrases":  [
+                                        "sei glücklich",
+                                        "freu dich",
+                                        "zeig ein glückliches gesicht",
+                                        "lächle",
+                                        "schau fröhlich",
+                                        "zeig ein lächeln"
+                                    ],
+                        "args":  {
+                                     "face":  "HAPPY"
+                                 },
+                        "risk":  "medium",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+                                                  "nicht sei glücklich"
+                                              ]
+                    },
+                    {
+                        "intent":  "display.face",
+                        "phrases":  [
+                                        "lach mal",
+                                        "lache",
+                                        "zeig ein lachendes gesicht"
+                                    ],
+                        "args":  {
+                                     "face":  "LAUGHING"
+                                 },
+                        "risk":  "medium",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+                                                  "nicht lach mal"
+                                              ]
+                    },
+                    {
+                        "intent":  "display.face",
+                        "phrases":  [
+                                        "sei traurig",
+                                        "guck traurig",
+                                        "schau traurig",
+                                        "zeig ein trauriges gesicht"
+                                    ],
+                        "args":  {
+                                     "face":  "SAD"
+                                 },
+                        "risk":  "medium",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+                                                  "nicht sei traurig"
+                                              ]
+                    },
+                    {
+                        "intent":  "display.face",
+                        "phrases":  [
+                                        "sei wütend",
+                                        "guck böse",
+                                        "schau wütend",
+                                        "zeig ein wütendes gesicht"
+                                    ],
+                        "args":  {
+                                     "face":  "ANGRY"
+                                 },
+                        "risk":  "medium",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+                                                  "nicht sei wütend"
+                                              ]
+                    },
+                    {
+                        "intent":  "display.face",
+                        "phrases":  [
+                                        "sei überrascht",
+                                        "schau erstaunt",
+                                        "mach einen überraschten blick",
+                                        "zeig ein überraschtes gesicht"
+                                    ],
+                        "args":  {
+                                     "face":  "SURPRISED"
+                                 },
+                        "risk":  "medium",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+                                                  "nicht sei überrascht"
+                                              ]
+                    },
+                    {
+                        "intent":  "display.face",
+                        "phrases":  [
+                                        "sei müde",
+                                        "gähn mal",
+                                        "zeig mir deinen schlafmodus",
+                                        "zeig müde augen"
+                                    ],
+                        "args":  {
+                                     "face":  "SLEEPY"
+                                 },
+                        "risk":  "medium",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+                                                  "nicht sei müde"
+                                              ]
+                    },
+                    {
+                        "intent":  "display.face",
+                        "phrases":  [
+                                        "sei neugierig",
+                                        "schau neugierig",
+                                        "guck neugierig"
+                                    ],
+                        "args":  {
+                                     "face":  "CURIOUS"
+                                 },
+                        "risk":  "medium",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+                                                  "nicht sei neugierig"
+                                              ]
+                    },
+                    {
+                        "intent":  "display.face",
+                        "phrases":  [
+                                        "sei verwirrt",
+                                        "schau verwirrt",
+                                        "zeig einen verwirrten blick"
+                                    ],
+                        "args":  {
+                                     "face":  "CONFUSED"
+                                 },
+                        "risk":  "medium",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+                                                  "nicht sei verwirrt"
+                                              ]
+                    },
+                    {
+                        "intent":  "display.face",
+                        "phrases":  [
+                                        "schau nachdenklich",
+                                        "zeig ein nachdenkliches gesicht",
+                                        "guck nachdenklich"
+                                    ],
+                        "args":  {
+                                     "face":  "THINKING"
+                                 },
+                        "risk":  "medium",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+                                                  "nicht schau nachdenklich"
+                                              ]
+                    },
+                    {
+                        "intent":  "display.face",
+                        "phrases":  [
+                                        "blinzel",
+                                        "blinzle",
+                                        "blinzel einmal"
+                                    ],
+                        "args":  {
+                                     "face":  "BLINK"
+                                 },
+                        "risk":  "medium",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+                                                  "nicht blinzel"
+                                              ]
+                    },
+                    {
+                        "intent":  "display.face",
+                        "phrases":  [
+                                        "zwinker",
+                                        "zwinker mit einem auge",
+                                        "zwinkere"
+                                    ],
+                        "args":  {
+                                     "face":  "WINK"
+                                 },
+                        "risk":  "medium",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+                                                  "nicht zwinker"
+                                              ]
+                    },
+                    {
+                        "intent":  "display.face",
+                        "phrases":  [
+                                        "zeig dein normales gesicht",
+                                        "zurück zum standardgesicht",
+                                        "mach die augen wieder auf",
+                                        "sei wieder normal",
+                                        "neutrales gesicht"
+                                    ],
+                        "args":  {
+                                     "face":  "NEUTRAL"
+                                 },
+                        "risk":  "medium",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+                                                  "nicht zeig dein normales gesicht"
+                                              ]
+                    },
+                    {
+                        "intent":  "audio.stop",
+                        "phrases":  [
+                                        "hör auf zu reden",
+                                        "sei still",
+                                        "hör auf zu sprechen",
+                                        "stoppe die sprachausgabe",
+                                        "ruhe bitte"
+                                    ],
+                        "args":  {
+
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+
+                                              ]
+                    },
+                    {
+                        "intent":  "audio.test",
+                        "phrases":  [
+                                        "teste deinen lautsprecher",
+                                        "spiele einen testton",
+                                        "teste die sprachausgabe",
+                                        "sprachtest",
+                                        "sag hallo"
+                                    ],
+                        "args":  {
+
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+
+                                              ]
+                    },
+                    {
+                        "intent":  "speech.repeat",
+                        "phrases":  [
+                                        "wiederhol das",
+                                        "sag das nochmal",
+                                        "was hast du gerade gesagt",
+                                        "wiederhole deine antwort",
+                                        "noch einmal bitte"
+                                    ],
+                        "args":  {
+
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+
+                                              ]
+                    },
+                    {
+                        "intent":  "music.pause",
+                        "phrases":  [
+                                        "pausiere die musik",
+                                        "musik pausieren",
+                                        "pausiere die wiedergabe"
+                                    ],
+                        "args":  {
+
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+
+                                              ]
+                    },
+                    {
+                        "intent":  "music.resume",
+                        "phrases":  [
+                                        "musik weiter",
+                                        "setze die musik fort",
+                                        "musik fortsetzen"
+                                    ],
+                        "args":  {
+
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+
+                                              ]
+                    },
+                    {
+                        "intent":  "music.stop",
+                        "phrases":  [
+                                        "stoppe die wiedergabe",
+                                        "stoppe die musik",
+                                        "musik aus",
+                                        "beende die musik"
+                                    ],
+                        "args":  {
+
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+
+                                              ]
+                    },
+                    {
+                        "intent":  "timer.status",
+                        "phrases":  [
+                                        "wie lange läuft mein timer noch",
+                                        "wie lange läuft der timer noch",
+                                        "wie viele timer laufen",
+                                        "welche timer laufen",
+                                        "zeig meine timer",
+                                        "restzeit timer",
+                                        "timerstatus"
+                                    ],
+                        "args":  {
+
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+
+                                              ]
+                    },
+                    {
+                        "intent":  "timer.cancel_one",
+                        "phrases":  [
+                                        "stoppe den timer",
+                                        "lösche den timer",
+                                        "beende den timer",
+                                        "timer abbrechen"
+                                    ],
+                        "args":  {
+
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+
+                                              ]
+                    },
+                    {
+                        "intent":  "timer.pause_one",
+                        "phrases":  [
+                                        "pausiere den timer",
+                                        "timer pausieren",
+                                        "halte den timer an"
+                                    ],
+                        "args":  {
+
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+
+                                              ]
+                    },
+                    {
+                        "intent":  "timer.resume_one",
+                        "phrases":  [
+                                        "setze den timer fort",
+                                        "timer fortsetzen",
+                                        "lass den timer weiterlaufen"
+                                    ],
+                        "args":  {
+
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+
+                                              ]
+                    },
+                    {
+                        "intent":  "notes.list",
+                        "phrases":  [
+                                        "zeig meine notizen",
+                                        "was hast du dir gemerkt",
+                                        "was hast du notiert",
+                                        "welche notizen habe ich",
+                                        "lies meine notizen vor"
+                                    ],
+                        "args":  {
+
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+
+                                              ]
+                    },
+                    {
+                        "intent":  "notes.delete_last",
+                        "phrases":  [
+                                        "lösche meine letzte notiz",
+                                        "lösch meine letzte notiz",
+                                        "entferne die letzte notiz"
+                                    ],
+                        "args":  {
+
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+
+                                              ]
+                    },
+                    {
+                        "intent":  "people.name",
+                        "phrases":  [
+                                        "ich heiße {name}",
+                                        "mein name ist {name}",
+                                        "du kannst mich {name} nennen"
+                                    ],
+                        "args":  {
+
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+
+                                              ]
+                    },
+                    {
+                        "intent":  "people.enroll",
+                        "phrases":  [
+                                        "speichere mein gesicht",
+                                        "lerne mich kennen",
+                                        "starte die gesichtsanmeldung",
+                                        "starte die gesichtsregistrierung",
+                                        "ich möchte mein gesicht registrieren",
+                                        "lerne mein gesicht"
+                                    ],
+                        "args":  {
+
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+
+                                              ]
+                    },
+                    {
+                        "intent":  "people.status",
+                        "phrases":  [
+                                        "wie weit ist die registrierung",
+                                        "wie weit ist die anmeldung",
+                                        "wie läuft die gesichtsanmeldung",
+                                        "soll ich nach links schauen",
+                                        "registrierungsstatus"
+                                    ],
+                        "args":  {
+
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+
+                                              ]
+                    },
+                    {
+                        "intent":  "people.identify",
+                        "phrases":  [
+                                        "kennst du mich",
+                                        "wer bin ich",
+                                        "erkennst du mein gesicht",
+                                        "erkennst du mich",
+                                        "wer steht vor dir",
+                                        "wie heiße ich"
+                                    ],
+                        "args":  {
+
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+
+                                              ]
+                    },
+                    {
+                        "intent":  "people.list",
+                        "phrases":  [
+                                        "welche personen kennst du",
+                                        "zeig gespeicherte gesichter",
+                                        "wie viele personen kennst du",
+                                        "zeige die personenprofile",
+                                        "wer ist gespeichert"
+                                    ],
+                        "args":  {
+
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+
+                                              ]
+                    },
+                    {
+                        "intent":  "people.facts",
+                        "phrases":  [
+                                        "was weißt du über mich",
+                                        "was hast du über mich gespeichert",
+                                        "welche informationen kennst du über mich",
+                                        "was weißt du von mir"
+                                    ],
+                        "args":  {
+
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+
+                                              ]
+                    },
+                    {
+                        "intent":  "people.fact.add",
+                        "phrases":  [
+                                        "merk dir über mich dass {fact}",
+                                        "speichere über mich dass {fact}",
+                                        "notiere zu meinem profil {fact}"
+                                    ],
+                        "args":  {
+
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+
+                                              ]
+                    },
+                    {
+                        "intent":  "people.topic",
+                        "phrases":  [
+                                        "was weißt du über mein thema {topic}",
+                                        "was weißt du über mein hobby {topic}"
+                                    ],
+                        "args":  {
+
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+
+                                              ]
+                    },
+                    {
+                        "intent":  "stationary",
+                        "phrases":  [
+                                        "fahr vorwärts",
+                                        "fahre vorwärts",
+                                        "fahr rückwärts",
+                                        "fahre nach vorne",
+                                        "fahr nach links"
+                                    ],
+                        "args":  {
+
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+
+                                              ]
+                    },
+                    {
+                        "intent":  "fun.joke",
+                        "phrases":  [
+                                        "erzähl einen witz",
+                                        "erzähl mir einen witz",
+                                        "kennst du einen guten witz",
+                                        "erzähl einen roboterwitz",
+                                        "erzähl einen schlechten witz"
+                                    ],
+                        "args":  {
+
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+
+                                              ]
+                    },
+                    {
+                        "intent":  "fun.dice",
+                        "phrases":  [
+                                        "würfle",
+                                        "wirf einen würfel",
+                                        "würfle einmal",
+                                        "wirf einen sechsseitigen würfel"
+                                    ],
+                        "args":  {
+
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+
+                                              ]
+                    },
+                    {
+                        "intent":  "fun.coin",
+                        "phrases":  [
+                                        "kopf oder zahl",
+                                        "wirf eine münze",
+                                        "münzwurf",
+                                        "entscheide mit einer münze"
+                                    ],
+                        "args":  {
+
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+
+                                              ]
+                    },
+                    {
+                        "intent":  "local.answer",
+                        "phrases":  [
+                                        "wie geht es dir",
+                                        "alles klar bei dir",
+                                        "wie läuft es",
+                                        "was machst du gerade",
+                                        "was geht ab"
+                                    ],
+                        "args":  {
+                                     "reply":  "Ich bin bereit für deine Fragen. Welche Geräte gerade verfügbar sind, kannst du im Systemstatus prüfen."
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+
+                                              ]
+                    },
+                    {
+                        "intent":  "local.answer",
+                        "phrases":  [
+                                        "tschüss",
+                                        "bis später",
+                                        "wir sehen uns",
+                                        "gute nacht",
+                                        "auf wiedersehen"
+                                    ],
+                        "args":  {
+                                     "reply":  "Bis später!"
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+
+                                              ]
+                    },
+                    {
+                        "intent":  "local.answer",
+                        "phrases":  [
+                                        "du bist cool",
+                                        "du bist lustig",
+                                        "du bist süß",
+                                        "schön dass es dich gibt"
+                                    ],
+                        "args":  {
+                                     "reply":  "Danke! Schön, dass dir Rovo gefällt."
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+
+                                              ]
+                    },
+                    {
+                        "intent":  "local.answer",
+                        "phrases":  [
+                                        "entschuldigung",
+                                        "tut mir leid",
+                                        "sorry"
+                                    ],
+                        "args":  {
+                                     "reply":  "Alles gut. Wie kann ich dir helfen?"
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+
+                                              ]
+                    },
+                    {
+                        "intent":  "local.answer",
+                        "phrases":  [
+                                        "brauchst du internet",
+                                        "funktionierst du offline",
+                                        "kannst du ohne ki funktionieren"
+                                    ],
+                        "args":  {
+                                     "reply":  "Uhr, Rechner, Timer, Notizen und registrierte Befehle funktionieren lokal. Für zusätzliche Textmodelle oder andere Netzfunktionen braucht es die eingerichtete Verbindung."
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+
+                                              ]
+                    },
+                    {
+                        "intent":  "local.answer",
+                        "phrases":  [
+                                        "wie kannst du sprechen",
+                                        "welche sprachdienste verwendest du",
+                                        "was ist spracherkennung"
+                                    ],
+                        "args":  {
+                                     "reply":  "Die lokale Spracheingabe verwendet faster-whisper; Piper erzeugt meine Stimme. Beides muss mit passenden Modellen und Audiogeräten eingerichtet sein. Ein Rovo-Wake-Word ist noch nicht vorhanden."
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+
+                                              ]
+                    },
+                    {
+                        "intent":  "local.answer",
+                        "phrases":  [
+                                        "wie bewegst du deinen kopf",
+                                        "was ist der unterschied zwischen pan und tilt"
+                                    ],
+                        "args":  {
+                                     "reply":  "Pan dreht horizontal, Tilt neigt vertikal. Nur der Bewegungsmanager darf innerhalb bestätigter Grenzen Ziele an den Nano senden."
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+
+                                              ]
+                    },
+                    {
+                        "intent":  "local.answer",
+                        "phrases":  [
+                                        "was ist ein raspberry pi",
+                                        "erkläre raspberry pi",
+                                        "was macht ein raspberry pi"
+                                    ],
+                        "args":  {
+                                     "reply":  "Ein Raspberry Pi ist ein kompakter Einplatinencomputer, auf dem beispielsweise Linux läuft."
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+
+                                              ]
+                    },
+                    {
+                        "intent":  "local.answer",
+                        "phrases":  [
+                                        "was ist ein esp32",
+                                        "was macht ein esp32",
+                                        "was ist ein mikrocontroller"
+                                    ],
+                        "args":  {
+                                     "reply":  "Ein Mikrocontroller steuert elektronische Funktionen direkt. Bei Rovo übernimmt ein Nano ESP32 die Kopf- und Displaysteuerung."
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+
+                                              ]
+                    },
+                    {
+                        "intent":  "local.answer",
+                        "phrases":  [
+                                        "was ist python",
+                                        "was bedeutet python",
+                                        "erkläre python"
+                                    ],
+                        "args":  {
+                                     "reply":  "Python ist eine Programmiersprache. Rovos zentraler Dienst ist in Python geschrieben."
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+
+                                              ]
+                    },
+                    {
+                        "intent":  "local.answer",
+                        "phrases":  [
+                                        "was ist linux",
+                                        "erkläre linux",
+                                        "was ist ein betriebssystem"
+                                    ],
+                        "args":  {
+                                     "reply":  "Ein Betriebssystem verwaltet Programme und Geräte. Linux ist ein Betriebssystemkern und Teil vieler Systeme für Computer und Raspberry Pis."
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+
+                                              ]
+                    },
+                    {
+                        "intent":  "local.answer",
+                        "phrases":  [
+                                        "was ist node-red",
+                                        "erkläre node-red",
+                                        "was macht node-red"
+                                    ],
+                        "args":  {
+                                     "reply":  "Node-RED verbindet Dienste mit grafisch bearbeitbaren Nachrichtenflüssen. Bei Rovo stellt es die Bedienoberfläche bereit."
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+
+                                              ]
+                    },
+                    {
+                        "intent":  "local.answer",
+                        "phrases":  [
+                                        "was ist ein netzwerk",
+                                        "was ist eine ip-adresse",
+                                        "was ist wlan"
+                                    ],
+                        "args":  {
+                                     "reply":  "Ein Netzwerk verbindet Geräte. IP-Adressen adressieren diese Geräte; WLAN stellt eine drahtlose Verbindung zum lokalen Netzwerk her."
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+
+                                              ]
+                    },
+                    {
+                        "intent":  "local.answer",
+                        "phrases":  [
+                                        "was ist ein servomotor",
+                                        "was macht ein servo",
+                                        "erkläre servomotoren"
+                                    ],
+                        "args":  {
+                                     "reply":  "Ein Positionsservo versucht, seinen Abtrieb auf einen vorgegebenen Winkel zu stellen. Ohne separaten Sensor kennt Rovo die tatsächliche Position nicht."
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+
+                                              ]
+                    },
+                    {
+                        "intent":  "local.answer",
+                        "phrases":  [
+                                        "was ist ein kondensator",
+                                        "was macht ein kondensator"
+                                    ],
+                        "args":  {
+                                     "reply":  "Ein Kondensator speichert elektrische Energie in einem elektrischen Feld."
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+
+                                              ]
+                    },
+                    {
+                        "intent":  "local.answer",
+                        "phrases":  [
+                                        "was ist ein widerstand",
+                                        "was macht ein widerstand"
+                                    ],
+                        "args":  {
+                                     "reply":  "Ein elektrischer Widerstand begrenzt den Stromfluss abhängig von der anliegenden Spannung."
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+
+                                              ]
+                    },
+                    {
+                        "intent":  "local.answer",
+                        "phrases":  [
+                                        "was ist stromstärke",
+                                        "was sind ampere",
+                                        "was bedeutet ampere"
+                                    ],
+                        "args":  {
+                                     "reply":  "Die elektrische Stromstärke beschreibt den Ladungsfluss pro Zeit. Ihre Einheit ist Ampere."
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+
+                                              ]
+                    },
+                    {
+                        "intent":  "local.answer",
+                        "phrases":  [
+                                        "was ist spannung",
+                                        "was sind volt",
+                                        "was bedeutet volt"
+                                    ],
+                        "args":  {
+                                     "reply":  "Elektrische Spannung beschreibt eine Potentialdifferenz. Ihre Einheit ist Volt."
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+
+                                              ]
+                    },
+                    {
+                        "intent":  "local.answer",
+                        "phrases":  [
+                                        "was ist leistung",
+                                        "was sind watt",
+                                        "was bedeutet watt"
+                                    ],
+                        "args":  {
+                                     "reply":  "Leistung ist umgesetzte Energie pro Zeit. Ihre Einheit ist Watt."
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+
+                                              ]
+                    },
+                    {
+                        "intent":  "local.answer",
+                        "phrases":  [
+                                        "was bedeutet usb",
+                                        "was ist usb"
+                                    ],
+                        "args":  {
+                                     "reply":  "USB steht für Universal Serial Bus und ist ein Standard zur Verbindung von Geräten."
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+
+                                              ]
+                    },
+                    {
+                        "intent":  "local.answer",
+                        "phrases":  [
+                                        "was ist ein algorithmus",
+                                        "erkläre algorithmus"
+                                    ],
+                        "args":  {
+                                     "reply":  "Ein Algorithmus ist eine festgelegte Folge von Schritten zur Lösung einer Aufgabe."
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+
+                                              ]
+                    },
+                    {
+                        "intent":  "local.answer",
+                        "phrases":  [
+                                        "was ist gesichtserkennung",
+                                        "wie funktioniert gesichtserkennung"
+                                    ],
+                        "args":  {
+                                     "reply":  "Gesichtsdetektion findet Gesichter im Bild. Personenidentifikation vergleicht lokale Merkmalsvektoren mit freiwillig angelegten Profilen; unsichere Treffer erhalten keinen Namen."
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+
+                                              ]
+                    },
+                    {
+                        "intent":  "local.answer",
+                        "phrases":  [
+                                        "speicherst du meine sprache",
+                                        "speicherst du meine bilder",
+                                        "was speicherst du über mich"
+                                    ],
+                        "args":  {
+                                     "reply":  "Rohmikrofonaufnahmen werden nicht dauerhaft gespeichert. Gesichtsprofile entstehen erst nach Einwilligung. Anmeldebilder bleiben nur bei einer ausdrücklich gewählten Bildspeicherung erhalten."
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+
+                                              ]
+                    },
+                    {
+                        "intent":  "local.answer",
+                        "phrases":  [
+                                        "wie viele bit hat ein byte",
+                                        "was ist ein byte"
+                                    ],
+                        "args":  {
+                                     "reply":  "Ein Byte besteht aus acht Bit."
+                                 },
+                        "risk":  "low",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+
+                                              ]
+                    },
+                    {
+                        "intent":  "unsupported_action",
+                        "phrases":  [
+                                        "schüttel den kopf",
+                                        "erhöhe deinen bewegungsradius",
+                                        "spiele meine spotify-playlist"
+                                    ],
+                        "args":  {
+
+                                 },
+                        "risk":  "medium",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ],
+                        "negative_examples":  [
+                                                  "nicht nicke"
+                                              ]
+                    },
+                    {
+                        "args":  {
+                                     "rate_factor":  1,
+                                     "volume_delta":  10
+                                 },
+                        "phrases":  [
+                                        "sprich lauter",
+                                        "rede lauter"
+                                    ],
+                        "risk":  "medium",
+                        "negative_examples":  [
+
+                                              ],
+                        "intent":  "audio.settings",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ]
+                    },
+                    {
+                        "args":  {
+                                     "rate_factor":  1,
+                                     "volume_delta":  -10
+                                 },
+                        "phrases":  [
+                                        "sprich leiser",
+                                        "rede leiser"
+                                    ],
+                        "risk":  "medium",
+                        "negative_examples":  [
+
+                                              ],
+                        "intent":  "audio.settings",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ]
+                    },
+                    {
+                        "args":  {
+                                     "rate_factor":  0.8,
+                                     "volume_delta":  0
+                                 },
+                        "phrases":  [
+                                        "sprich langsamer",
+                                        "rede langsamer"
+                                    ],
+                        "risk":  "medium",
+                        "negative_examples":  [
+
+                                              ],
+                        "intent":  "audio.settings",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ]
+                    },
+                    {
+                        "args":  {
+                                     "rate_factor":  1.2,
+                                     "volume_delta":  0
+                                 },
+                        "phrases":  [
+                                        "sprich schneller",
+                                        "rede schneller"
+                                    ],
+                        "risk":  "medium",
+                        "negative_examples":  [
+
+                                              ],
+                        "intent":  "audio.settings",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ]
+                    },
+                    {
+                        "args":  {
+                                     "delta":  10
+                                 },
+                        "phrases":  [
+                                        "musik lauter",
+                                        "mach die musik lauter"
+                                    ],
+                        "risk":  "medium",
+                        "negative_examples":  [
+
+                                              ],
+                        "intent":  "music.adjust",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ]
+                    },
+                    {
+                        "args":  {
+                                     "delta":  -10
+                                 },
+                        "phrases":  [
+                                        "musik leiser",
+                                        "mach die musik leiser"
+                                    ],
+                        "risk":  "medium",
+                        "negative_examples":  [
+
+                                              ],
+                        "intent":  "music.adjust",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ]
+                    },
+                    {
+                        "args":  {
+                                     "speed_factor":  1.25,
+                                     "acceleration_factor":  1
+                                 },
+                        "phrases":  [
+                                        "bewege dich schneller",
+                                        "beweg dich schneller"
+                                    ],
+                        "risk":  "medium",
+                        "negative_examples":  [
+
+                                              ],
+                        "intent":  "motion.profile",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ]
+                    },
+                    {
+                        "args":  {
+                                     "speed_factor":  0.8,
+                                     "acceleration_factor":  1
+                                 },
+                        "phrases":  [
+                                        "bewege dich langsamer",
+                                        "beweg dich langsamer"
+                                    ],
+                        "risk":  "medium",
+                        "negative_examples":  [
+
+                                              ],
+                        "intent":  "motion.profile",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ]
+                    },
+                    {
+                        "args":  {
+                                     "speed_factor":  1,
+                                     "acceleration_factor":  0.7
+                                 },
+                        "phrases":  [
+                                        "bewege dich sanfter",
+                                        "beweg dich sanfter"
+                                    ],
+                        "risk":  "medium",
+                        "negative_examples":  [
+
+                                              ],
+                        "intent":  "motion.profile",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ]
+                    },
+                    {
+                        "args":  {
+                                     "speed_factor":  1,
+                                     "acceleration_factor":  1.25
+                                 },
+                        "phrases":  [
+                                        "bewege dich direkter"
+                                    ],
+                        "risk":  "medium",
+                        "negative_examples":  [
+
+                                              ],
+                        "intent":  "motion.profile",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ]
+                    },
+                    {
+                        "args":  {
+
+                                 },
+                        "phrases":  [
+                                        "fahr herunter",
+                                        "fahre herunter",
+                                        "fahre dich herunter"
+                                    ],
+                        "risk":  "medium",
+                        "negative_examples":  [
+
+                                              ],
+                        "intent":  "system.shutdown",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ]
+                    },
+                    {
+                        "args":  {
+
+                                 },
+                        "phrases":  [
+                                        "starte dich neu"
+                                    ],
+                        "risk":  "medium",
+                        "negative_examples":  [
+
+                                              ],
+                        "intent":  "system.restart",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ]
+                    },
+                    {
+                        "intent":  "motion.relative",
+                        "phrases":  [
+                                        "dreh dich ein stück nach links"
+                                    ],
+                        "args":  {
+                                     "axis":  "pan",
+                                     "delta":  -3
+                                 },
+                        "risk":  "medium",
+                        "negation_safe":  false,
+                        "requires":  [
+                                         "motion.calibrated"
+                                     ],
+                        "negative_examples":  [
+                                                  "nicht schau nach links"
+                                              ]
+                    },
+                    {
+                        "intent":  "motion.relative",
+                        "phrases":  [
+                                        "dreh dich ein stück nach rechts"
+                                    ],
+                        "args":  {
+                                     "axis":  "pan",
+                                     "delta":  3
+                                 },
+                        "risk":  "medium",
+                        "negation_safe":  false,
+                        "requires":  [
+                                         "motion.calibrated"
+                                     ],
+                        "negative_examples":  [
+                                                  "nicht schau nach rechts"
+                                              ]
+                    },
+                    {
+                        "intent":  "motion.relative",
+                        "phrases":  [
+                                        "schau etwas höher",
+                                        "guck höher",
+                                        "schau ein stück hoch"
+                                    ],
+                        "args":  {
+                                     "axis":  "tilt",
+                                     "delta":  -3
+                                 },
+                        "risk":  "medium",
+                        "negation_safe":  false,
+                        "requires":  [
+                                         "motion.calibrated"
+                                     ],
+                        "negative_examples":  [
+                                                  "nicht schau nach oben"
+                                              ]
+                    },
+                    {
+                        "intent":  "motion.relative",
+                        "phrases":  [
+                                        "schau etwas tiefer",
+                                        "guck tiefer",
+                                        "schau ein stück runter"
+                                    ],
+                        "args":  {
+                                     "axis":  "tilt",
+                                     "delta":  3
+                                 },
+                        "risk":  "medium",
+                        "negation_safe":  false,
+                        "requires":  [
+                                         "motion.calibrated"
+                                     ],
+                        "negative_examples":  [
+                                                  "nicht schau nach unten"
+                                              ]
+                    },
+                    {
+                        "args":  {
+                                     "kind":  "quiz"
+                                 },
+                        "phrases":  [
+                                        "starte ein wissensquiz",
+                                        "starte ein quiz",
+                                        "spielen wir quiz"
+                                    ],
+                        "risk":  "medium",
+                        "negative_examples":  [
+
+                                              ],
+                        "intent":  "game.start",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ]
+                    },
+                    {
+                        "args":  {
+                                     "kind":  "numbers"
+                                 },
+                        "phrases":  [
+                                        "spielen wir zahlenraten",
+                                        "starte zahlenraten"
+                                    ],
+                        "risk":  "medium",
+                        "negative_examples":  [
+
+                                              ],
+                        "intent":  "game.start",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ]
+                    },
+                    {
+                        "args":  {
+
+                                 },
+                        "phrases":  [
+                                        "spiel beenden",
+                                        "beende das spiel",
+                                        "quiz beenden"
+                                    ],
+                        "risk":  "medium",
+                        "negative_examples":  [
+
+                                              ],
+                        "intent":  "game.cancel",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ]
+                    },
+                    {
+                        "args":  {
+                                     "action":  "start"
+                                 },
+                        "phrases":  [
+                                        "starte eine stoppuhr",
+                                        "starte die stoppuhr",
+                                        "stoppuhr fortsetzen"
+                                    ],
+                        "risk":  "medium",
+                        "negative_examples":  [
+
+                                              ],
+                        "intent":  "stopwatch.action",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ]
+                    },
+                    {
+                        "args":  {
+                                     "action":  "pause"
+                                 },
+                        "phrases":  [
+                                        "pausiere die stoppuhr",
+                                        "stoppe die stoppuhr"
+                                    ],
+                        "risk":  "medium",
+                        "negative_examples":  [
+
+                                              ],
+                        "intent":  "stopwatch.action",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ]
+                    },
+                    {
+                        "args":  {
+                                     "action":  "reset"
+                                 },
+                        "phrases":  [
+                                        "stoppuhr zurÃ¼cksetzen",
+                                        "setze die stoppuhr zurÃ¼ck"
+                                    ],
+                        "risk":  "medium",
+                        "negative_examples":  [
+
+                                              ],
+                        "intent":  "stopwatch.action",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ]
+                    },
+                    {
+                        "args":  {
+                                     "action":  "status"
+                                 },
+                        "phrases":  [
+                                        "wie lange lÃ¤uft die stoppuhr",
+                                        "stoppuhr status"
+                                    ],
+                        "risk":  "medium",
+                        "negative_examples":  [
+
+                                              ],
+                        "intent":  "stopwatch.action",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ]
+                    },
+                    {
+                        "args":  {
+                                     "action":  "lap"
+                                 },
+                        "phrases":  [
+                                        "stoppuhr runde",
+                                        "rundenzeit"
+                                    ],
+                        "risk":  "medium",
+                        "negative_examples":  [
+
+                                              ],
+                        "intent":  "stopwatch.action",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ]
+                    },
+                    {
+                        "args":  {
+
+                                 },
+                        "phrases":  [
+                                        "welche wecker sind eingestellt",
+                                        "zeige meine wecker",
+                                        "liste die wecker"
+                                    ],
+                        "risk":  "medium",
+                        "negative_examples":  [
+
+                                              ],
+                        "intent":  "alarm.list",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ]
+                    },
+                    {
+                        "args":  {
+                                     "action":  "delete"
+                                 },
+                        "phrases":  [
+                                        "lÃ¶sche den wecker",
+                                        "wecker lÃ¶schen"
+                                    ],
+                        "risk":  "medium",
+                        "negative_examples":  [
+
+                                              ],
+                        "intent":  "alarm.change_one",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ]
+                    },
+                    {
+                        "args":  {
+                                     "action":  "disable"
+                                 },
+                        "phrases":  [
+                                        "deaktiviere den wecker",
+                                        "schalte den wecker aus"
+                                    ],
+                        "risk":  "medium",
+                        "negative_examples":  [
+
+                                              ],
+                        "intent":  "alarm.change_one",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ]
+                    },
+                    {
+                        "args":  {
+                                     "action":  "enable"
+                                 },
+                        "phrases":  [
+                                        "aktiviere den wecker",
+                                        "schalte den wecker ein"
+                                    ],
+                        "risk":  "medium",
+                        "negative_examples":  [
+
+                                              ],
+                        "intent":  "alarm.change_one",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ]
+                    },
+                    {
+                        "args":  {
+                                     "name":  "nod"
+                                 },
+                        "phrases":  [
+                                        "nicke",
+                                        "nicke zweimal",
+                                        "sag ja mit deinem kopf"
+                                    ],
+                        "risk":  "medium",
+                        "negative_examples":  [
+
+                                              ],
+                        "intent":  "motion.sequence",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ]
+                    },
+                    {
+                        "args":  {
+                                     "name":  "shake"
+                                 },
+                        "phrases":  [
+                                        "schÃ¼ttel den kopf",
+                                        "schÃ¼ttle den kopf",
+                                        "sag nein mit deinem kopf"
+                                    ],
+                        "risk":  "medium",
+                        "negative_examples":  [
+
+                                              ],
+                        "intent":  "motion.sequence",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ]
+                    },
+                    {
+                        "args":  {
+                                     "name":  "look"
+                                 },
+                        "phrases":  [
+                                        "schau dich um",
+                                        "sieh dich um"
+                                    ],
+                        "risk":  "medium",
+                        "negative_examples":  [
+
+                                              ],
+                        "intent":  "motion.sequence",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ]
+                    },
+                    {
+                        "args":  {
+                                     "enabled":  true
+                                 },
+                        "phrases":  [
+                                        "aufmerksamkeitsblicke an",
+                                        "schau mich beim reden gelegentlich an"
+                                    ],
+                        "risk":  "medium",
+                        "negative_examples":  [
+
+                                              ],
+                        "intent":  "behavior.gaze",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ]
+                    },
+                    {
+                        "args":  {
+                                     "enabled":  false
+                                 },
+                        "phrases":  [
+                                        "aufmerksamkeitsblicke aus",
+                                        "beende aufmerksamkeitsblicke"
+                                    ],
+                        "risk":  "medium",
+                        "negative_examples":  [
+
+                                              ],
+                        "intent":  "behavior.gaze",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ]
+                    },
+                    {
+                        "args":  {
+
+                                 },
+                        "phrases":  [
+                                        "kalibriere deinen kopf",
+                                        "starte automatische kalibrierung"
+                                    ],
+                        "risk":  "medium",
+                        "negative_examples":  [
+
+                                              ],
+                        "intent":  "calibration.auto",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ]
+                    },
+                    {
+                        "args":  {
+
+                                 },
+                        "phrases":  [
+                                        "wie ist die kalibrierung",
+                                        "kalibrierstatus"
+                                    ],
+                        "risk":  "medium",
+                        "negative_examples":  [
+
+                                              ],
+                        "intent":  "calibration.status",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ]
+                    },
+                    {
+                        "args":  {
+
+                                 },
+                        "phrases":  [
+                                        "spiele auf spotify {query}",
+                                        "spiele das lied {query}",
+                                        "spiele ein lied von {query}",
+                                        "spiele lied von {query}",
+                                        "spiele musik von {query}",
+                                        "spiele {query}"
+                                    ],
+                        "risk":  "medium",
+                        "negative_examples":  [
+
+                                              ],
+                        "intent":  "music.spotify",
+                        "negation_safe":  false,
+                        "requires":  [
+
+                                     ]
+                    }
+                ]
+}

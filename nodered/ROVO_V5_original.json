@@ -1,0 +1,1466 @@
+[
+  {
+    "id": "d02026bb00000101",
+    "type": "tab",
+    "label": "ROVO 01 · Oberfläche",
+    "disabled": false,
+    "info": "Frontend: 7 übersichtliche Bereiche, keine direkte Hardwaresteuerung"
+  },
+  {
+    "id": "d02026bb00000102",
+    "type": "tab",
+    "label": "ROVO 02 · Steuerbefehle (TEST)",
+    "disabled": false,
+    "info": "Testmodus, Befehlsvalidierung, späteres Python-Backend"
+  },
+  {
+    "id": "d02026bb00000103",
+    "type": "tab",
+    "label": "ROVO 03 · Telemetrie",
+    "disabled": false,
+    "info": "Node-RED Host-Monitor und externer Status-Eingang"
+  },
+  {
+    "id": "d02026bb00000001",
+    "type": "ui-base",
+    "name": "ROVO · Control Center V5",
+    "path": "/rovo-v5",
+    "showPathInSidebar": false,
+    "navigationStyle": "default",
+    "headerContent": "page",
+    "titleBarStyle": "default",
+    "showReconnectNotification": true,
+    "showDisconnectNotification": true
+  },
+  {
+    "id": "d02026bb00000002",
+    "type": "ui-theme",
+    "name": "ROVO · Industrial / neutral",
+    "colors": {
+      "surface": "#202c3b",
+      "primary": "#8abacb",
+      "bgPage": "#101923",
+      "groupBg": "#101923",
+      "groupOutline": "#101923"
+    },
+    "sizes": {
+      "density": "comfortable",
+      "pagePadding": "16px",
+      "groupGap": "12px",
+      "groupBorderRadius": "10px",
+      "widgetGap": "0px"
+    }
+  },
+  {
+    "id": "d02026bb00000003",
+    "type": "ui-template",
+    "z": "d02026bb00000101",
+    "group": "",
+    "page": "",
+    "ui": "d02026bb00000001",
+    "name": "Design · neutral für alle Seiten",
+    "order": 0,
+    "width": 0,
+    "height": 0,
+    "head": "",
+    "format": "/* ROVO Control Center V5 styles */\n:root {color-scheme:dark}\nbody,.v-application{font-family:'DM Sans',Inter,system-ui,-apple-system,'Segoe UI',sans-serif!important;}\n.v-application .v-main{background:#09111e!important}\n.v-application .v-main .v-container {max-width:1480px!important}\n.rx{--bg:#09111e;--card:#111d2e;--card2:#162338;--line:#26364b;--muted:#92a3b9;--txt:#edf5ff;--mint:#78ebd4;--blue:#82adff;--amber:#f6c77c;--good:#55dca7;color:var(--txt);width:100%;padding:12px 8px 38px;box-sizing:border-box;font-size:14px;line-height:1.5}\n.rx *,.rx *:before,.rx *:after{box-sizing:border-box}\n.rx button,.rx input,.rx select{font:inherit}.rx button{cursor:pointer}\n.rx a{text-decoration:none}\n.rx-head{display:flex;gap:16px;align-items:flex-start;justify-content:space-between;margin-bottom:23px;flex-wrap:wrap}\n.rx-kicker{font-size:10px;letter-spacing:2.3px;color:var(--mint);font-weight:800;text-transform:uppercase}\n.rx h1{font-size:clamp(26px,3.2vw,38px);letter-spacing:-1.25px;font-weight:800;line-height:1.18;margin:6px 0 8px}\n.rx-sub{color:var(--muted);font-size:13px;max-width:680px;line-height:1.6}\n.rx-chip{display:inline-flex;align-items:center;gap:8px;border:1px solid #304259;color:#bbccde;background:#162337;border-radius:999px;padding:7px 11px;font-size:11px;font-weight:700;white-space:nowrap}\n.rx-chip.ok{background:#10372f;color:#7fe7c1;border-color:#235e4d}\n.rx-chip.warn{background:#3c2d1d;color:#f1c580;border-color:#6c512f}\n.rx-dot{width:7px;height:7px;border-radius:50%;background:#869ab2;display:inline-block;flex:none}\n.rx-chip.ok .rx-dot{background:#58d9a5}.rx-chip.warn .rx-dot{background:#e9ae55}\n.rx-grid{display:grid;gap:14px;grid-template-columns:repeat(12,minmax(0,1fr))}\n.rx-span-12{grid-column:span 12}.rx-span-8{grid-column:span 8}.rx-span-7{grid-column:span 7}.rx-span-6{grid-column:span 6}.rx-span-5{grid-column:span 5}.rx-span-4{grid-column:span 4}.rx-span-3{grid-column:span 3}\n.rx-panel{border:1px solid var(--line);background:linear-gradient(160deg,#142237,#101a2b);border-radius:20px;padding:22px;min-width:0;box-shadow:0 12px 26px #03091318}\n.rx-panel.strong{background:radial-gradient(ellipse at 83% 13%,#1d505b 0%,#17283b 29%,#112034 58%,#101b2b 100%);border-color:#305163}\n.rx-panel.flat{background:#101b2c}\n.rx-panel-head{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:15px}\n.rx-panel h2,.rx-section-title{font-size:15px;letter-spacing:-.3px;font-weight:800;margin:0}\n.rx-small{font-size:11px;color:var(--muted);line-height:1.5}\n.rx-label{font-size:12px;color:var(--muted)}\n.rx-big{font-size:29px;letter-spacing:-1px;line-height:1.2;font-weight:800}\n.rx-xl{font-size:clamp(31px,3.6vw,46px);letter-spacing:-1.7px;font-weight:800;line-height:1.2}\n.rx-flex{display:flex;align-items:center;gap:12px}.rx-between{display:flex;align-items:center;justify-content:space-between;gap:12px}.rx-wrap{flex-wrap:wrap}.rx-col{display:flex;flex-direction:column;gap:13px}\n.rx-icon{height:41px;width:41px;background:#193344;color:var(--mint);border:1px solid #2b5960;border-radius:14px;display:grid;place-items:center;flex:none}\n.rx-button{border:1px solid #36506a;border-radius:12px;padding:11px 15px;color:#dceaf8;background:#1a2b42;display:inline-flex;gap:9px;align-items:center;justify-content:center;font-size:12px;font-weight:750;min-height:42px;transition:.16s background,.16s transform}\n.rx-button:hover{background:#243d57;transform:translateY(-1px)}\n.rx-button.primary{background:#79e7d6;border-color:#79e7d6;color:#0d3238}.rx-button.primary:hover{background:#a0f7e8}\n.rx-button.soft{background:#172638}.rx-button.danger{background:#362533;border-color:#6b3d54;color:#ffbecd}\n.rx-button:disabled{opacity:.4;cursor:not-allowed}.rx-button.active{border-color:#68e4d0;color:#83eedc;background:#17413f}\n.rx-buttons{display:flex;gap:9px;flex-wrap:wrap}\n.rx-input,.rx-select{background:#0c1828;color:#f1f8ff;border:1px solid #314761;border-radius:12px;padding:11px 12px;width:100%;min-width:0;outline:none}\n.rx-input:focus,.rx-select:focus{border-color:#73dace;box-shadow:0 0 0 3px #4ac4bb18}\n.rx-range{width:100%;accent-color:#79e7d6;cursor:pointer;min-height:26px}\n.rx-field{display:flex;flex-direction:column;gap:7px}.rx-field label{font-size:12px;color:#c4d5e4;font-weight:700}\n.rx-progress{height:8px;border-radius:99px;background:#2a394e;overflow:hidden}.rx-progress>span{height:100%;display:block;border-radius:99px;background:linear-gradient(90deg,#438da6,#7ee9d5)}\n.rx-rule{height:1px;background:#2b3b50;margin:18px 0}\n.rx-row{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid #26354a;min-width:0}\n.rx-row:last-child{border-bottom:0}.rx-row strong{font-size:13px}.rx-row .rx-small{margin-top:2px}\n.rx-banner{display:flex;align-items:center;gap:9px;border-radius:12px;border:1px solid #575037;background:#332a1b;color:#f2d6a6;padding:11px 13px;font-size:12px;line-height:1.5;margin-bottom:15px}\n.rx-banner.mint{background:#153334;border-color:#235c5b;color:#98e5da}\n.rx-note{font-size:11px;color:var(--muted);margin-top:13px;line-height:1.65}\n.rx-robot-area{min-width:190px;min-height:178px;display:grid;place-items:center;position:relative}\n.rx-robot{width:175px;height:132px;border:7px solid #556f86;border-radius:38px;background:#050d17;box-shadow:0 0 0 3px #223e52,0 28px 48px #041019a9,inset 0 0 26px #1d455d;display:flex;justify-content:center;align-items:center;gap:37px;position:relative}\n.rx-eye{height:34px;width:23px;border-radius:99px;background:#81f4e4;box-shadow:0 0 18px #6eebd0a8;animation:rx-blink 7s infinite}\n.rx-smile{height:10px;width:29px;border-bottom:3px solid #7ce6d9;border-radius:0 0 99% 99%;position:absolute;bottom:20px;left:calc(50% - 14px)}\n@keyframes rx-blink{0%,43%,45%,100%{transform:scaleY(1)}44%{transform:scaleY(.12)}}\n.rx-spark{position:absolute;border:1px solid #296577;border-radius:50%;width:216px;height:216px;opacity:.4;pointer-events:none}\n.rx-hero{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:230px}\n.rx-hero-copy{flex:1;max-width:540px}.rx-hero-title{font-size:clamp(23px,3vw,35px);line-height:1.2;font-weight:800;letter-spacing:-1px;margin:10px 0}\n.rx-stat-value{font-size:clamp(22px,2.4vw,29px);font-weight:800;letter-spacing:-.8px;margin:9px 0 3px;white-space:nowrap}\n.rx-quick{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:11px}\n.rx-quick-btn{background:#14263a;border:1px solid #2c425b;border-radius:15px;padding:17px 12px;text-align:left;display:flex;align-items:center;gap:12px;color:var(--txt);min-height:74px}\n.rx-quick-btn:hover{border-color:#68cbbc;background:#19374a}.rx-quick-btn .v-icon{color:var(--mint)}\n.rx-camera{width:100%;aspect-ratio:16/9;min-height:230px;border:1px solid #334e63;border-radius:16px;overflow:hidden;position:relative;background:radial-gradient(ellipse at 48% 35%,#1e354d,#0b1523 70%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:11px;color:#96abc2}\n.rx-camera img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}\n.rx-camera .rx-corner{position:absolute;inset:21px;pointer-events:none;border:1px solid #4d8d91b0;border-radius:8px;opacity:.3}\n.rx-chatbox{height:368px;display:flex;flex-direction:column;gap:12px;overflow:auto;background:#0b1727;border:1px solid #293c52;border-radius:15px;padding:17px}\n.rx-bubble{border:1px solid #2d4257;border-radius:15px;background:#1a2a40;max-width:82%;align-self:flex-start;padding:11px 14px;font-size:13px;white-space:pre-wrap;overflow-wrap:anywhere}\n.rx-bubble.me{background:#164641;border-color:#27675d;align-self:flex-end}.rx-bubble small{display:block;font-weight:800;color:#8fb6bf;font-size:10px;margin-bottom:4px}\n.rx-face-preview{height:198px;display:grid;place-items:center;border:1px solid #2d4658;background:radial-gradient(circle at 50% 15%,#18364e,#081322 72%);border-radius:16px}\n.rx-monitor{font:11px/1.8 ui-monospace,Consolas,monospace;background:#081322;border:1px solid #294053;border-radius:13px;padding:14px;max-height:235px;overflow:auto;color:#add0e0}\n.rx-bullet{height:8px;width:8px;border-radius:50%;background:#6f8298;display:inline-block}.rx-bullet.good{background:#6bd8a9}.rx-bullet.warn{background:#e1b46d}\n.rx-choice{display:flex;flex-wrap:wrap;gap:8px}.rx-choice button{border:1px solid #35506a;background:#18283d;color:#cbd8e8;padding:9px 13px;border-radius:11px;font-size:12px}.rx-choice button.active{background:#164942;border-color:#65caba;color:#80f4df}\n.rx-divider-title{font-size:12px;font-weight:800;color:#c2d3e2;margin:18px 0 10px}\n@media(max-width:1100px){.rx-span-8,.rx-span-7,.rx-span-5,.rx-span-4,.rx-span-3{grid-column:span 6}.rx-quick{grid-template-columns:repeat(2,minmax(0,1fr))}}\n@media(max-width:740px){.rx{padding:6px 2px 26px}.rx-span-8,.rx-span-7,.rx-span-6,.rx-span-5,.rx-span-4,.rx-span-3{grid-column:span 12}.rx-panel{padding:17px;border-radius:17px}.rx-hero{flex-direction:column;align-items:flex-start}.rx-robot-area{align-self:center}.rx-chatbox{height:310px}}\n@media(max-width:440px){.rx-quick{grid-template-columns:1fr 1fr}.rx-quick-btn{flex-direction:column;align-items:flex-start;min-height:95px}.rx-quick-btn .rx-small{font-size:10px}.rx-buttons .rx-button{flex:1}.rx-head{gap:9px}}\n/* --- V3 overrides --- */\n/* ROVO V3 – ruhige, funktionsorientierte Steueroberfläche */\n:root{color-scheme:dark}\nbody,.v-application{font-family:Inter,system-ui,-apple-system,\"Segoe UI\",sans-serif!important;letter-spacing:0!important}\n.v-application .v-main{background:#14191e!important}\n.v-application .v-main .v-container{max-width:1440px!important}\n.rx{--bg:#14191e;--card:#222a31;--card2:#283139;--line:#37414a;--muted:#a3b0bb;--txt:#e8edf1;--mint:#b1bdc7;--blue:#b1bdc7;--amber:#d2c4a8;--good:#87baa1;color:var(--txt);width:100%;padding:13px 8px 32px;box-sizing:border-box;font-size:14px;line-height:1.48}\n.rx *,.rx *:before,.rx *:after{box-sizing:border-box}\n.rx button,.rx input,.rx select{font:inherit}\n.rx button{cursor:pointer}\n.rx a{text-decoration:none}\n.rx-head{display:flex;gap:14px;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;border-bottom:1px solid #39434c;padding-bottom:18px}\n.rx-kicker{font-size:11px;letter-spacing:1.15px;color:#9caab5;font-weight:650;text-transform:uppercase}\n.rx h1{font-size:clamp(23px,2.4vw,30px);letter-spacing:-.6px;font-weight:680;line-height:1.2;margin:5px 0 6px}\n.rx-sub{color:#acb8c2;font-size:13px;max-width:700px;line-height:1.6}\n.rx-chip{display:inline-flex;align-items:center;gap:7px;border:1px solid #48545e;color:#d5dfe6;background:#2d363e;border-radius:6px;padding:5px 9px;font-size:11px;font-weight:600;white-space:nowrap}\n.rx-chip.ok{background:#2a3b35;color:#bed9cb;border-color:#567767}\n.rx-chip.warn{background:#433a2b;color:#e2d2b3;border-color:#786b51}\n.rx-dot{width:7px;height:7px;border-radius:50%;background:#86929c;display:inline-block;flex:none}\n.rx-chip.ok .rx-dot{background:#9ecbb0}.rx-chip.warn .rx-dot{background:#dbbc85}\n.rx-grid{display:grid;gap:13px;grid-template-columns:repeat(12,minmax(0,1fr))}\n.rx-span-12{grid-column:span 12}.rx-span-8{grid-column:span 8}.rx-span-7{grid-column:span 7}.rx-span-6{grid-column:span 6}.rx-span-5{grid-column:span 5}.rx-span-4{grid-column:span 4}.rx-span-3{grid-column:span 3}\n.rx-panel,.rx-panel.strong,.rx-panel.flat{border:1px solid #39444e;background:#222a31!important;border-radius:11px;padding:20px;min-width:0;box-shadow:none!important}\n.rx-panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}\n.rx-panel h2,.rx-section-title{font-size:15px;letter-spacing:-.1px;font-weight:650;margin:0}\n.rx-small,.rx-note{font-size:12px;color:#a7b3be;line-height:1.6}\n.rx-label{font-size:12px;color:#b4bec7}\n.rx-row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid #354049}\n.rx-row:last-child{border-bottom:0}\n.rx-row strong{font-weight:620}\n.rx-between{display:flex;justify-content:space-between;align-items:center;gap:12px}\n.rx-wrap{flex-wrap:wrap}\n.rx-flex{display:flex;align-items:center;gap:10px}\n.rx-col{display:flex;flex-direction:column;gap:13px}\n.rx-buttons{display:flex;align-items:center;gap:9px;flex-wrap:wrap}\n.rx .rx-button,.rx .rx-button.primary,.rx .rx-button.soft,.rx .rx-button.danger{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 14px;min-height:41px;border:1px solid #5c6974!important;border-radius:7px!important;background:#354049!important;color:#f0f3f6!important;font-size:13px;font-weight:620;box-shadow:none!important;text-transform:none!important;letter-spacing:0!important;transition:background .12s,border-color .12s}\n.rx .rx-button:hover,.rx .rx-button.primary:hover,.rx .rx-button.soft:hover{background:#44515d!important;border-color:#82909d!important}\n.rx .rx-button:focus-visible,.rx .rx-choice button:focus-visible{outline:2px solid #d0d9e1;outline-offset:2px}\n.rx .rx-button:disabled{opacity:.45;cursor:not-allowed}\n.rx .rx-button.danger{border-color:#986a6a!important}\n.rx-field{display:flex;flex-direction:column;gap:8px;margin-top:8px}\n.rx-field label{font-size:12px;font-weight:650;color:#d4dce2}\n.rx .rx-input,.rx .rx-select{width:100%;min-width:0;background:#171e24!important;border:1px solid #53606b!important;color:#e7edf2!important;border-radius:7px!important;padding:10px 12px!important;min-height:42px;outline:none}\n.rx .rx-input:focus,.rx .rx-select:focus{border-color:#b7c4cd!important}\n.rx .rx-input::placeholder{color:#7e8c98}\n.rx .rx-range{width:100%;accent-color:#adbcc8}\n.rx-rule{height:1px;background:#3b454e;margin:17px 0}\n.rx-banner,.rx-banner.mint{border:1px solid #52616a;background:#29333b;color:#d5dee5;border-radius:8px;padding:12px 14px;display:flex;align-items:center;gap:9px;margin-bottom:16px;font-size:12px}\n.rx-note{margin-top:12px}\n.rx-stat-value,.rx-xl,.rx-big{font-weight:680;color:#e9eef1}\n.rx-progress{background:#12191f;border-radius:3px;height:8px;overflow:hidden}\n.rx-progress span{display:block;background:#8b9ca9;height:100%;border-radius:3px}\n.rx-bullet{width:8px;height:8px;background:#8b959f;border-radius:50%;display:inline-block}\n.rx-bullet.good{background:#8fbc9f}\n.rx-choice{display:flex;flex-wrap:wrap;gap:8px}\n.rx .rx-choice button{padding:9px 13px;border:1px solid #53606b;background:#303b44;color:#e0e6ea;border-radius:7px}\n.rx .rx-choice button.active{background:#51606d;color:#fff;border-color:#b1c1cc}\n.rx-hero-title{font-size:24px!important;line-height:1.3!important;letter-spacing:-.3px!important;font-weight:670!important}\n.rx-robot-area,.rx-spark{filter:grayscale(1);opacity:.72}\n.rx-panel.strong .rx-kicker{color:#b5c2cb}\n.rx-icon{background:#303b44!important;color:#cad5db!important;border-radius:7px!important}\n.rx-camera{background:#131a20!important;border-radius:8px!important}\n.rx-chatbox,.rx-monitor{background:#151c22!important;border:1px solid #36414b!important;border-radius:8px!important}\n.rx-bubble.me{background:#384550!important;color:#e9eff3!important}\n.rx .v-icon{color:inherit}\n.rx-face-preview{background:#151e25!important;border-radius:9px!important}\n.rx input[type=checkbox]{accent-color:#adbac4;width:17px;height:17px}\n.rx-help{font-size:12px;color:#9eadb9;line-height:1.6}\n.rx-stack{display:flex;flex-direction:column;gap:14px}\n.rx-code{background:#141a20;color:#d9e2e8;border:1px solid #414e59;padding:9px 12px;border-radius:7px;font-family:ui-monospace,Consolas,monospace;font-size:12px;overflow-wrap:anywhere}\n.rx-hint{display:block;color:#aab6c0;font-size:11px;margin-top:3px}\n.rx-status{min-width:140px;text-align:right}\n.rx-card-title{font-size:14px;font-weight:680;margin-bottom:12px}\n@media(max-width:880px){.rx-span-8,.rx-span-7,.rx-span-6,.rx-span-5,.rx-span-4,.rx-span-3{grid-column:span 12}.rx-panel{padding:16px}.rx-flex{flex-wrap:wrap}.rx-head{align-items:flex-start}}\n\n/* ROVO V4 - funktionale Steueroberfläche, ruhiges Blau/Türkis */\n.rx {--bg:#101923;--card:#192637;--card2:#243346;--line:#3a4d60;--muted:#acc0d2;--txt:#edf5fa;--mint:#89c9c7;--blue:#8fbdcd;--good:#8bc7ad;color:#edf5fa}\n.v-application .v-main{background:#101923!important}\n.rx-panel,.rx-panel.strong,.rx-panel.flat{background:#1b2939!important;border:1px solid #31465a!important;box-shadow:none!important;border-radius:12px!important}\n.rx-head{border-color:#34495a}\n.rx-kicker{color:#83b4c6}.rx-label,.rx-small,.rx-note,.rx-sub{color:#b3c4d3}\n.rx .rx-button,.rx .rx-button.primary,.rx .rx-button.soft,.rx .rx-button.danger {background:#304357!important;border:1px solid #587086!important;color:#f0f7fb!important;border-radius:8px!important;min-height:41px!important}\n.rx .rx-button:hover,.rx .rx-button.primary:hover,.rx .rx-button.soft:hover {background:#3d5468!important}\n.rx .rx-button.danger {border-color:#98676f!important;background:#304357!important}\n.rx .rx-button:disabled{opacity:.46}\n.rx .rx-input,.rx .rx-select {background:#101c2a!important;border-color:#536b80!important}\n.rx .rx-range{accent-color:#78bacb}.rx input[type=checkbox]{accent-color:#85c5d3}\n.rx .rx-banner {background:#263b4c!important;color:#dbe9ef!important;border-color:#456679!important}\n.rx .rx-chip{background:#263747;color:#dce9ee;border-color:#4b6173}\n.rx .rx-chip.ok{background:#213e3a;color:#c8efe2;border-color:#497e72}\n.rx .rx-chip.warn{background:#3e3429;color:#ead5b5;border-color:#826947}\n.rv-acronym{display:flex;gap:9px;flex-wrap:wrap;margin:18px 0 10px}\n.rv-word{flex:1 1 100px;min-width:95px;background:#223448;border:1px solid #3c5668;border-radius:10px;padding:15px 12px}\n.rv-letter{font-size:39px;font-weight:850;line-height:1;color:#9fd3df;letter-spacing:-2px}\n.rv-definition{font-size:12px;margin-top:8px;color:#d2e2eb}\n.rv-two{display:grid;grid-template-columns:1fr 1fr;gap:14px}\n.rv-three{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}\n.rv-tip{font-size:12px;color:#a8bccb;margin-top:7px;line-height:1.5}\n.rv-switch{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:13px 0;border-bottom:1px solid #354a5c}\n.rv-switch:last-child{border-bottom:0}\n.rv-switch input{width:19px;height:19px;flex:none}\n.rv-control{margin:16px 0 21px}\n.rv-control-header{display:flex;justify-content:space-between;font-size:13px;font-weight:550;margin-bottom:7px}\n.rv-control input[type=range]{width:100%;accent-color:#8cc3d1}\n.rv-control input[type=number]{max-width:110px}\n.rv-foot{display:flex;gap:9px;flex-wrap:wrap;justify-content:flex-start;margin-top:17px}\n.rv-status{font-size:12px;color:#bcd0df;margin-top:12px;min-height:20px}\n.rv-warning{padding:13px 15px;border-left:3px solid #d6b780;background:#302e2d;border-radius:5px;font-size:12px;color:#f3e2c3;margin:14px 0}\n.rv-face-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}\n.rv-emotion{background:#25384a;border:1px solid #465e73;color:#e6eff5;border-radius:10px;min-height:104px;padding:13px;display:flex;align-items:center;justify-content:flex-start;flex-direction:row;gap:10px;cursor:pointer}\n.rv-emotion.selected{outline:2px solid #8dd1dc;background:#2d4959}\n.rv-emotion .rv-icon{font-size:30px;line-height:1;min-width:86px;text-align:center}\n.rv-emotion strong{font-size:12px}\n.rv-person-row{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid #34495b;padding:14px 0;align-items:flex-start}\n.rv-person-row:last-child{border:0}\n.rv-soft{font-size:12px;color:#aec3d1;margin-top:4px;white-space:pre-wrap}\n@media(max-width:800px){.rv-two,.rv-three{grid-template-columns:1fr}.rv-face-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}\n\n/* ROVO V5 — reserved, mechanical control panel style */\n.rv-name-subline{display:flex;align-items:center;gap:12px;margin:-7px 0 22px;padding:7px 10px;border-left:2px solid #7fb9ce;color:#a8bfd1;font-size:11px;letter-spacing:.1px}\n.rv-name-strong{font-size:12px;letter-spacing:1.4px;font-weight:850;color:#a2d2e0}\n.rv-system-status{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}\n.rv-system-state{display:flex;gap:8px;flex-wrap:wrap;align-items:center;background:#233548;border:1px solid #365269;border-radius:7px;padding:13px 11px;color:#dce8ee;font-size:12px}\n.rv-system-state strong{flex-basis:100%;font-size:13px;padding-left:13px;color:#bdd0de}\n.rv-system-indicator{width:6px;height:6px;background:#667988;border-radius:50%}.rv-system-indicator.on{background:#71c7aa}\n.rv-motion-illustration{display:flex;flex-direction:column}\n.rv-robot-stage{height:230px;position:relative;overflow:hidden;margin:10px 0 4px;border-radius:8px;background:radial-gradient(ellipse at 50% 35%,#294557,#142433 78%);border:1px solid #3a5265}\n.rv-robot-guide{position:absolute;pointer-events:none;opacity:.22}.rv-robot-guide-vert{top:10px;bottom:10px;width:1px;border-left:1px dashed #9eb3c0;left:50%}.rv-robot-guide-horz{left:15px;right:15px;border-top:1px dashed #9eb3c0;top:51%}\n.rv-robot-head{width:150px;height:112px;border:7px solid #506b83;border-radius:35px;background:#101c2a;position:absolute;z-index:3;top:40px;left:calc(50% - 75px);display:grid;place-items:center;box-shadow:0 8px 24px #0005;transition:transform .23s cubic-bezier(.23,.75,.3,1)}\n.rv-robot-screen{width:122px;height:85px;border-radius:26px;background:#07111b;display:flex;align-items:center;justify-content:center;gap:27px;position:relative}\n.rv-robot-eye{background:#90e2e0;width:17px;height:28px;border-radius:20px;box-shadow:0 0 10px #7bc8ce5c;animation:rv-eye-blink 7s infinite}\n.rv-robot-mouth{position:absolute;width:23px;height:9px;border-bottom:3px solid #8bcece;border-radius:0 0 50% 50%;bottom:15px;left:calc(50% - 11px)}\n.rv-robot-neck{width:34px;height:65px;background:#63798c;position:absolute;z-index:1;top:127px;left:calc(50% - 17px);border-radius:6px}\n.rv-robot-base{width:100px;height:22px;background:#516d82;position:absolute;z-index:2;bottom:11px;left:calc(50% - 50px);border-radius:10px 10px 3px 3px}\n.rv-robot-coordinates{display:flex;gap:9px;margin:6px 0;justify-content:space-between}\n.rv-robot-coordinates>div{flex:1;background:#243748;padding:9px 11px;border-radius:7px;display:flex;justify-content:space-between;gap:5px;align-items:center;font-size:11px}\n.rv-robot-coordinates b{font-size:12px;color:#dbeef3}\n.rv-main-expression{display:flex;flex-direction:column;align-items:center;gap:10px;margin:18px 0 18px;padding:21px 15px;border-radius:9px;background:#132333;border:1px solid #334b5f}\n.rv-expression-robot{position:relative;width:220px;height:133px;background:#07121e;border:8px solid #4f6880;border-radius:37px;box-shadow:inset 0 0 20px #2b5161,0 10px 24px #0004;overflow:hidden}\n.rv-expression-name{font-size:14px;font-weight:750;color:#edf7fa}\n.rv-face-eye{position:absolute;top:39%;height:37px;width:26px;border-radius:55%;background:#80dadd;box-shadow:0 0 13px #7ad0db66;animation:rv-eye-blink 6.8s infinite;transition:.3s all}\n.rv-eye-left{left:26%}.rv-eye-right{right:26%}\n.rv-face-mouth{position:absolute;width:39px;height:13px;bottom:17%;left:calc(50% - 19px);border-bottom:4px solid #80dadd;border-radius:0 0 55% 55%;transition:.3s all}\n.rv-expression-happy .rv-face-eye{height:20px;top:49%;border-radius:50% 50% 20% 20%;transform:rotate(-8deg)}\n.rv-expression-happy .rv-face-mouth{width:54px;left:calc(50% - 27px);height:19px;border-bottom-width:5px}\n.rv-expression-curious .rv-eye-left{transform:scale(1.1)}.rv-expression-curious .rv-eye-right{transform:scale(.8) translateY(5px)}\n.rv-expression-curious .rv-face-mouth{width:17px;left:calc(50% - 8px);border-bottom-width:3px;border-radius:50%}\n.rv-expression-sleepy .rv-face-eye{height:9px;top:55%;border-radius:6px;animation:none}.rv-expression-sleepy .rv-face-mouth{width:24px;left:calc(50% - 12px);height:4px}\n.rv-expression-surprised .rv-face-eye{width:30px;height:42px;top:35%}.rv-expression-surprised .rv-face-mouth{width:21px;height:21px;left:calc(50% - 11px);bottom:15%;border:4px solid #80dadd;border-radius:50%}\n.rv-expression-blink .rv-eye-left{height:7px;top:55%;animation:none}.rv-expression-blink .rv-eye-right{animation:rv-eye-blink 2.3s infinite}.rv-expression-blink .rv-face-mouth{width:30px;left:calc(50% - 15px)}\n@keyframes rv-eye-blink{0%,43%,45%,100%{transform:scaleY(1)}44%{transform:scaleY(.12)}}\n.rv-mini-robot{position:relative;width:98px;height:65px;flex:none;background:#0c1826;border:3px solid #537088;border-radius:21px;display:block}\n.rv-mini-robot .rv-face-eye{top:39%;height:19px;width:12px;box-shadow:none}.rv-mini-robot .rv-eye-left{left:27%}.rv-mini-robot .rv-eye-right{right:27%}\n.rv-mini-robot .rv-face-mouth{width:20px;height:7px;bottom:12%;left:calc(50% - 10px);border-bottom-width:2px}\n.rv-mini-robot.rv-expression-happy .rv-face-eye{height:10px;top:50%}.rv-mini-robot.rv-expression-surprised .rv-face-mouth{height:9px;width:9px;left:calc(50% - 5px);border-width:2px}\n.rv-mini-robot.rv-expression-sleepy .rv-face-eye{height:5px;top:50%}.rv-mini-robot.rv-expression-blink .rv-eye-left{height:4px;top:52%}\n.rv-model-summary{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:17px 0}\n.rv-model-summary>div{background:#233447;border-radius:7px;border:1px solid #385368;padding:11px 12px;display:flex;flex-direction:column;gap:5px;min-width:0}\n.rv-model-summary strong{overflow-wrap:anywhere;font-size:12px;color:#e4f0f6}\n.rv-empty{font-size:12px;line-height:1.7;padding:15px;border:1px dashed #456174;border-radius:8px;color:#b3c6d4}\n@media(max-width:1050px){.rv-system-status{grid-template-columns:repeat(3,minmax(0,1fr))}}\n@media(max-width:680px){.rv-system-status{grid-template-columns:repeat(2,minmax(0,1fr))}.rv-robot-coordinates{flex-direction:column}.rv-model-summary{grid-template-columns:1fr}.rv-mini-robot{width:80px}}\n@media(prefers-reduced-motion:reduce){.rv-robot-head,.rv-face-eye,.rv-expression-robot{transition:none;animation:none!important}}\n",
+    "storeOutMessages": true,
+    "passthru": false,
+    "resendOnRefresh": true,
+    "templateScope": "site:style",
+    "className": "",
+    "x": 300,
+    "y": 80,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "d02026bb00001000",
+    "type": "ui-page",
+    "name": "Übersicht",
+    "ui": "d02026bb00000001",
+    "path": "/overview",
+    "icon": "view-dashboard-outline",
+    "layout": "grid",
+    "theme": "d02026bb00000002",
+    "order": 1,
+    "className": "",
+    "visible": "true",
+    "disabled": "false",
+    "breakpoints": [
+      {
+        "name": "Default",
+        "px": "0",
+        "cols": "4"
+      },
+      {
+        "name": "Tablet",
+        "px": "600",
+        "cols": "8"
+      },
+      {
+        "name": "Desktop",
+        "px": "1024",
+        "cols": "12"
+      }
+    ]
+  },
+  {
+    "id": "d02026bb00002000",
+    "type": "ui-group",
+    "name": "ROVO · Übersicht",
+    "page": "d02026bb00001000",
+    "width": "12",
+    "height": "1",
+    "order": 1,
+    "showTitle": false,
+    "className": "",
+    "visible": "true",
+    "disabled": "false",
+    "groupType": "default"
+  },
+  {
+    "id": "d02026bb00003000",
+    "type": "ui-template",
+    "z": "d02026bb00000101",
+    "group": "d02026bb00002000",
+    "page": "",
+    "ui": "",
+    "name": "01 • Übersicht",
+    "order": 1,
+    "width": 12,
+    "height": 0,
+    "head": "",
+    "format": "<template>\n<div class=\"rx\">\n <header class=\"rx-head\"><div><div class=\"rx-kicker\">ROVO / ROBOTERSTEUERUNG</div><h1>Willkommen bei Rovo</h1><div class=\"rx-sub\">Alle wichtigen Funktionen auf einen Blick.</div></div><span class=\"rx-chip warn\">Hardware: Testmodus</span></header>\n <div class=\"rv-name-subline\"><span class=\"rv-name-strong\">ROVO</span><span>Robotic Observation and Voice Operator</span></div>\n <div class=\"rx-grid\">\n  <section class=\"rx-panel rx-span-12\"><div class=\"rx-panel-head\"><h2>Funktionsübersicht</h2><span class=\"rx-small\">Betriebsbereitschaft &amp; Systemeinstellungen</span></div>\n    <div class=\"rv-system-status\"><div class=\"rv-system-state\" v-for=\"row in statuses\" :key=\"row.name\"><span class=\"rv-system-indicator\" :class=\"{on:row.active}\"></span><span>{{row.name}}</span><strong>{{row.active?'Aktiv':'Aus'}}</strong></div></div>\n  </section>\n  <section class=\"rx-panel rx-span-3\"><div class=\"rx-label\">Akku</div><div class=\"rx-stat-value\">{{metric(tele.battery.percent,'%')}}</div><div class=\"rv-tip\">Nur mit angeschlossener UPS-Telemetrie</div></section>\n  <section class=\"rx-panel rx-span-3\"><div class=\"rx-label\">CPU-Temperatur</div><div class=\"rx-stat-value\">{{metric(tele.system.cpuTemp,' °C')}}</div></section>\n  <section class=\"rx-panel rx-span-3\"><div class=\"rx-label\">Kamera</div><div class=\"rx-stat-value\" style=\"font-size:17px\">{{tele.camera.connected===true?'Verbunden':'Nicht erkannt'}}</div></section>\n  <section class=\"rx-panel rx-span-3\"><div class=\"rx-label\">ESP32</div><div class=\"rx-stat-value\" style=\"font-size:17px\">{{tele.esp32.connected===true?'Verbunden':'Nicht erkannt'}}</div></section>\n </div>\n</div>\n</template>\n<script>\nexport default {\n data(){return {cfg:{audio:{enabled:true},motion:{enabled:true},camera:{enabled:true,autoTracking:false},display:{enabled:true}},tele:{system:{},battery:{},camera:{},esp32:{}},notice:'',loaded:false}},\n mounted(){this.rpc('config.read');this.send({payload:{type:'ui.sync',data:{}}})},\n watch:{msg:{handler(v){if(v?.payload)this.receive(v.payload)},immediate:true}},\n computed:{statuses(){return [{name:'Bewegung',active:this.cfg.motion.enabled},{name:'Sprache',active:this.cfg.audio.enabled},{name:'Kamera',active:this.cfg.camera.enabled},{name:'Tracking',active:this.cfg.camera.autoTracking},{name:'Display',active:this.cfg.display.enabled}]}},\n methods:{rpc(action,data={}){this.send({topic:'rovo/integrations',payload:{action,data}})},command(type,data={}){this.send({topic:'rovo/command',payload:{type,data}});this.notice='Testbefehl gesendet; keine Hardwarebewegung.'},receive(p){if(p.kind==='rovo_config'){if(p.config){this.cfg=p.config;this.loaded=true}this.notice=p.ok?'Konfiguration geladen.':p.message}else if(p.kind==='snapshot'&&p.tele){this.tele={...this.tele,...p.tele}}else if(p.kind==='telemetry'){this.tele={...this.tele,...p}}else if(p.kind==='ack'){this.notice=p.message||''}},metric(v,s=''){return v==null?'—':String(v)+s}}\n}\n</script>\n",
+    "storeOutMessages": true,
+    "passthru": false,
+    "resendOnRefresh": true,
+    "templateScope": "local",
+    "className": "",
+    "x": 370,
+    "y": 170,
+    "wires": [
+      [
+        "d02026bb00000011",
+        "v4out030009999999"
+      ]
+    ]
+  },
+  {
+    "id": "d02026bb00001001",
+    "type": "ui-page",
+    "name": "KI & Sprache",
+    "ui": "d02026bb00000001",
+    "path": "/assistant",
+    "icon": "robot-outline",
+    "layout": "grid",
+    "theme": "d02026bb00000002",
+    "order": 2,
+    "className": "",
+    "visible": "true",
+    "disabled": "false",
+    "breakpoints": [
+      {
+        "name": "Default",
+        "px": "0",
+        "cols": "4"
+      },
+      {
+        "name": "Tablet",
+        "px": "600",
+        "cols": "8"
+      },
+      {
+        "name": "Desktop",
+        "px": "1024",
+        "cols": "12"
+      }
+    ]
+  },
+  {
+    "id": "d02026bb00002001",
+    "type": "ui-group",
+    "name": "ROVO · KI & Sprache",
+    "page": "d02026bb00001001",
+    "width": "12",
+    "height": "1",
+    "order": 1,
+    "showTitle": false,
+    "className": "",
+    "visible": "true",
+    "disabled": "false",
+    "groupType": "default"
+  },
+  {
+    "id": "d02026bb00003001",
+    "type": "ui-template",
+    "z": "d02026bb00000101",
+    "group": "d02026bb00002001",
+    "page": "",
+    "ui": "",
+    "name": "02 • KI & Sprache",
+    "order": 1,
+    "width": 12,
+    "height": 0,
+    "head": "",
+    "format": "<template>\n<div class=\"rx\">\n<header class=\"rx-head\"><div><div class=\"rx-kicker\">KOMMUNIKATION</div><h1>KI & Sprache</h1><div class=\"rx-sub\">Mit Rovo schreiben, Sprache testen und das KI-Verhalten steuern.</div></div><span class=\"rx-chip\"><span class=\"rx-dot\"></span>{{tele.ai.state}}</span></header>\n<div class=\"rx-grid\">\n<section class=\"rx-panel rx-span-8\"><div class=\"rx-panel-head\"><h2><v-icon icon=\"mdi-chat-processing-outline\" size=\"21\" style=\"margin-right:8px\"/>Rovo Chat</h2><button class=\"rx-button soft\" @click=\"chat=[]\"><v-icon icon=\"mdi-delete-outline\" size=\"16\"/> Chat lokal leeren</button></div><div class=\"rx-chatbox\"><div v-if=\"!chat.length\" style=\"margin:auto;text-align:center;max-width:315px\"><v-icon icon=\"mdi-robot-happy-outline\" size=\"45\" color=\"#73e8d5\"/><div style=\"font-weight:800;margin:12px 0 6px\">Frag mich etwas!</div><div class=\"rx-small\">Deine Nachrichten erscheinen hier. Für echte KI-Antworten muss der Python-Backend-Dienst angebunden werden.</div></div><div v-for=\"(m,i) in chat\" :key=\"i\" class=\"rx-bubble\" :class=\"{me:m.who==='Du'}\"><small>{{m.who}}</small>{{m.text}}</div></div><form @submit.prevent=\"sendChat\" class=\"rx-flex\" style=\"margin-top:13px\"><input class=\"rx-input\" v-model=\"draft\" maxlength=\"1200\" placeholder=\"Schreibe eine Nachricht an Rovo…\"/><button type=\"submit\" class=\"rx-button primary\"><v-icon icon=\"mdi-send\" size=\"18\"/><span>Senden</span></button></form><div class=\"rx-note\">Das Dashboard sendet einen Chat-Befehl an Node-RED. Sobald der lokale Verbindungsdienst eingerichtet ist, kann Rovo über den hinterlegten LLM-API-Schlüssel antworten. Der Anfrageinhalt wird an den ausgewählten API-Anbieter gesendet.</div></section>\n<section class=\"rx-span-4 rx-col\"><section class=\"rx-panel\"><div class=\"rx-panel-head\"><h2>Sprachsteuerung</h2><v-icon icon=\"mdi-waveform\" color=\"#7eebd9\"/></div><div class=\"rx-row\"><span>Mikrofon</span><span class=\"rx-chip\" :class=\"tele.audio.microphone===true?'ok':''\"><span class=\"rx-dot\"></span>{{tele.audio.microphone===true?'Bereit':'Nicht bestätigt'}}</span></div><div class=\"rx-row\"><span>Lautsprecher</span><span class=\"rx-chip\" :class=\"tele.audio.speaker===true?'ok':''\"><span class=\"rx-dot\"></span>{{tele.audio.speaker===true?'Bereit':'Nicht bestätigt'}}</span></div><div class=\"rx-buttons\" style=\"margin-top:18px\"><button class=\"rx-button soft\" @click=\"command('audio.listen')\"><v-icon icon=\"mdi-microphone\"/> Zuhören</button><button class=\"rx-button soft\" @click=\"command('audio.stop')\"><v-icon icon=\"mdi-stop\"/> Stoppen</button><button class=\"rx-button soft\" @click=\"command('audio.test')\"><v-icon icon=\"mdi-volume-high\"/> Testton</button></div></section><section class=\"rx-panel\"><h2>Aktives KI-Modell</h2><div class=\"rx-sub\" style=\"margin-top:8px\">Anbieter, Modell und API-Key wählst du unter <strong>Verbindungen</strong> aus. Die Auswahl wird dort gespeichert und vom Chat übernommen.</div><div class=\"rv-foot\"><span class=\"rx-chip\">LLM über Verbindungen konfigurierbar</span></div></section></section>\n</div><div v-if=\"notice\" class=\"rx-banner mint\" style=\"margin-top:16px\">{{notice}}</div>\n</div>\n</template>\n<script>\nexport default {\n  data(){return {tele:{system:{cpuTemp:null,load1:null,ramUsage:null,uptimeSeconds:null,hostname:null,platform:null},battery:{percent:null,voltage:null,current:null,charging:null},esp32:{connected:null},camera:{connected:null,tracking:null,faceDetected:null},ai:{state:'nicht verbunden'},audio:{microphone:null,speaker:null}},\nnotice:'',events:[],draft:'',model:'gpt-4o-mini',chat:[]};},\n  mounted(){this.send({payload:{type:'ui.sync',data:{}}});},\n  watch:{msg:{handler(v){if(v && v.payload)this.receive(v.payload)},immediate:true}},\n  methods:{\nreceive(p){\n  if(!p || typeof p !== 'object') return;\n  if(p.kind==='snapshot') {\n    if(p.tele) this.mergeTele(p.tele);\n    if(Array.isArray(p.events)) this.events=p.events.slice(0,60);\n  } else if(p.kind==='telemetry') this.mergeTele(p);\n  else if(p.kind==='ack') this.notice=String(p.message||'Im Testmodus verarbeitet');\n  else if(p.kind==='chat_response' && Array.isArray(this.chat)) this.chat.push({who:'ROVO',text:String(p.text||'')});\n},\nmergeTele(v){\n  for(const k of ['system','battery','esp32','camera','ai','audio']){\n    if(v[k] && typeof v[k]==='object') this.tele[k]={...this.tele[k],...v[k]};\n  }\n},\ncommand(type,data={}){\n  this.send({topic:'rovo/command',payload:{type,data}});\n  this.notice='Befehl an Node-RED gesendet – Testmodus';\n},\nmetric(v,suffix=''){return v===null||v===undefined||v===''?'—':String(v)+suffix;},\npercent(v){return v===null||v===undefined?0:Math.min(100,Math.max(0,Number(v)||0));},\ntime(t){const d=new Date(t);return Number.isNaN(+d)?'—':d.toLocaleTimeString('de-DE',{hour:'2-digit',minute:'2-digit',second:'2-digit'});},\nup(t){if(t===null||t===undefined)return '—';const v=Math.max(0,Number(t)||0);return Math.floor(v/86400)+'d '+Math.floor(v%86400/3600)+'h';},sendChat(){const text=this.draft.trim();if(!text)return;this.chat.push({who:'Du',text});this.draft='';this.command('chat.send',{text});}\n  }\n}\n</script>",
+    "storeOutMessages": true,
+    "passthru": false,
+    "resendOnRefresh": true,
+    "templateScope": "local",
+    "className": "",
+    "x": 370,
+    "y": 265,
+    "wires": [
+      [
+        "d02026bb00000011"
+      ]
+    ]
+  },
+  {
+    "id": "d02026bb00001002",
+    "type": "ui-page",
+    "name": "Kamera",
+    "ui": "d02026bb00000001",
+    "path": "/camera",
+    "icon": "camera-outline",
+    "layout": "grid",
+    "theme": "d02026bb00000002",
+    "order": 3,
+    "className": "",
+    "visible": "true",
+    "disabled": "false",
+    "breakpoints": [
+      {
+        "name": "Default",
+        "px": "0",
+        "cols": "4"
+      },
+      {
+        "name": "Tablet",
+        "px": "600",
+        "cols": "8"
+      },
+      {
+        "name": "Desktop",
+        "px": "1024",
+        "cols": "12"
+      }
+    ]
+  },
+  {
+    "id": "d02026bb00002002",
+    "type": "ui-group",
+    "name": "ROVO · Kamera",
+    "page": "d02026bb00001002",
+    "width": "12",
+    "height": "1",
+    "order": 1,
+    "showTitle": false,
+    "className": "",
+    "visible": "true",
+    "disabled": "false",
+    "groupType": "default"
+  },
+  {
+    "id": "d02026bb00003002",
+    "type": "ui-template",
+    "z": "d02026bb00000101",
+    "group": "d02026bb00002002",
+    "page": "",
+    "ui": "",
+    "name": "03 • Kamera",
+    "order": 1,
+    "width": 12,
+    "height": 0,
+    "head": "",
+    "format": "<template>\n<div class=\"rx\"><header class=\"rx-head\"><div><div class=\"rx-kicker\">KAMERA / TRACKING</div><h1>Kamera & Gesichtserkennung</h1><div class=\"rx-sub\">Kamera und automatisches Tracking direkt in diesem Bereich konfigurieren.</div></div><span class=\"rx-chip warn\">Kamera noch nicht verbunden</span></header>\n<div class=\"rx-grid\"><section class=\"rx-panel rx-span-7\"><h2>Kameravorschau</h2><div class=\"rx-camera\" style=\"min-height:260px;display:flex;align-items:center;justify-content:center;flex-direction:column;margin-top:15px\"><v-icon icon=\"mdi-camera-outline\" size=\"52\"/><div class=\"rx-small\" style=\"margin-top:12px\">Stream wird angezeigt, sobald das Python-Kameraprogramm angebunden ist</div></div></section>\n<section class=\"rx-panel rx-span-5\"><h2>Tracking-Einstellungen</h2>\n <div class=\"rv-switch\"><div><strong>Kamera aktiv</strong><div class=\"rx-small\">Kamerafunktionen zulassen</div></div><input type=\"checkbox\" v-model=\"form.enabled\"/></div>\n <div class=\"rv-switch\"><div><strong>Automatisches Tracking</strong><div class=\"rx-small\">Erkannten Gesichtern automatisch folgen</div></div><input type=\"checkbox\" v-model=\"form.autoTracking\" :disabled=\"!form.enabled\"/></div>\n <div class=\"rv-control\"><div class=\"rv-control-header\"><span>Empfindlichkeit</span><strong>{{form.trackingSensitivity}} %</strong></div><input type=\"range\" min=\"0\" max=\"100\" step=\"5\" v-model.number=\"form.trackingSensitivity\" :disabled=\"!form.enabled\"/></div>\n <div class=\"rv-tip\">Die Einstellung wird gespeichert. Face Tracking funktioniert erst, wenn das Kameraprogramm sie auswertet.</div>\n <div class=\"rv-foot\"><button class=\"rx-button\" @click=\"save\">Speichern</button><button class=\"rx-button\" @click=\"reset\">Standardwerte</button></div><div class=\"rv-status\">{{notice}}</div>\n</section></div></div>\n</template>\n<script>\nexport default {\n data(){return {form:{enabled:true,autoTracking:false,trackingSensitivity:65},notice:''}},mounted(){this.rpc('config.read')},\n watch:{msg:{handler(v){const p=v?.payload;if(p?.kind==='rovo_config'){if(p.config?.camera)this.form={...p.config.camera};this.notice=p.message||''}},immediate:true}},\n methods:{rpc(action,data={}){this.send({topic:'rovo/integrations',payload:{action,data}})},save(){this.rpc('config.update',{section:'camera',changes:{...this.form}})},reset(){this.rpc('config.reset',{section:'camera'})}}\n}\n</script>\n",
+    "storeOutMessages": true,
+    "passthru": false,
+    "resendOnRefresh": true,
+    "templateScope": "local",
+    "className": "",
+    "x": 370,
+    "y": 360,
+    "wires": [
+      [
+        "d02026bb00000011",
+        "v4out030029999999"
+      ]
+    ]
+  },
+  {
+    "id": "d02026bb00001003",
+    "type": "ui-page",
+    "name": "Bewegung",
+    "ui": "d02026bb00000001",
+    "path": "/motion",
+    "icon": "axis-arrow",
+    "layout": "grid",
+    "theme": "d02026bb00000002",
+    "order": 4,
+    "className": "",
+    "visible": "true",
+    "disabled": "false",
+    "breakpoints": [
+      {
+        "name": "Default",
+        "px": "0",
+        "cols": "4"
+      },
+      {
+        "name": "Tablet",
+        "px": "600",
+        "cols": "8"
+      },
+      {
+        "name": "Desktop",
+        "px": "1024",
+        "cols": "12"
+      }
+    ]
+  },
+  {
+    "id": "d02026bb00002003",
+    "type": "ui-group",
+    "name": "ROVO · Bewegung",
+    "page": "d02026bb00001003",
+    "width": "12",
+    "height": "1",
+    "order": 1,
+    "showTitle": false,
+    "className": "",
+    "visible": "true",
+    "disabled": "false",
+    "groupType": "default"
+  },
+  {
+    "id": "d02026bb00003003",
+    "type": "ui-template",
+    "z": "d02026bb00000101",
+    "group": "d02026bb00002003",
+    "page": "",
+    "ui": "",
+    "name": "04 • Bewegung",
+    "order": 1,
+    "width": 12,
+    "height": 0,
+    "head": "",
+    "format": "<template>\n<div class=\"rx\"><header class=\"rx-head\"><div><div class=\"rx-kicker\">BEWEGUNG / PAN & TILT</div><h1>Kopfbewegung</h1><div class=\"rx-sub\">Manuelle Steuerung, feste Startposition, Geschwindigkeit, Glättung und sichere Winkelgrenzen.</div></div><span class=\"rx-chip warn\">Keine echte Servo-Ansteuerung</span></header>\n<div class=\"rx-grid\">\n <section class=\"rx-panel rx-span-5 rv-motion-illustration\"><div class=\"rx-between\"><h2>Bewegungsvorschau</h2><span class=\"rx-small\">Simulation</span></div>\n <div class=\"rv-robot-stage\"><div class=\"rv-robot-guide rv-robot-guide-vert\"></div><div class=\"rv-robot-guide rv-robot-guide-horz\"></div>\n  <div class=\"rv-robot-neck\"></div><div class=\"rv-robot-base\"></div>\n  <div class=\"rv-robot-head\" :style=\"{transform:'translateY('+((form.homeTilt-tilt)*0.35)+'px) rotate('+((pan-form.homePan)*0.6)+'deg)'}\">\n   <div class=\"rv-robot-screen\"><span class=\"rv-robot-eye\"></span><span class=\"rv-robot-eye\"></span><span class=\"rv-robot-mouth\"></span></div>\n  </div>\n </div>\n <div class=\"rv-robot-coordinates\"><div><span>Pan</span><b>{{pan}}°</b></div><div><span>Tilt</span><b>{{tilt}}°</b></div><div><span>Home</span><b>{{form.homePan}}° / {{form.homeTilt}}°</b></div></div>\n <div class=\"rv-tip\">Animierte Vorschau anhand der Reglerwerte; keine Messung der echten Servoposition.</div></section>\n <section class=\"rx-panel rx-span-7\"><h2>Direktsteuerung</h2>\n  <div class=\"rv-switch\"><div><strong>Bewegung aktiv</strong><div class=\"rx-small\">Steuerung generell freigeben</div></div><input type=\"checkbox\" v-model=\"form.enabled\"/></div>\n  <div class=\"rv-control\"><div class=\"rv-control-header\"><span>Pan – horizontal</span><strong>{{pan}}°</strong></div><input type=\"range\" v-model.number=\"pan\" :min=\"form.panMin\" :max=\"form.panMax\" step=\"1\" :disabled=\"!form.enabled\"/></div>\n  <div class=\"rv-control\"><div class=\"rv-control-header\"><span>Tilt – vertikal</span><strong>{{tilt}}°</strong></div><input type=\"range\" v-model.number=\"tilt\" :min=\"form.tiltMin\" :max=\"form.tiltMax\" step=\"1\" :disabled=\"!form.enabled\"/></div>\n  <div class=\"rx-buttons\"><button class=\"rx-button\" @click=\"move\" :disabled=\"!form.enabled\">Position senden</button><button class=\"rx-button\" @click=\"home\" :disabled=\"!form.enabled\">Zur Startposition</button><button class=\"rx-button\" @click=\"command('motion.stop')\">Stopp</button></div><div class=\"rv-tip\">Position senden erzeugt momentan nur einen Testbefehl. Der Stopp-Knopf ist kein hardwareseitiger Not-Aus.</div>\n </section>\n <section class=\"rx-panel rx-span-12\"><h2>Bewegungsverhalten</h2>\n  <div class=\"rv-control\"><div class=\"rv-control-header\"><span>Bewegungsgeschwindigkeit</span><strong>{{form.speed}} %</strong></div><input type=\"range\" v-model.number=\"form.speed\" min=\"10\" max=\"100\" step=\"5\"/></div>\n  <div class=\"rv-control\"><div class=\"rv-control-header\"><span>Bewegungsglättung</span><strong>{{form.smoothing}} %</strong></div><input type=\"range\" v-model.number=\"form.smoothing\" min=\"0\" max=\"100\" step=\"5\"/><div class=\"rv-tip\">70 % als Startwert. Die tatsächliche Wirkung setzt Unterstützung im Bewegungsprogramm voraus.</div></div>\n  <div class=\"rv-foot\"><button class=\"rx-button\" @click=\"saveBehavior\">Verhalten speichern</button><button class=\"rx-button\" @click=\"reset\">Standardwerte</button></div>\n </section>\n <section class=\"rx-panel rx-span-6\"><h2>Startposition kalibrieren</h2><div class=\"rx-sub\" style=\"margin:9px 0\">Aktuelle Reglerposition als neue Home-Position übernehmen. Bereits bekannte Ausgangswerte: Pan 75°, Tilt 90°.</div>\n  <div class=\"rv-two\"><div class=\"rx-field\"><label>Pan (°)</label><input class=\"rx-input\" type=\"number\" :value=\"form.homePan\" disabled/></div><div class=\"rx-field\"><label>Tilt (°)</label><input class=\"rx-input\" type=\"number\" :value=\"form.homeTilt\" disabled/></div></div>\n  <div class=\"rv-foot\"><button class=\"rx-button\" @click=\"calibrate\">Aktuelle Position als Startposition speichern</button></div>\n  <div class=\"rv-warning\">Die Position wird als Konfiguration gespeichert, nicht am Servo vermessen. Vor der ersten Bewegung mechanisch freigängigen Bereich sicherstellen.</div>\n </section>\n <section class=\"rx-panel rx-span-6\"><h2>Bewegungsradius</h2>\n  <div class=\"rv-two\"><div class=\"rx-field\"><label>Pan Minimum</label><input class=\"rx-input\" type=\"number\" v-model.number=\"form.panMin\" min=\"15\" max=\"165\"/></div><div class=\"rx-field\"><label>Pan Maximum</label><input class=\"rx-input\" type=\"number\" v-model.number=\"form.panMax\" min=\"15\" max=\"165\"/></div><div class=\"rx-field\"><label>Tilt Minimum</label><input class=\"rx-input\" type=\"number\" v-model.number=\"form.tiltMin\" min=\"25\" max=\"155\"/></div><div class=\"rx-field\"><label>Tilt Maximum</label><input class=\"rx-input\" type=\"number\" v-model.number=\"form.tiltMax\" min=\"25\" max=\"155\"/></div></div>\n  <div class=\"rv-switch\"><div><strong>Erweiterte Grenzen zulassen</strong><div class=\"rx-small\">Nur nach mechanischer Prüfung des montierten Gehäuses</div></div><input type=\"checkbox\" v-model=\"form.allowExtendedRange\"/></div>\n  <div class=\"rv-warning\">Größere Winkel können Servos, Kabel oder Gehäuse beschädigen. Die Standardgrenzen sind nur vorsichtige Startwerte, keine geprüften Sicherheitsgrenzen.</div>\n  <div class=\"rv-foot\"><button class=\"rx-button\" @click=\"saveLimits\">Winkelgrenzen prüfen und speichern</button><button class=\"rx-button\" @click=\"resetLimits\">Standardradius wiederherstellen</button></div>\n </section>\n <section class=\"rx-panel rx-span-12\"><div class=\"rx-between\"><strong>Speicherstatus</strong><span class=\"rx-small\">Die Hardware bleibt unverbunden</span></div><div class=\"rv-status\">{{notice}}</div></section>\n</div></div>\n</template>\n<script>\nexport default {\n data(){return {form:{enabled:true,homePan:75,homeTilt:90,speed:65,smoothing:70,panMin:50,panMax:105,tiltMin:70,tiltMax:110,allowExtendedRange:false},pan:75,tilt:90,notice:''}},\n mounted(){this.rpc('config.read')},\n watch:{msg:{handler(v){const p=v?.payload;if(p?.kind==='rovo_config'){if(p.config?.motion){const oldPan=this.pan,oldTilt=this.tilt;this.form={...p.config.motion};if(p.action==='config.read'||p.action==='config.reset'){this.pan=this.form.homePan;this.tilt=this.form.homeTilt}else{this.pan=Math.max(this.form.panMin,Math.min(this.form.panMax,oldPan));this.tilt=Math.max(this.form.tiltMin,Math.min(this.form.tiltMax,oldTilt))}}this.notice=p.message||''}else if(p?.kind==='ack'){this.notice=p.message||''}},immediate:true}},\n methods:{rpc(action,data={}){this.send({topic:'rovo/integrations',payload:{action,data}})},command(type,data={}){this.send({topic:'rovo/command',payload:{type,data}});this.notice='Testbefehl gesendet.'},home(){this.pan=this.form.homePan;this.tilt=this.form.homeTilt;this.command('motion.home')},move(){if(!this.form.enabled)return;this.command('motion.set',{pan:this.pan,tilt:this.tilt,speed:this.form.speed})},saveBehavior(){this.rpc('config.update',{section:'motion',changes:{enabled:this.form.enabled,speed:this.form.speed,smoothing:this.form.smoothing}})},calibrate(){if(!window.confirm(`Aktuelle Position als neue Startposition übernehmen?\\nPan ${this.pan}° / Tilt ${this.tilt}°\\nNur durchführen, wenn der Bereich mechanisch geprüft ist.`))return;this.rpc('config.update',{section:'motion',changes:{homePan:this.pan,homeTilt:this.tilt},confirmCalibration:true})},saveLimits(){if(!window.confirm('Achtung: Bewegungsgrenzen verändern! Sind Servos, Gehäuse und Kamera-Flachbandkabel mechanisch geprüft?\\n\\nFortfahren und neue Grenzen speichern?'))return;this.rpc('config.update',{section:'motion',changes:{panMin:this.form.panMin,panMax:this.form.panMax,tiltMin:this.form.tiltMin,tiltMax:this.form.tiltMax,allowExtendedRange:this.form.allowExtendedRange},confirmLimits:true})},resetLimits(){if(!window.confirm('Nur den Bewegungsradius auf die vorsichtigen Standardwerte zurücksetzen?\\nPan: 50°–105°, Tilt: 70°–110°. Startposition und Geschwindigkeit bleiben erhalten.'))return;this.rpc('config.update',{section:'motion',changes:{panMin:50,panMax:105,tiltMin:70,tiltMax:110,allowExtendedRange:false},confirmLimits:true})},reset(){if(window.confirm('Bewegung auf Standardwerte zurücksetzen?'))this.rpc('config.reset',{section:'motion'})}}\n}\n</script>\n",
+    "storeOutMessages": true,
+    "passthru": false,
+    "resendOnRefresh": true,
+    "templateScope": "local",
+    "className": "",
+    "x": 370,
+    "y": 455,
+    "wires": [
+      [
+        "d02026bb00000011",
+        "v4out030039999999"
+      ]
+    ]
+  },
+  {
+    "id": "d02026bb00001004",
+    "type": "ui-page",
+    "name": "Display",
+    "ui": "d02026bb00000001",
+    "path": "/display",
+    "icon": "emoticon-happy-outline",
+    "layout": "grid",
+    "theme": "d02026bb00000002",
+    "order": 5,
+    "className": "",
+    "visible": "true",
+    "disabled": "false",
+    "breakpoints": [
+      {
+        "name": "Default",
+        "px": "0",
+        "cols": "4"
+      },
+      {
+        "name": "Tablet",
+        "px": "600",
+        "cols": "8"
+      },
+      {
+        "name": "Desktop",
+        "px": "1024",
+        "cols": "12"
+      }
+    ]
+  },
+  {
+    "id": "d02026bb00002004",
+    "type": "ui-group",
+    "name": "ROVO · Display",
+    "page": "d02026bb00001004",
+    "width": "12",
+    "height": "1",
+    "order": 1,
+    "showTitle": false,
+    "className": "",
+    "visible": "true",
+    "disabled": "false",
+    "groupType": "default"
+  },
+  {
+    "id": "d02026bb00003004",
+    "type": "ui-template",
+    "z": "d02026bb00000101",
+    "group": "d02026bb00002004",
+    "page": "",
+    "ui": "",
+    "name": "05 • Display",
+    "order": 1,
+    "width": 12,
+    "height": 0,
+    "head": "",
+    "format": "<template>\n<div class=\"rx\"><header class=\"rx-head\"><div><div class=\"rx-kicker\">DISPLAY / EMOTIONEN</div><h1>Gesicht & Ausdruck</h1><div class=\"rx-sub\">Jeden Gesichtsausdruck direkt als Vorschau mit Beschriftung auswählen.</div></div><span class=\"rx-chip\">ESP32 · TFT</span></header>\n<div class=\"rx-grid\"><section class=\"rx-panel rx-span-8\"><h2>Emotion auswählen</h2><div class=\"rv-tip\" style=\"margin:8px 0 18px\">Die Symbolvorschauen sind eine Darstellung in der WebUI. Für identische TFT-Bilder muss der ESP32 entsprechend programmiert werden.</div>\n <div class=\"rv-main-expression\"><div class=\"rv-expression-robot\" :class=\"'rv-expression-'+form.emotion\"><span class=\"rv-face-eye rv-eye-left\"></span><span class=\"rv-face-eye rv-eye-right\"></span><span class=\"rv-face-mouth\"></span></div><div class=\"rv-expression-name\">{{selectedEmotion}}</div><div class=\"rv-tip\">Animierte Gesichtsvorschau · Beispiel für das TFT-Display</div></div>\n <div class=\"rv-face-grid\"><button v-for=\"face in emotions\" :key=\"face.id\" class=\"rv-emotion\" :class=\"{selected:form.emotion===face.id}\" @click=\"choose(face.id)\" :disabled=\"!form.enabled\"><span class=\"rv-mini-robot\" :class=\"'rv-expression-'+face.id\" aria-hidden=\"true\"><span class=\"rv-face-eye rv-eye-left\"></span><span class=\"rv-face-eye rv-eye-right\"></span><span class=\"rv-face-mouth\"></span></span><strong>{{face.label}}</strong></button></div>\n </section><section class=\"rx-panel rx-span-4\"><h2>Display-Einstellungen</h2>\n  <div class=\"rv-switch\"><div><strong>Display aktiv</strong><div class=\"rx-small\">Display-Ausgabe an-/ausschalten</div></div><input type=\"checkbox\" v-model=\"form.enabled\"/></div>\n  <div class=\"rx-field\"><label>Betriebsart</label><select class=\"rx-select\" v-model=\"form.mode\" :disabled=\"!form.enabled\"><option value=\"auto\">Automatisch</option><option value=\"manual\">Manuell</option><option value=\"test\">Animationstest</option></select></div>\n  <div class=\"rv-control\"><div class=\"rv-control-header\"><span>Helligkeit</span><strong>{{form.brightness}} %</strong></div><input type=\"range\" v-model.number=\"form.brightness\" min=\"0\" max=\"100\" step=\"5\" :disabled=\"!form.enabled\"/></div>\n  <div class=\"rv-foot\"><button class=\"rx-button\" @click=\"save\">Speichern</button><button class=\"rx-button\" @click=\"reset\">Standardwerte</button></div><div class=\"rv-status\">{{notice}}</div>\n </section></div></div>\n</template>\n<script>\nexport default {\n data(){return {form:{enabled:true,emotion:'neutral',brightness:75,mode:'auto'},emotions:[{id:'neutral',label:'Neutral',face:''},{id:'happy',label:'Fröhlich',face:''},{id:'curious',label:'Neugierig',face:''},{id:'sleepy',label:'Müde',face:''},{id:'surprised',label:'Überrascht',face:''},{id:'blink',label:'Blinzeln',face:''}],notice:''}},\n computed:{selectedEmotion(){return (this.emotions.find(e=>e.id===this.form.emotion)||this.emotions[0]).label}},\n mounted(){this.rpc('config.read')},\n watch:{msg:{handler(v){const p=v?.payload;if(p?.kind==='rovo_config'){if(p.config?.display)this.form={...p.config.display};this.notice=p.message||''}else if(p?.kind==='ack')this.notice=p.message||''},immediate:true}},\n methods:{rpc(action,data={}){this.send({topic:'rovo/integrations',payload:{action,data}})},choose(id){this.form.emotion=id;this.rpc('config.update',{section:'display',changes:{emotion:id}});this.send({topic:'rovo/command',payload:{type:'display.emotion',data:{emotion:id}}})},save(){this.rpc('config.update',{section:'display',changes:{...this.form}})},reset(){this.rpc('config.reset',{section:'display'})}}\n}\n</script>\n",
+    "storeOutMessages": true,
+    "passthru": false,
+    "resendOnRefresh": true,
+    "templateScope": "local",
+    "className": "",
+    "x": 370,
+    "y": 550,
+    "wires": [
+      [
+        "d02026bb00000011",
+        "v4out030049999999"
+      ]
+    ]
+  },
+  {
+    "id": "d02026bb00001005",
+    "type": "ui-page",
+    "name": "System",
+    "ui": "d02026bb00000001",
+    "path": "/system",
+    "icon": "monitor-dashboard",
+    "layout": "grid",
+    "theme": "d02026bb00000002",
+    "order": 8,
+    "className": "",
+    "visible": "true",
+    "disabled": "false",
+    "breakpoints": [
+      {
+        "name": "Default",
+        "px": "0",
+        "cols": "4"
+      },
+      {
+        "name": "Tablet",
+        "px": "600",
+        "cols": "8"
+      },
+      {
+        "name": "Desktop",
+        "px": "1024",
+        "cols": "12"
+      }
+    ]
+  },
+  {
+    "id": "d02026bb00002005",
+    "type": "ui-group",
+    "name": "ROVO · System",
+    "page": "d02026bb00001005",
+    "width": "12",
+    "height": "1",
+    "order": 1,
+    "showTitle": false,
+    "className": "",
+    "visible": "true",
+    "disabled": "false",
+    "groupType": "default"
+  },
+  {
+    "id": "d02026bb00003005",
+    "type": "ui-template",
+    "z": "d02026bb00000101",
+    "group": "d02026bb00002005",
+    "page": "",
+    "ui": "",
+    "name": "06 • System",
+    "order": 1,
+    "width": 12,
+    "height": 0,
+    "head": "",
+    "format": "<template>\n<div class=\"rx\"><header class=\"rx-head\"><div><div class=\"rx-kicker\">SYSTEMSTATUS</div><h1>System & Energie</h1><div class=\"rx-sub\">Node-RED Host, UPS-Akku, Verbindungen und Befehlsprotokoll an einer Stelle.</div></div><span class=\"rx-chip\">Live-Status nur soweit verfügbar</span></header>\n<div class=\"rx-grid\"><section class=\"rx-panel rx-span-4\"><div class=\"rx-panel-head\"><h2>Akku / UPS HAT</h2><v-icon icon=\"mdi-battery-charging-outline\" color=\"#7de7d5\"/></div><div class=\"rx-xl\" style=\"margin:16px 0 14px\">{{metric(tele.battery.percent,'%')}}</div><div class=\"rx-progress\"><span :style=\"{width:percent(tele.battery.percent)+'%'}\"></span></div><div class=\"rx-rule\"></div><div class=\"rx-row\"><span>Spannung</span><strong>{{metric(tele.battery.voltage,' V')}}</strong></div><div class=\"rx-row\"><span>Strom</span><strong>{{metric(tele.battery.current,' A')}}</strong></div><div class=\"rx-row\"><span>Ladestatus</span><strong>{{tele.battery.charging===true?'Lädt':tele.battery.charging===false?'Lädt nicht':'—'}}</strong></div><div class=\"rx-note\">Die Akkuwerte bleiben leer, bis ein Programm sie vom konkreten UPS HAT übermittelt.</div></section>\n<section class=\"rx-panel rx-span-4\"><div class=\"rx-panel-head\"><h2>Host-Monitor</h2><v-icon icon=\"mdi-raspberry-pi\" color=\"#87b4ff\"/></div><div class=\"rx-row\"><span>Gerätename</span><strong>{{tele.system.hostname||'—'}}</strong></div><div class=\"rx-row\"><span>System</span><strong>{{tele.system.platform||'—'}}</strong></div><div class=\"rx-row\"><span>Temperatur</span><strong>{{metric(tele.system.cpuTemp,' °C')}}</strong></div><div class=\"rx-row\"><span>RAM-Nutzung</span><strong>{{metric(tele.system.ramUsage,'%')}}</strong></div><div class=\"rx-row\"><span>1-Min.-Last</span><strong>{{metric(tele.system.load1)}}</strong></div><div class=\"rx-row\"><span>Uptime</span><strong>{{up(tele.system.uptimeSeconds)}}</strong></div></section>\n<section class=\"rx-panel rx-span-4\"><div class=\"rx-panel-head\"><h2>Verbindungen</h2><v-icon icon=\"mdi-lan-connect\" color=\"#7be5d7\"/></div><div class=\"rx-row\" v-for=\"p in connections\" :key=\"p.label\"><span>{{p.label}}</span><span class=\"rx-flex\" style=\"gap:7px\"><span class=\"rx-bullet\" :class=\"p.value===true?'good':''\"></span><strong>{{p.value===true?'OK':p.value===false?'Offline':'Unbekannt'}}</strong></span></div></section>\n<section class=\"rx-panel rx-span-12\"><div class=\"rx-panel-head\"><h2>Befehlsprotokoll</h2><span class=\"rx-chip\">Letzte {{events.length}} Ereignisse</span></div><div class=\"rx-monitor\"><div v-if=\"events.length===0\" style=\"color:#7e98af\">Noch keine protokollierten Befehle. Der Testmodus wartet auf Eingaben.</div><div v-for=\"(e,i) in events\" :key=\"i\"><span style=\"color:#7ce8d9\">{{time(e.ts)}}</span> · {{e.type}} <span style=\"color:#8e9db0\">{{e.details}}</span></div></div><div class=\"rx-note\">Diese Ereignisse werden in Node-RED protokolliert; ein Neustart kann die Historie zurücksetzen. Der Befehlsausgang ist absichtlich nicht mit Hardware verbunden.</div></section></div></div>\n</template>\n<script>\nexport default {\n  data(){return {tele:{system:{cpuTemp:null,load1:null,ramUsage:null,uptimeSeconds:null,hostname:null,platform:null},battery:{percent:null,voltage:null,current:null,charging:null},esp32:{connected:null},camera:{connected:null,tracking:null,faceDetected:null},ai:{state:'nicht verbunden'},audio:{microphone:null,speaker:null}},\nnotice:'',events:[]};},\n  mounted(){this.send({payload:{type:'ui.sync',data:{}}});},\n  watch:{msg:{handler(v){if(v && v.payload)this.receive(v.payload)},immediate:true}},\n  computed:{connections(){return [{label:'Nano ESP32',value:this.tele.esp32.connected},{label:'Kamera',value:this.tele.camera.connected},{label:'Mikrofon',value:this.tele.audio.microphone},{label:'Lautsprecher',value:this.tele.audio.speaker},{label:'UPS Telemetrie',value:this.tele.battery.percent!==null}];}},\n  methods:{\nreceive(p){\n  if(!p || typeof p !== 'object') return;\n  if(p.kind==='snapshot') {\n    if(p.tele) this.mergeTele(p.tele);\n    if(Array.isArray(p.events)) this.events=p.events.slice(0,60);\n  } else if(p.kind==='telemetry') this.mergeTele(p);\n  else if(p.kind==='ack') this.notice=String(p.message||'Im Testmodus verarbeitet');\n  else if(p.kind==='chat_response' && Array.isArray(this.chat)) this.chat.push({who:'ROVO',text:String(p.text||'')});\n},\nmergeTele(v){\n  for(const k of ['system','battery','esp32','camera','ai','audio']){\n    if(v[k] && typeof v[k]==='object') this.tele[k]={...this.tele[k],...v[k]};\n  }\n},\ncommand(type,data={}){\n  this.send({topic:'rovo/command',payload:{type,data}});\n  this.notice='Befehl an Node-RED gesendet – Testmodus';\n},\nmetric(v,suffix=''){return v===null||v===undefined||v===''?'—':String(v)+suffix;},\npercent(v){return v===null||v===undefined?0:Math.min(100,Math.max(0,Number(v)||0));},\ntime(t){const d=new Date(t);return Number.isNaN(+d)?'—':d.toLocaleTimeString('de-DE',{hour:'2-digit',minute:'2-digit',second:'2-digit'});},\nup(t){if(t===null||t===undefined)return '—';const v=Math.max(0,Number(t)||0);return Math.floor(v/86400)+'d '+Math.floor(v%86400/3600)+'h';}\n  }\n}\n</script>",
+    "storeOutMessages": true,
+    "passthru": false,
+    "resendOnRefresh": true,
+    "templateScope": "local",
+    "className": "",
+    "x": 370,
+    "y": 645,
+    "wires": [
+      [
+        "d02026bb00000011"
+      ]
+    ]
+  },
+  {
+    "id": "d02026bb00001006",
+    "type": "ui-page",
+    "name": "Audio & Sprache",
+    "ui": "d02026bb00000001",
+    "path": "/audio",
+    "icon": "volume-high",
+    "layout": "grid",
+    "theme": "d02026bb00000002",
+    "order": 6,
+    "className": "",
+    "visible": "true",
+    "disabled": "false",
+    "breakpoints": [
+      {
+        "name": "Default",
+        "px": "0",
+        "cols": "4"
+      },
+      {
+        "name": "Tablet",
+        "px": "600",
+        "cols": "8"
+      },
+      {
+        "name": "Desktop",
+        "px": "1024",
+        "cols": "12"
+      }
+    ]
+  },
+  {
+    "id": "d02026bb00002006",
+    "type": "ui-group",
+    "name": "ROVO · Audio & Sprache",
+    "page": "d02026bb00001006",
+    "width": "12",
+    "height": "1",
+    "order": 1,
+    "showTitle": false,
+    "className": "",
+    "visible": "true",
+    "disabled": "false",
+    "groupType": "default"
+  },
+  {
+    "id": "d02026bb00003006",
+    "type": "ui-template",
+    "z": "d02026bb00000101",
+    "group": "d02026bb00002006",
+    "page": "",
+    "ui": "",
+    "name": "07 · Audio & Sprache",
+    "order": 1,
+    "width": 12,
+    "height": 0,
+    "head": "",
+    "format": "<template>\n<div class=\"rx\"><header class=\"rx-head\"><div><div class=\"rx-kicker\">AUDIO / SPRACHE</div><h1>Lautsprecher und Gespräch</h1><div class=\"rx-sub\">Lautstärke, Sprachausgabe und Gesprächsmodus direkt konfigurieren.</div></div><span class=\"rx-chip\">Gespeicherte Werte</span></header>\n<div class=\"rx-grid\">\n <section class=\"rx-panel rx-span-7\"><h2>Lautsprecher</h2>\n  <div class=\"rv-switch\"><div><strong>Audio aktivieren</strong><div class=\"rx-small\">Alle Audiofunktionen zentral ein- oder ausschalten</div></div><input type=\"checkbox\" v-model=\"form.enabled\" aria-label=\"Audio aktivieren\"/></div>\n  <div class=\"rv-control\"><div class=\"rv-control-header\"><span>Standardlautstärke</span><strong>{{form.volume}} %</strong></div><input type=\"range\" v-model.number=\"form.volume\" min=\"0\" max=\"100\" step=\"1\" :disabled=\"!form.enabled\"/><div class=\"rv-tip\">Empfehlung: 64 %. Die reale Lautstärke muss später an den Audio-Dienst übertragen werden.</div></div>\n  <div class=\"rx-buttons\"><button class=\"rx-button\" @click=\"command('audio.test')\" :disabled=\"!form.enabled\">Testton auslösen</button></div>\n </section>\n <section class=\"rx-panel rx-span-5\"><h2>Sprache</h2>\n  <div class=\"rv-switch\"><div><strong>Antworten vorlesen</strong><div class=\"rx-small\">KI-Antworten per Lautsprecher ausgeben</div></div><input type=\"checkbox\" v-model=\"form.autoSpeak\" :disabled=\"!form.enabled\"/></div>\n  <div class=\"rv-switch\"><div><strong>Gesprächsmodus</strong><div class=\"rx-small\">Fortlaufende Unterhaltung erlauben</div></div><input type=\"checkbox\" v-model=\"form.continuous\" :disabled=\"!form.enabled\"/></div>\n </section>\n <section class=\"rx-panel rx-span-12\"><div class=\"rx-between rx-wrap\"><div><h2>Einstellungen</h2><div class=\"rx-small\">Werden lokal gespeichert und nach einem Neustart geladen</div></div><div class=\"rx-buttons\"><button class=\"rx-button\" @click=\"save\">Speichern</button><button class=\"rx-button\" @click=\"reset\">Standardwerte</button></div></div><div class=\"rv-status\">{{notice}}</div></section>\n</div></div>\n</template>\n<script>\nexport default {\n data(){return {form:{enabled:true,volume:64,autoSpeak:true,continuous:false},notice:'',ready:false}},\n mounted(){this.rpc('config.read')},watch:{msg:{handler(v){const p=v?.payload;if(p?.kind==='rovo_config'){if(p.config?.audio){this.form={...p.config.audio};this.ready=true}this.notice=p.message||''}else if(p?.kind==='ack')this.notice=p.message||''},immediate:true}},\n methods:{rpc(action,data={}){this.send({topic:'rovo/integrations',payload:{action,data}})},save(){this.rpc('config.update',{section:'audio',changes:{...this.form}})},reset(){this.rpc('config.reset',{section:'audio'})},command(type){this.send({payload:{type,data:{}}});this.notice='Testbefehl gesendet – Lautsprecherausgabe noch nicht verbunden.'}}\n}\n</script>\n",
+    "storeOutMessages": true,
+    "passthru": false,
+    "resendOnRefresh": true,
+    "templateScope": "local",
+    "className": "",
+    "x": 370,
+    "y": 740,
+    "wires": [
+      [
+        "d02026bb00000011",
+        "v4out030069999999"
+      ]
+    ]
+  },
+  {
+    "id": "d02026bb00000011",
+    "type": "link out",
+    "z": "d02026bb00000101",
+    "name": "UI → Befehle",
+    "mode": "link",
+    "links": [
+      "d02026bb00000012"
+    ],
+    "x": 715,
+    "y": 490,
+    "wires": []
+  },
+  {
+    "id": "d02026bb00000013",
+    "type": "link in",
+    "z": "d02026bb00000101",
+    "name": "Status & Rückmeldungen → UI",
+    "links": [
+      "d02026bb00000019",
+      "d02026bb00000029",
+      "c8261020b3000026"
+    ],
+    "x": 65,
+    "y": 885,
+    "wires": [
+      [
+        "d02026bb00003000",
+        "d02026bb00003001",
+        "d02026bb00003002",
+        "d02026bb00003003",
+        "d02026bb00003004",
+        "d02026bb00003005",
+        "d02026bb00003006"
+      ]
+    ]
+  },
+  {
+    "id": "d02026bb00000014",
+    "type": "comment",
+    "z": "d02026bb00000101",
+    "name": "Jede Seite ist ein eigener Baustein. Gemeinsame Gestaltung: CSS oben.",
+    "info": "",
+    "x": 405,
+    "y": 45,
+    "wires": []
+  },
+  {
+    "id": "d02026bb00000012",
+    "type": "link in",
+    "z": "d02026bb00000102",
+    "name": "UI → Kommandos",
+    "links": [
+      "d02026bb00000011"
+    ],
+    "x": 115,
+    "y": 240,
+    "wires": [
+      [
+        "d02026bb00000015"
+      ]
+    ]
+  },
+  {
+    "id": "d02026bb00000015",
+    "type": "function",
+    "z": "d02026bb00000102",
+    "name": "01 · Eingaben prüfen / Testmodus",
+    "func": "const p=msg.payload; if(p&&typeof p.action==='string')return null;\nconst status=global.get('rovo_v2_status')||null;\nconst events=global.get('rovo_v2_events')||[];\nconst snap=()=>({payload:{kind:'snapshot',tele:global.get('rovo_v2_status')||{},events:global.get('rovo_v2_events')||[]}});\nconst reply=(message)=>[null,{payload:{kind:'ack',message}},null];\nif(!p || typeof p!=='object' || typeof p.type!=='string') return reply('Ungültiger Befehl');\nif(p.type==='ui.sync') return [null,snap(),null];\nconst allowed=new Set(['motion.home','motion.set','motion.stop','tracking.start','tracking.stop','tracking.config','camera.snapshot','audio.test','audio.listen','audio.stop','chat.send','ai.model','display.emotion','display.brightness','display.mode']);\nif(!allowed.has(p.type)) return reply('Befehl nicht erlaubt: '+p.type);\nconst data=(p.data && typeof p.data==='object' && !Array.isArray(p.data)) ? {...p.data}:{};\nconst n=(v,min,max)=>typeof v==='number' && Number.isFinite(v) && v>=min && v<=max;\nif(p.type==='motion.set' && (!n(data.pan,15,165)||!n(data.tilt,25,155)||!n(data.speed,10,100))) return reply('Winkel oder Geschwindigkeit außerhalb der Testgrenzen');\nif(p.type==='chat.send' && (typeof data.text!=='string'||!data.text.trim()||data.text.length>1200)) return reply('Nachricht muss 1–1200 Zeichen enthalten');\nif(p.type==='tracking.config' && (!n(data.sensitivity,10,100)||!n(data.smoothing,0,100)))return reply('Trackingwerte ungültig');\nif(p.type==='display.brightness' && !n(data.brightness,0,100))return reply('Helligkeit ungültig');\nif(p.type==='display.emotion' && !['neutral','happy','curious','sleepy','surprised','blink'].includes(data.emotion))return reply('Emotion unbekannt');\nif(p.type==='display.mode' && !['auto','manual','test'].includes(data.mode))return reply('Displaymodus unbekannt');\nif(p.type==='ai.model')return reply('KI-Modell bitte unter Verbindungen auswählen und speichern.');\nif(p.type==='config.update'){\n if(!n(data.volume,0,100)||!n(data.motionSmooth,0,100)||['autoSpeak','continuous','autoTracking'].some(k=>typeof data[k]!=='boolean'))return reply('Konfigurationswerte ungültig');\n}\nconst ts=new Date().toISOString();\nconst event={ts,type:p.type,details: p.type==='chat.send'?'Nachricht (Inhalt ausgeblendet)':JSON.stringify(data).slice(0,100)};\nconst history=[event,...events].slice(0,60);\nglobal.set('rovo_v2_events',history);\nconst output={topic:'rovo/command',payload:{type:p.type,data},ts,mode:'TEST'};\nreturn [output,snap(),{payload:{kind:'ack',message:'Befehl erfasst · Testmodus · nicht an Hardware gesendet'}}];",
+    "outputs": 3,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 375,
+    "y": 240,
+    "wires": [
+      [
+        "d02026bb00000016",
+        "d02026bb00000017",
+        "c8261020b3000029"
+      ],
+      [
+        "d02026bb00000019"
+      ],
+      [
+        "d02026bb00000019"
+      ]
+    ]
+  },
+  {
+    "id": "d02026bb00000016",
+    "type": "debug",
+    "z": "d02026bb00000102",
+    "name": "TEST · empfangene Befehle",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "true",
+    "targetType": "full",
+    "statusVal": "",
+    "statusType": "auto",
+    "x": 735,
+    "y": 185,
+    "wires": []
+  },
+  {
+    "id": "d02026bb00000017",
+    "type": "link out",
+    "z": "d02026bb00000102",
+    "name": "OUT · später Python anschließen (NICHT VERBUNDEN)",
+    "mode": "link",
+    "links": [],
+    "x": 750,
+    "y": 235,
+    "wires": []
+  },
+  {
+    "id": "d02026bb00000019",
+    "type": "link out",
+    "z": "d02026bb00000102",
+    "name": "Antworten → Dashboard",
+    "mode": "link",
+    "links": [
+      "d02026bb00000013"
+    ],
+    "x": 750,
+    "y": 310,
+    "wires": []
+  },
+  {
+    "id": "d02026bb00000018",
+    "type": "comment",
+    "z": "d02026bb00000102",
+    "name": "ACHTUNG: Backend nicht verbunden. STOP ist kein Not-Aus. Erst Mechanik prüfen.",
+    "info": "",
+    "x": 420,
+    "y": 115,
+    "wires": []
+  },
+  {
+    "id": "d02026bb00000020",
+    "type": "comment",
+    "z": "d02026bb00000102",
+    "name": "Später: OUT-Link mit Python/MQTT/HTTP verbinden – nicht einfach blind an den Servo.",
+    "info": "",
+    "x": 425,
+    "y": 370,
+    "wires": []
+  },
+  {
+    "id": "d02026bb00000025",
+    "type": "inject",
+    "z": "d02026bb00000103",
+    "name": "Host-Werte · alle 20 Sekunden",
+    "props": [
+      {
+        "p": "payload"
+      }
+    ],
+    "repeat": "20",
+    "crontab": "",
+    "once": true,
+    "onceDelay": 2,
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "x": 160,
+    "y": 220,
+    "wires": [
+      [
+        "d02026bb00000026"
+      ]
+    ]
+  },
+  {
+    "id": "d02026bb00000026",
+    "type": "exec",
+    "z": "d02026bb00000103",
+    "command": "node -e \"const os=require('os'),fs=require('fs');let t=null;try{t=Math.round(Number(fs.readFileSync('/sys/class/thermal/thermal_zone0/temp','utf8'))/100)/10}catch(e){};const m=Math.round((1-os.freemem()/os.totalmem())*1000)/10;console.log(JSON.stringify({kind:'telemetry',system:{cpuTemp:t,ramUsage:m,load1:os.platform()==='win32'?null:Math.round(os.loadavg()[0]*100)/100,uptimeSeconds:Math.round(os.uptime()),hostname:os.hostname(),platform:os.platform()}}))\"",
+    "addpay": "",
+    "append": "",
+    "useSpawn": "false",
+    "timer": "5",
+    "winHide": false,
+    "oldrc": false,
+    "name": "Host-Monitor · Node.js",
+    "x": 420,
+    "y": 220,
+    "wires": [
+      [
+        "d02026bb00000027"
+      ],
+      [],
+      []
+    ]
+  },
+  {
+    "id": "d02026bb00000027",
+    "type": "function",
+    "z": "d02026bb00000103",
+    "name": "JSON → Telemetrie",
+    "func": "try {const v=JSON.parse(String(msg.payload));if(!v.system)return null;msg.payload=v;return msg;}catch(e){node.warn('Monitor: '+e.message);return null;}",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 670,
+    "y": 220,
+    "wires": [
+      [
+        "d02026bb00000028"
+      ]
+    ]
+  },
+  {
+    "id": "d02026bb00000030",
+    "type": "link in",
+    "z": "d02026bb00000103",
+    "name": "IN · Python / ESP32 / UPS Status",
+    "links": [],
+    "x": 185,
+    "y": 370,
+    "wires": [
+      [
+        "d02026bb00000028"
+      ]
+    ]
+  },
+  {
+    "id": "d02026bb00000028",
+    "type": "function",
+    "z": "d02026bb00000103",
+    "name": "Status sammeln → Dashboard",
+    "func": "const p=msg.payload;\nif(!p || typeof p!=='object')return null;\nif(p.kind==='chat_response')return {payload:{kind:'chat_response',text:String(p.text||'')}};\nif(p.kind!=='telemetry')return null;\nconst defaults={system:{cpuTemp:null,load1:null,ramUsage:null,uptimeSeconds:null,hostname:null,platform:null},battery:{percent:null,voltage:null,current:null,charging:null},esp32:{connected:null},camera:{connected:null,tracking:null,faceDetected:null},ai:{state:'nicht verbunden'},audio:{microphone:null,speaker:null}};\nconst current=global.get('rovo_v2_status')||defaults;\nfor(const k of Object.keys(defaults)){\n if(p[k]&&typeof p[k]==='object'&&!Array.isArray(p[k])){\n  current[k]={...defaults[k],...current[k]};\n  for(const field of Object.keys(defaults[k]))if(Object.prototype.hasOwnProperty.call(p[k],field))current[k][field]=p[k][field];\n }\n}\nglobal.set('rovo_v2_status',current);\nreturn {payload:{kind:'snapshot',tele:current,events:global.get('rovo_v2_events')||[]}};",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 935,
+    "y": 275,
+    "wires": [
+      [
+        "d02026bb00000029"
+      ]
+    ]
+  },
+  {
+    "id": "d02026bb00000029",
+    "type": "link out",
+    "z": "d02026bb00000103",
+    "name": "Status → UI",
+    "mode": "link",
+    "links": [
+      "d02026bb00000013"
+    ],
+    "x": 1210,
+    "y": 275,
+    "wires": []
+  },
+  {
+    "id": "d02026bb00000031",
+    "type": "comment",
+    "z": "d02026bb00000103",
+    "name": "Host-Werte = Rechner mit Node-RED. Pi-Werte nur, wenn Node-RED auf dem Pi läuft.",
+    "info": "",
+    "x": 430,
+    "y": 115,
+    "wires": []
+  },
+  {
+    "id": "d02026bb00000032",
+    "type": "comment",
+    "z": "d02026bb00000103",
+    "name": "Python-Status als msg.payload={kind:\"telemetry\",esp32:{connected:true}, ...} einspeisen",
+    "info": "",
+    "x": 485,
+    "y": 455,
+    "wires": []
+  },
+  {
+    "id": "c8261020b3000010",
+    "type": "ui-page",
+    "name": "Verbindungen",
+    "ui": "d02026bb00000001",
+    "path": "/connections",
+    "icon": "lan-connect",
+    "layout": "grid",
+    "theme": "d02026bb00000002",
+    "breakpoints": [
+      {
+        "name": "Default",
+        "px": 0,
+        "cols": 3
+      },
+      {
+        "name": "Tablet",
+        "px": 576,
+        "cols": 6
+      },
+      {
+        "name": "Small Desktop",
+        "px": 768,
+        "cols": 9
+      },
+      {
+        "name": "Desktop",
+        "px": 1024,
+        "cols": 12
+      }
+    ],
+    "order": 9,
+    "className": "",
+    "visible": "true",
+    "disabled": "false"
+  },
+  {
+    "id": "c8261020b3000011",
+    "type": "ui-group",
+    "name": "ROVO · Verbindungen",
+    "page": "c8261020b3000010",
+    "width": "12",
+    "height": "1",
+    "order": 1,
+    "showTitle": false,
+    "className": "",
+    "visible": "true",
+    "disabled": "false"
+  },
+  {
+    "id": "c8261020b3000012",
+    "type": "ui-template",
+    "z": "d02026bb00000101",
+    "group": "c8261020b3000011",
+    "page": "",
+    "ui": "",
+    "name": "08 · Verbindungen (8 LLM-Anbieter & Spotify)",
+    "order": 1,
+    "width": 12,
+    "height": 0,
+    "head": "",
+    "format": "<template>\n<div class=\"rx\">\n <header class=\"rx-head\"><div><div class=\"rx-kicker\">EINSTELLUNGEN / ONLINE-DIENSTE</div><h1>Verbindungen</h1><div class=\"rx-sub\">LLM-Anbieter, eigene Modelle und Spotify an einem Ort verwalten.</div></div><span class=\"rx-chip\" :class=\"{ok:serviceReady}\">{{serviceReady?'Integrationsdienst online':'Verbindung prüfen'}}</span></header>\n <div class=\"rx-grid\">\n  <section class=\"rx-panel rx-span-7\"><div class=\"rx-panel-head\"><h2>KI-Modell konfigurieren</h2><span class=\"rx-chip\" :class=\"{ok:currentHasKey}\">{{provider==='ollama'?'Lokal · kein API-Key':(currentHasKey?'API-Key hinterlegt':'Kein API-Key')}}</span></div>\n   <div class=\"rv-two\">\n    <div class=\"rx-field\"><label>API-Anbieter</label><select class=\"rx-select\" v-model=\"provider\" @change=\"onProviderChange\"><option v-for=\"p in providers\" :key=\"p.id\" :value=\"p.id\">{{p.name}}</option></select></div>\n    <div class=\"rx-field\"><label>Modell auswählen</label><select class=\"rx-select\" v-model=\"modelChoice\" @change=\"onModelChoice\"><option v-for=\"item in availableModels\" :value=\"item.value\" :key=\"item.value\">{{item.label}}</option><option value=\"__own__\">Eigene Modell-ID eingeben …</option></select></div>\n   </div>\n   <div class=\"rx-field\" v-if=\"modelChoice==='__own__'\" style=\"margin-top:12px\"><label>Modell-ID</label><input class=\"rx-input\" type=\"text\" v-model.trim=\"ownModel\" placeholder=\"Modell-ID des Anbieters, z. B. org/modell\" maxlength=\"100\"/><div class=\"rv-tip\">Eine eigene Modell-ID kannst du einmalig verwenden oder für die spätere Auswahl speichern.</div></div>\n   <div class=\"rv-foot\" v-if=\"modelChoice==='__own__'\"><button class=\"rx-button\" @click=\"addOwnModel\" :disabled=\"working||!ownModel.trim()\">Zur Modellauswahl hinzufügen</button></div>\n   <div class=\"rv-model-summary\"><div><span class=\"rx-label\">Gewählte Modell-ID</span><strong>{{effectiveModel||'—'}}</strong></div><div><span class=\"rx-label\">Zugang</span><strong>{{provider==='ollama'?'Lokal':(currentHasKey?'API-Key gespeichert':'API-Key fehlt')}}</strong></div></div>\n   <div class=\"rx-field\" v-if=\"provider==='custom'\"><label>Eigene API-Basis-URL</label><input class=\"rx-input\" v-model.trim=\"baseUrl\" placeholder=\"https://api.mein-anbieter.de/v1\" maxlength=\"500\"/><div class=\"rv-tip\">OpenAI-kompatibler Endpoint mit <code>/chat/completions</code>; HTTPS erforderlich, lokale Loopback-Adresse erlaubt.</div></div>\n   <div v-if=\"provider!=='ollama'\" class=\"rx-field\" style=\"margin-top:12px\"><label>API-Key für {{providerName}}</label><input class=\"rx-input\" type=\"password\" v-model=\"apiKey\" autocomplete=\"new-password\" placeholder=\"Neuen Schlüssel eintragen oder leer lassen\"/><div class=\"rv-tip\">Jeder Anbieter erhält einen eigenen verschlüsselten Schlüssel. Der hinterlegte Schlüssel wird im Browser nicht mehr angezeigt.</div></div>\n   <div v-if=\"provider==='ollama'\" class=\"rx-banner\" style=\"margin-top:12px\">Ollama muss auf demselben Rechner wie der lokale Integrationsdienst laufen. Die ausgewählten Modelle müssen dort vorher heruntergeladen sein.</div>\n   <div class=\"rv-foot\"><button class=\"rx-button\" @click=\"saveLLM\" :disabled=\"working||!effectiveModel\">Modell &amp; Zugang speichern</button><button class=\"rx-button\" @click=\"testLLM\" :disabled=\"working||!selectionIsActive||(provider!=='ollama'&&!currentHasKey)\">Verbindung testen</button><button class=\"rx-button\" v-if=\"provider!=='ollama'\" @click=\"forgetLLM\" :disabled=\"working||!selectionIsActive||!currentHasKey\">API-Key entfernen</button></div>\n   <div class=\"rv-tip\">Der Verbindungstest sendet eine kurze Modellanfrage; beim Cloud-Anbieter können Kosten entstehen. Die Auswahl ist erst nach „Speichern“ für Rovos Chat aktiv.</div>\n  </section>\n  <section class=\"rx-panel rx-span-5\"><h2>Eigene Modelle</h2><div class=\"rx-sub\" style=\"margin-top:8px\">Zusätzliche Modell-IDs für <strong>{{providerName}}</strong>, dauerhaft gespeichert.</div>\n   <div v-if=\"!customForProvider.length\" class=\"rv-empty\" style=\"margin-top:16px\">Noch keine eigenen Modelle. Wähle links „Eigene Modell-ID eingeben“, um eines hinzuzufügen.</div>\n   <div v-for=\"m in customForProvider\" :key=\"m\" class=\"rv-person-row\"><div style=\"min-width:0\"><strong style=\"overflow-wrap:anywhere\">{{m}}</strong><div class=\"rx-small\">Eigene Auswahl</div></div><button class=\"rx-button\" @click=\"removeOwnModel(m)\" :disabled=\"working\">Entfernen</button></div>\n   <div class=\"rv-warning\">Die vorgeschlagenen Modelle können je nach API-Zugang, Kontostatus oder Verfügbarkeit eingeschränkt sein. „Eigenes Modell“ erlaubt beliebige gültige Modell-IDs, keine automatische Installation.</div>\n  </section>\n  <section class=\"rx-panel rx-span-12\"><div class=\"rx-between rx-wrap\"><h2>Spotify</h2><span class=\"rx-chip\" :class=\"{ok:spotify.connected}\">{{spotify.connected?'Verbunden':'Nicht verbunden'}}</span></div>\n   <div class=\"rv-two\" style=\"margin-top:15px\"><div class=\"rx-field\"><label>Spotify Client-ID</label><input class=\"rx-input\" v-model.trim=\"spotifyClientId\" placeholder=\"Spotify Developer App Client-ID\" maxlength=\"128\"/><div class=\"rv-tip\">Die Client-ID erhältst du im Spotify Developer Dashboard. Kein Spotify-Passwort eingeben.</div></div><div class=\"rx-field\"><label>Redirect-URI (exakt bei Spotify eintragen)</label><div class=\"rx-code\">http://127.0.0.1:1891/spotify/callback</div><div class=\"rv-tip\">Anmeldung mit PKCE über Spotify im lokalen Browser am Integrations-Rechner.</div></div></div>\n   <div class=\"rx-row\"><span>Angemeldetes Konto</span><strong>{{spotify.displayName || '—'}}</strong></div>\n   <div class=\"rv-foot\"><button class=\"rx-button\" @click=\"saveSpotify\" :disabled=\"working\">Client-ID speichern</button><button class=\"rx-button\" @click=\"loginSpotify\" :disabled=\"working||!spotifyClientId\">Mit Spotify verbinden</button><button class=\"rx-button\" @click=\"refreshStatus\" :disabled=\"working\">Status prüfen</button><button class=\"rx-button\" @click=\"disconnectSpotify\" :disabled=\"working||!spotify.connected\">Trennen</button></div>\n  </section>\n  <section class=\"rx-panel rx-span-12\"><div class=\"rx-between\"><strong>Verbindungsstatus</strong><span class=\"rx-small\">Integrationsdienst: 127.0.0.1:1891</span></div><div class=\"rv-status\">{{message||'Noch keine Rückmeldung'}}</div></section>\n </div>\n</div>\n</template>\n<script>\nexport default {\n data(){return {\n  providers:[{id:'openai',name:'OpenAI'},{id:'anthropic',name:'Anthropic · Claude'},{id:'google',name:'Google · Gemini'},{id:'openrouter',name:'OpenRouter'},{id:'mistral',name:'Mistral AI'},{id:'groq',name:'Groq'},{id:'ollama',name:'Ollama · lokal'},{id:'custom',name:'Eigene OpenAI-kompatible API'}],\n  presets:{\n   openai:[['gpt-4o-mini','GPT-4o mini · schnell'],['gpt-4.1-mini','GPT-4.1 mini'],['gpt-5.2','GPT-5.2']],\n   anthropic:[['claude-sonnet-5','Claude Sonnet 5'],['claude-haiku-4-5','Claude Haiku 4.5'],['claude-opus-4-8','Claude Opus 4.8']],\n   google:[['gemini-3.8-flash','Gemini 3.8 Flash'],['gemini-3.5-flash-lite','Gemini 3.5 Flash-Lite'],['gemini-3.1-pro-preview','Gemini 3.1 Pro (Preview)']],\n   openrouter:[['openai/gpt-4o-mini','OpenAI · GPT-4o mini'],['anthropic/claude-sonnet-5','Anthropic · Claude Sonnet 5'],['google/gemini-3.8-flash','Google · Gemini 3.8 Flash']],\n   mistral:[['mistral-small-latest','Mistral Small'],['mistral-large-latest','Mistral Large']],\n   groq:[['llama-3.3-70b-versatile','Llama 3.3 70B'],['openai/gpt-oss-120b','GPT-OSS 120B']],\n   ollama:[['llama3.2','Llama 3.2 · lokal'],['qwen2.5:3b','Qwen 2.5 3B · lokal'],['gemma3:4b','Gemma 3 4B · lokal']],custom:[]\n  },\n  provider:'openai',modelChoice:'gpt-4o-mini',ownModel:'',baseUrl:'',apiKey:'',llm:{hasKey:false},profiles:{},customModels:{},spotifyClientId:'',savedSpotifyClientId:'',spotify:{connected:false,displayName:''},serviceReady:false,working:false,message:'',activeProvider:'openai',activeModel:'gpt-4o-mini'\n }},\n computed:{providerName(){return this.providers.find(p=>p.id===this.provider)?.name||this.provider},customForProvider(){return Array.isArray(this.customModels[this.provider])?this.customModels[this.provider]:[]},availableModels(){const mapped=(this.presets[this.provider]||[]).map(x=>({value:x[0],label:x[1]}));for(const m of this.customForProvider)if(!mapped.some(x=>x.value===m))mapped.push({value:m,label:m+' · eigenes Modell'});return mapped},effectiveModel(){return this.modelChoice==='__own__'?this.ownModel.trim():this.modelChoice},currentHasKey(){return !!this.profiles[this.provider]?.hasKey},selectionIsActive(){return this.provider===this.activeProvider&&this.effectiveModel===this.activeModel}},\n mounted(){this.refreshStatus()},\n watch:{msg:{handler(v){if(v?.payload?.kind==='integrations')this.readResponse(v.payload)},immediate:true}},\n methods:{\n  sendCommand(action,data={}){this.working=true;this.message='Anfrage wird verarbeitet …';this.send({topic:'rovo/integrations',payload:{action,data}})},\n  refreshStatus(){this.sendCommand('status')},\n  setModel(value){const found=this.availableModels.some(x=>x.value===value);this.modelChoice=found?value:'__own__';this.ownModel=found?'':value},\n  onProviderChange(){this.apiKey='';const p=this.profiles[this.provider]||{};this.baseUrl=p.baseUrl||'';this.setModel(p.model||this.availableModels[0]?.value||'');this.message='Anbieter ausgewählt. Zum Aktivieren Einstellungen speichern.'},\n  onModelChoice(){if(this.modelChoice!=='__own__')this.ownModel=''},\n  readResponse(p){this.working=false;this.serviceReady=p.ready===true;this.message=String(p.message||'');if(p.status){const s=p.status;this.profiles=s.llm?.profiles||{};this.activeProvider=s.llm?.provider||'openai';this.activeModel=s.llm?.model||'gpt-4o-mini';this.customModels=s.llm?.customModels||{};this.spotify={connected:!!s.spotify?.connected,displayName:s.spotify?.displayName||''};if(s.spotify?.clientId){this.spotifyClientId=s.spotify.clientId;this.savedSpotifyClientId=s.spotify.clientId}if(p.action==='status'||p.action==='llm.save'){this.provider=s.llm?.provider||'openai';this.baseUrl=s.llm?.baseUrl||'';this.setModel(s.llm?.model||'gpt-4o-mini')}}if(p.action==='llm.save'&&p.ok)this.apiKey=''},\n  saveLLM(){if(!this.effectiveModel){this.message='Modell-ID fehlt.';return}this.sendCommand('llm.save',{provider:this.provider,model:this.effectiveModel,baseUrl:this.baseUrl.trim(),apiKey:this.apiKey})},\n  testLLM(){if(!this.selectionIsActive){this.message='Zuerst Modell und Anbieter speichern, dann testen.';return}this.sendCommand('llm.test')},\n  addOwnModel(){if(!this.ownModel.trim())return;this.sendCommand('llm.add_model',{provider:this.provider,model:this.ownModel.trim()})},\n  removeOwnModel(id){if(window.confirm('Eigenen Modelleintrag '+id+' entfernen?'))this.sendCommand('llm.remove_model',{provider:this.provider,model:id})},\n  forgetLLM(){if(!this.selectionIsActive){this.message='Zuerst diesen Anbieter als aktiv speichern.';return}if(window.confirm('Gespeicherten Schlüssel für '+this.providerName+' entfernen?'))this.sendCommand('llm.forget')},\n  saveSpotify(){this.sendCommand('spotify.save',{clientId:this.spotifyClientId.trim()})},\n  loginSpotify(){if(!this.spotifyClientId.trim()||this.spotifyClientId.trim()!==this.savedSpotifyClientId){this.message='Spotify Client-ID zuerst speichern.';return}this.message='Spotify öffnet sich im neuen Tab.';window.open('http://127.0.0.1:1891/spotify/start','_blank','noopener,noreferrer')},\n  disconnectSpotify(){if(window.confirm('Spotify-Verbindung trennen?'))this.sendCommand('spotify.disconnect')}\n }\n}\n</script>\n",
+    "storeOutMessages": false,
+    "passthru": false,
+    "resendOnRefresh": false,
+    "templateScope": "local",
+    "className": "",
+    "x": 380,
+    "y": 830,
+    "wires": [
+      [
+        "c8261020b3000020"
+      ]
+    ]
+  },
+  {
+    "id": "c8261020b3000013",
+    "type": "tab",
+    "label": "ROVO 04 · Integrationen",
+    "disabled": false,
+    "info": "API-Konfiguration und Spotify nur über lokalen Dienst. Keine Debug-Ausgabe der API-Keys."
+  },
+  {
+    "id": "c8261020b3000020",
+    "type": "link out",
+    "z": "d02026bb00000101",
+    "name": "Verbindungen → lokaler Dienst",
+    "mode": "link",
+    "links": [
+      "c8261020b3000021"
+    ],
+    "x": 635,
+    "y": 830,
+    "wires": []
+  },
+  {
+    "id": "c8261020b3000021",
+    "type": "link in",
+    "z": "c8261020b3000013",
+    "name": "Eingang · Verbindungen",
+    "links": [
+      "c8261020b3000020",
+      "c8261020b3000028",
+      "v4out030009999999",
+      "v4out030039999999",
+      "v4out030049999999",
+      "v4out030069999999",
+      "v4out030029999999",
+      "v420261020000010"
+    ],
+    "x": 115,
+    "y": 240,
+    "wires": [
+      [
+        "c8261020b3000022"
+      ]
+    ]
+  },
+  {
+    "id": "c8261020b3000022",
+    "type": "function",
+    "z": "c8261020b3000013",
+    "name": "01 · Zulässige Befehle",
+    "func": "const p=msg.payload||{};let action='',data={};\nif(typeof p.action==='string'){action=p.action;data=p.data||{};}\nelse if(p.type==='chat.send'&&typeof p.data?.text==='string'){action='chat.send';data={text:p.data.text};}\nconst allowed=new Set(['status','llm.save','llm.forget','llm.test','llm.add_model','llm.remove_model','spotify.save','spotify.disconnect','chat.send','config.read','config.update','config.reset','people.list','people.save','people.delete']);\nif(!allowed.has(action))return null;\nif(action==='llm.save'){\n if(!['openai','anthropic','google','openrouter','mistral','groq','ollama','custom'].includes(data.provider)||typeof data.model!=='string'||data.model.length>100||typeof data.apiKey!=='string'||data.apiKey.length>1024)return null;\n data={provider:data.provider,model:data.model,apiKey:data.apiKey,baseUrl:typeof data.baseUrl==='string'?data.baseUrl.slice(0,500):''};\n}\nif(['llm.add_model','llm.remove_model'].includes(action))data={provider:String(data.provider||'').slice(0,35),model:String(data.model||'').slice(0,100)};\nif(action==='spotify.save')data={clientId:String(data.clientId||'').slice(0,150)};\nif(action==='chat.send'&&(typeof data.text!=='string'||data.text.length>1200))return null;\nif(JSON.stringify(data).length>9000)return null;\nmsg.rovoAction=action;\nmsg.method='POST';msg.url='http://127.0.0.1:1891/rpc';\nmsg.headers={'content-type':'application/json'};msg.payload={action,data};return msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 330,
+    "y": 240,
+    "wires": [
+      [
+        "c8261020b3000023"
+      ]
+    ]
+  },
+  {
+    "id": "c8261020b3000023",
+    "type": "http request",
+    "z": "c8261020b3000013",
+    "name": "02 · Lokaler Integrationsdienst (1891)",
+    "method": "use",
+    "ret": "obj",
+    "paytoqs": "ignore",
+    "url": "",
+    "tls": "",
+    "persist": false,
+    "proxy": "",
+    "insecureHTTPParser": false,
+    "authType": "",
+    "senderr": false,
+    "headers": [],
+    "x": 620,
+    "y": 240,
+    "wires": [
+      [
+        "c8261020b3000024"
+      ]
+    ]
+  },
+  {
+    "id": "c8261020b3000024",
+    "type": "function",
+    "z": "c8261020b3000013",
+    "name": "03 · Antwort ohne Zugangsdaten",
+    "func": "const a=msg.rovoAction;\nconst body=(msg.payload&&typeof msg.payload==='object')?msg.payload:{};\nconst ok=body.ok===true;\nconst message=typeof body.message==='string'?body.message.slice(0,300):(ok?'Erfolgreich':'Verbindungsdienst antwortet nicht richtig.');\nif(a==='chat.send')return [null,{payload:{kind:'chat_response',text:ok?String(body.reply||''):('KI nicht verfügbar: '+message).slice(0,500)}},null,null];\nif(a?.startsWith('config.'))return [null,null,{payload:{kind:'rovo_config',action:a,ok,message,config:body.config||null}},null];\nif(a?.startsWith('people.'))return [null,null,null,{payload:{kind:'rovo_people',action:a,ok,message,people:body.people||null}}];\nreturn [{payload:{kind:'integrations',action:a,ok,ready:true,message,status:body.status||null}},null,null,null];\n",
+    "outputs": 4,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 965,
+    "y": 240,
+    "wires": [
+      [
+        "c8261020b3000025"
+      ],
+      [
+        "c8261020b3000026"
+      ],
+      [
+        "v420261020000020"
+      ],
+      [
+        "v420261020000021"
+      ]
+    ]
+  },
+  {
+    "id": "c8261020b3000025",
+    "type": "link out",
+    "z": "c8261020b3000013",
+    "name": "Status → Verbindungen",
+    "mode": "link",
+    "links": [
+      "c8261020b3000027"
+    ],
+    "x": 1235,
+    "y": 200,
+    "wires": []
+  },
+  {
+    "id": "c8261020b3000026",
+    "type": "link out",
+    "z": "c8261020b3000013",
+    "name": "Chat → bestehende UI",
+    "mode": "link",
+    "links": [
+      "d02026bb00000013"
+    ],
+    "x": 1235,
+    "y": 280,
+    "wires": []
+  },
+  {
+    "id": "c8261020b3000027",
+    "type": "link in",
+    "z": "d02026bb00000101",
+    "name": "Verbindungsstatus → UI",
+    "links": [
+      "c8261020b3000025",
+      "c8261020b3000030"
+    ],
+    "x": 735,
+    "y": 830,
+    "wires": [
+      [
+        "c8261020b3000012"
+      ]
+    ]
+  },
+  {
+    "id": "c8261020b3000028",
+    "type": "link out",
+    "z": "d02026bb00000102",
+    "name": "Chat → LLM-Dienst",
+    "mode": "link",
+    "links": [
+      "c8261020b3000021"
+    ],
+    "x": 630,
+    "y": 350,
+    "wires": []
+  },
+  {
+    "id": "c8261020b3000029",
+    "type": "switch",
+    "z": "d02026bb00000102",
+    "name": "Nur Chat an LLM weiterleiten",
+    "property": "payload.type",
+    "propertyType": "msg",
+    "rules": [
+      {
+        "t": "eq",
+        "v": "chat.send",
+        "vt": "str"
+      }
+    ],
+    "checkall": "true",
+    "repair": false,
+    "outputs": 1,
+    "x": 490,
+    "y": 350,
+    "wires": [
+      [
+        "c8261020b3000028"
+      ]
+    ]
+  },
+  {
+    "id": "c8261020b3000031",
+    "type": "catch",
+    "z": "c8261020b3000013",
+    "name": "Verbindungsfehler",
+    "scope": [
+      "c8261020b3000023"
+    ],
+    "uncaught": false,
+    "x": 350,
+    "y": 350,
+    "wires": [
+      [
+        "c8261020b3000032"
+      ]
+    ]
+  },
+  {
+    "id": "c8261020b3000032",
+    "type": "function",
+    "z": "c8261020b3000013",
+    "name": "Fehler ohne Geheimnisse",
+    "func": "const a=msg.rovoAction||'status';\nconst message='Integrationsdienst nicht erreichbar. START_VERBINDUNGEN.cmd starten und Node-RED-Verbindung prüfen.';\nif(a==='chat.send')return [null,{payload:{kind:'chat_response',text:message}},null,null];\nif(a.startsWith('config.'))return [null,null,{payload:{kind:'rovo_config',action:a,ok:false,message}},null];\nif(a.startsWith('people.'))return [null,null,null,{payload:{kind:'rovo_people',action:a,ok:false,message}}];\nreturn [{payload:{kind:'integrations',action:a,ready:false,ok:false,message}},null,null,null];\n",
+    "outputs": 4,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 635,
+    "y": 350,
+    "wires": [
+      [
+        "c8261020b3000030"
+      ],
+      [
+        "c8261020b3000026"
+      ],
+      [
+        "v420261020000024"
+      ],
+      [
+        "v420261020000025"
+      ]
+    ]
+  },
+  {
+    "id": "c8261020b3000030",
+    "type": "link out",
+    "z": "c8261020b3000013",
+    "name": "Offline → Verbindungen",
+    "mode": "link",
+    "links": [
+      "c8261020b3000027"
+    ],
+    "x": 855,
+    "y": 340,
+    "wires": []
+  },
+  {
+    "id": "c8261020b3000033",
+    "type": "comment",
+    "z": "c8261020b3000013",
+    "name": "Keine API-Keys in Debug- oder Log-Nodes. Helper nur auf 127.0.0.1:1891.",
+    "info": "Voraussetzung: Companion-Node.js Dienst aus dem ZIP gestartet. Dashboard-Sicherheit und HTTPS für LAN einrichten.",
+    "x": 520,
+    "y": 105,
+    "wires": []
+  },
+  {
+    "id": "c8261020b3000034",
+    "type": "comment",
+    "z": "d02026bb00000101",
+    "name": "Einheitliche Steuerfarben; zusätzlicher Tab „Verbindungen“",
+    "info": "Das LLM-Speichern geschieht im lokalen Integrationsdienst, niemals in dieser JSON.",
+    "x": 365,
+    "y": 925,
+    "wires": []
+  },
+  {
+    "id": "v420261020000001",
+    "type": "ui-page",
+    "name": "Personen",
+    "ui": "d02026bb00000001",
+    "path": "/people",
+    "icon": "account-multiple-outline",
+    "layout": "grid",
+    "theme": "d02026bb00000002",
+    "order": 7,
+    "className": "",
+    "visible": "true",
+    "disabled": "false",
+    "breakpoints": [
+      {
+        "name": "Default",
+        "px": "0",
+        "cols": "4"
+      },
+      {
+        "name": "Tablet",
+        "px": "600",
+        "cols": "8"
+      },
+      {
+        "name": "Desktop",
+        "px": "1024",
+        "cols": "12"
+      }
+    ]
+  },
+  {
+    "id": "v420261020000002",
+    "type": "ui-group",
+    "name": "ROVO · Personen",
+    "page": "v420261020000001",
+    "width": "12",
+    "height": "1",
+    "order": 1,
+    "showTitle": false,
+    "className": "",
+    "visible": "true",
+    "disabled": "false",
+    "groupType": "default"
+  },
+  {
+    "id": "v420261020000003",
+    "type": "ui-template",
+    "z": "d02026bb00000101",
+    "group": "v420261020000002",
+    "page": "",
+    "ui": "",
+    "name": "09 · Personen",
+    "order": 1,
+    "width": 12,
+    "height": 0,
+    "head": "",
+    "format": "<template>\n<div class=\"rx\"><header class=\"rx-head\"><div><div class=\"rx-kicker\">PERSONEN / VERWALTUNG</div><h1>Gespeicherte Personen</h1><div class=\"rx-sub\">Personen und ihre Informationen verwalten: ansehen, bearbeiten und mit Bestätigung löschen.</div></div><span class=\"rx-chip\">{{people.length}} Einträge</span></header>\n<div class=\"rx-grid\">\n<section class=\"rx-panel rx-span-7\"><div class=\"rx-panel-head\"><h2>Personenübersicht</h2><button class=\"rx-button\" @click=\"reload\">Aktualisieren</button></div>\n<div v-if=\"people.length===0\" class=\"rx-note\">Noch keine Personen angelegt. Personen werden hier zunächst manuell gespeichert; die automatische Gesichtserkennung ist noch nicht angebunden.</div>\n<div v-for=\"p in people\" :key=\"p.id\" class=\"rv-person-row\"><div style=\"min-width:0;flex:1\"><strong>{{p.name}}</strong><div class=\"rv-soft\">{{p.info||'Keine Kurzinfo'}}</div><div v-if=\"p.notes\" class=\"rv-soft\">{{p.notes}}</div><div class=\"rv-tip\">Zuletzt bearbeitet: {{date(p.updatedAt)}}</div></div><div class=\"rx-buttons\"><button class=\"rx-button\" @click=\"edit(p)\">Bearbeiten</button><button class=\"rx-button danger\" @click=\"remove(p)\">Löschen</button></div></div>\n</section>\n<section class=\"rx-panel rx-span-5\"><h2>{{form.id?'Person bearbeiten':'Person hinzufügen'}}</h2>\n <div class=\"rx-field\"><label>Name</label><input class=\"rx-input\" v-model=\"form.name\" maxlength=\"80\" placeholder=\"Vorname / Name\"/></div>\n <div class=\"rx-field\"><label>Kurzinfo</label><input class=\"rx-input\" v-model=\"form.info\" maxlength=\"240\" placeholder=\"z. B. Bekannte Person\"/></div>\n <div class=\"rx-field\"><label>Weitere Informationen</label><textarea class=\"rx-input\" rows=\"5\" maxlength=\"1000\" v-model=\"form.notes\" placeholder=\"Optionale Notiz\"></textarea></div>\n <div class=\"rv-tip\">Keine automatischen Fotos oder biometrischen Daten. Einträge werden lokal auf diesem Rechner gespeichert.</div>\n <div class=\"rv-foot\"><button class=\"rx-button\" @click=\"save\" :disabled=\"!form.name.trim()\">{{form.id?'Änderungen speichern':'Person anlegen'}}</button><button class=\"rx-button\" @click=\"clear\">Zurücksetzen</button></div>\n</section><section class=\"rx-panel rx-span-12\"><div class=\"rv-status\">{{notice}}</div></section>\n</div></div>\n</template>\n<script>\nexport default {\n data(){return {people:[],form:{id:'',name:'',info:'',notes:''},notice:''}},mounted(){this.reload()},\n watch:{msg:{handler(v){const p=v?.payload;if(p?.kind==='rovo_people'){if(Array.isArray(p.people))this.people=p.people;this.notice=p.message||'';if(p.ok&&p.action==='people.save')this.clear()}},immediate:true}},\n methods:{rpc(action,data={}){this.send({topic:'rovo/integrations',payload:{action,data}})},reload(){this.rpc('people.list')},edit(p){this.form={id:p.id,name:p.name,info:p.info||'',notes:p.notes||''}},clear(){this.form={id:'',name:'',info:'',notes:''}},save(){if(!this.form.name.trim())return;this.rpc('people.save',{...this.form})},remove(p){if(!window.confirm(`Person „${p.name}“ und alle hier gespeicherten Informationen endgültig löschen?`))return;this.rpc('people.delete',{id:p.id,confirm:true});if(this.form.id===p.id)this.clear()},date(v){try{return new Date(v).toLocaleString('de-DE')}catch{return '—'}}}\n}\n</script>\n",
+    "storeOutMessages": true,
+    "passthru": false,
+    "resendOnRefresh": true,
+    "templateScope": "local",
+    "className": "",
+    "x": 390,
+    "y": 980,
+    "wires": [
+      [
+        "v420261020000010"
+      ]
+    ]
+  },
+  {
+    "id": "v4out030009999999",
+    "type": "link out",
+    "z": "d02026bb00000101",
+    "name": "V4 · Einstellungen → Backend",
+    "mode": "link",
+    "links": [
+      "c8261020b3000021"
+    ],
+    "x": 650,
+    "y": 160,
+    "wires": []
+  },
+  {
+    "id": "v4out030039999999",
+    "type": "link out",
+    "z": "d02026bb00000101",
+    "name": "V4 · Einstellungen → Backend",
+    "mode": "link",
+    "links": [
+      "c8261020b3000021"
+    ],
+    "x": 650,
+    "y": 240,
+    "wires": []
+  },
+  {
+    "id": "v4out030049999999",
+    "type": "link out",
+    "z": "d02026bb00000101",
+    "name": "V4 · Einstellungen → Backend",
+    "mode": "link",
+    "links": [
+      "c8261020b3000021"
+    ],
+    "x": 650,
+    "y": 320,
+    "wires": []
+  },
+  {
+    "id": "v4out030069999999",
+    "type": "link out",
+    "z": "d02026bb00000101",
+    "name": "V4 · Einstellungen → Backend",
+    "mode": "link",
+    "links": [
+      "c8261020b3000021"
+    ],
+    "x": 650,
+    "y": 400,
+    "wires": []
+  },
+  {
+    "id": "v4out030029999999",
+    "type": "link out",
+    "z": "d02026bb00000101",
+    "name": "V4 · Einstellungen → Backend",
+    "mode": "link",
+    "links": [
+      "c8261020b3000021"
+    ],
+    "x": 650,
+    "y": 480,
+    "wires": []
+  },
+  {
+    "id": "v420261020000010",
+    "type": "link out",
+    "z": "d02026bb00000101",
+    "name": "V4 · Personen → Backend",
+    "mode": "link",
+    "links": [
+      "c8261020b3000021"
+    ],
+    "x": 650,
+    "y": 980,
+    "wires": []
+  },
+  {
+    "id": "v420261020000020",
+    "type": "link out",
+    "z": "c8261020b3000013",
+    "name": "V4 · Einstellungen zurück",
+    "mode": "link",
+    "links": [
+      "v420261020000022"
+    ],
+    "x": 1270,
+    "y": 380,
+    "wires": []
+  },
+  {
+    "id": "v420261020000021",
+    "type": "link out",
+    "z": "c8261020b3000013",
+    "name": "V4 · Personen zurück",
+    "mode": "link",
+    "links": [
+      "v420261020000023"
+    ],
+    "x": 1270,
+    "y": 440,
+    "wires": []
+  },
+  {
+    "id": "v420261020000022",
+    "type": "link in",
+    "z": "d02026bb00000101",
+    "name": "V4 · Konfiguration Antwort",
+    "links": [
+      "v420261020000020",
+      "v420261020000024"
+    ],
+    "x": 790,
+    "y": 1040,
+    "wires": [
+      [
+        "d02026bb00003000",
+        "d02026bb00003003",
+        "d02026bb00003004",
+        "d02026bb00003006",
+        "d02026bb00003002"
+      ]
+    ]
+  },
+  {
+    "id": "v420261020000023",
+    "type": "link in",
+    "z": "d02026bb00000101",
+    "name": "V4 · Personen Antwort",
+    "links": [
+      "v420261020000021",
+      "v420261020000025"
+    ],
+    "x": 800,
+    "y": 980,
+    "wires": [
+      [
+        "v420261020000003"
+      ]
+    ]
+  },
+  {
+    "id": "v420261020000024",
+    "type": "link out",
+    "z": "c8261020b3000013",
+    "name": "V4 · Einstellungsfehler",
+    "mode": "link",
+    "links": [
+      "v420261020000022"
+    ],
+    "x": 1040,
+    "y": 500,
+    "wires": []
+  },
+  {
+    "id": "v420261020000025",
+    "type": "link out",
+    "z": "c8261020b3000013",
+    "name": "V4 · Personenfehler",
+    "mode": "link",
+    "links": [
+      "v420261020000023"
+    ],
+    "x": 1040,
+    "y": 555,
+    "wires": []
+  },
+  {
+    "id": "v420261020000080",
+    "type": "comment",
+    "z": "c8261020b3000013",
+    "name": "V4 · JSON-Dateien bleiben lokal; Hardware bleibt Testmodus",
+    "info": "config.update schreibt rovo-settings-v4.json. Personen manuell verwaltet in rovo-people-v4.json. APIs sind nur an localhost gebunden.",
+    "x": 540,
+    "y": 62,
+    "wires": []
+  }
+]

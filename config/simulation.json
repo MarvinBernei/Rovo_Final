@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "safe_mode": true,
+  "simulation": true,
+  "motion": {
+    "calibrated": true,
+    "pan": {"min": 60, "max": 120, "home": 90, "direction": 1},
+    "tilt": {"min": 60, "max": 120, "home": 90, "direction": 1}
+  }
+}

@@ -1,0 +1,23 @@
+# Vorlage: erst nach Geräteprüfung installieren/aktivieren. Kein Teil von rovo.service.
+[Unit]
+Description=ROVO WLAN-Einrichtungsportal bei fehlender WLAN-Verbindung
+Wants=NetworkManager.service
+After=NetworkManager.service
+StartLimitIntervalSec=300
+StartLimitBurst=3
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/rovo-network
+ExecStart=/usr/bin/python3 /opt/rovo-network/rovo/network_setup.py --config /etc/rovo/network_setup.json --apply
+Restart=on-failure
+RestartSec=30
+KillMode=control-group
+TimeoutStopSec=20
+UMask=0077
+NoNewPrivileges=true
+ProtectHome=true
+
+[Install]
+WantedBy=multi-user.target

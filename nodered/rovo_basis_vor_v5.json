@@ -1,0 +1,690 @@
+[
+  {
+    "id": "rf",
+    "type": "tab",
+    "label": "ROVO Neuaufbau",
+    "disabled": false,
+    "info": "Isolierter Neuaufbau. Kein Ersatzimport für historische V5-Flows."
+  },
+  {
+    "id": "rb",
+    "type": "ui-base",
+    "name": "ROVO Neuaufbau",
+    "path": "/rovo-neu",
+    "includeClientData": true,
+    "acceptsClientConfig": [
+      "ui-control",
+      "ui-notification"
+    ],
+    "showPathInSidebar": false,
+    "showPageTitle": true,
+    "navigationStyle": "default",
+    "titleBarStyle": "default"
+  },
+  {
+    "id": "rt",
+    "type": "ui-theme",
+    "name": "ROVO Dunkel",
+    "colors": {
+      "surface": "#152333",
+      "primary": "#39d6c8",
+      "bgPage": "#0b1420",
+      "groupBg": "#152333",
+      "groupOutline": "#294057"
+    },
+    "sizes": {
+      "density": "default",
+      "pagePadding": "16px",
+      "groupGap": "16px",
+      "groupBorderRadius": "12px",
+      "widgetGap": "12px"
+    }
+  },
+  {
+    "id": "poll",
+    "type": "inject",
+    "z": "rf",
+    "name": "Status alle 2 s",
+    "props": [
+      {
+        "p": "payload"
+      }
+    ],
+    "repeat": "2",
+    "once": true,
+    "onceDelay": 1,
+    "payload": "",
+    "payloadType": "date",
+    "x": 140,
+    "y": 60,
+    "wires": [
+      [
+        "statusreq"
+      ]
+    ]
+  },
+  {
+    "id": "statusreq",
+    "type": "function",
+    "z": "rf",
+    "name": "GET Status mit Token",
+    "func": "const t=env.get(\"ROVO_API_TOKEN\");if(!t||t.length<32){node.status({fill:\"red\",shape:\"ring\",text:\"Token fehlt\"});return {payload:{offline:true},url:\"http://127.0.0.1:1891/api/v1/status\",method:\"GET\"};}msg.method=\"GET\";msg.url=\"http://127.0.0.1:1891/api/v1/status\";msg.headers={Authorization:\"Bearer \"+t};return msg;",
+    "outputs": 1,
+    "x": 390,
+    "y": 60,
+    "wires": [
+      [
+        "statushttp"
+      ]
+    ]
+  },
+  {
+    "id": "statushttp",
+    "type": "http request",
+    "z": "rf",
+    "name": "ROVO Status",
+    "method": "use",
+    "ret": "obj",
+    "paytoqs": "ignore",
+    "url": "",
+    "persist": false,
+    "senderr": false,
+    "headers": [],
+    "x": 640,
+    "y": 60,
+    "wires": [
+      [
+        "statusclean"
+      ]
+    ]
+  },
+  {
+    "id": "statusclean",
+    "type": "function",
+    "z": "rf",
+    "name": "Nur Status an Browser",
+    "func": "return {payload:msg.statusCode===200&&msg.payload?.schema===\"rovo.status.v1\"?msg.payload:{offline:true,updated_at_utc:new Date().toISOString()}};",
+    "outputs": 1,
+    "x": 860,
+    "y": 60,
+    "wires": [
+      [
+        "widget-overview",
+        "widget-motion",
+        "widget-camera",
+        "widget-display",
+        "widget-chat",
+        "widget-assistant",
+        "widget-system"
+      ]
+    ]
+  },
+  {
+    "id": "cmdreq",
+    "type": "function",
+    "z": "rf",
+    "name": "POST zum gemeinsamen Core",
+    "func": "const t=env.get(\"ROVO_API_TOKEN\");if(!t||t.length<32){node.error(\"ROVO_API_TOKEN fehlt\");return null;}const p=msg.payload;if(!p||typeof p.type!==\"string\")return null;msg.payload={schema:\"rovo.command.v1\",type:p.type,args:p.args||{}};msg.method=\"POST\";msg.url=\"http://127.0.0.1:1891/api/v1/command\";msg.headers={Authorization:\"Bearer \"+t,\"Content-Type\":\"application/json\",\"X-ROVO-Session\":String(msg._client?.socketId||\"dashboard\")};return msg;",
+    "outputs": 1,
+    "x": 400,
+    "y": 180,
+    "wires": [
+      [
+        "cmdhttp"
+      ]
+    ]
+  },
+  {
+    "id": "cmdhttp",
+    "type": "http request",
+    "z": "rf",
+    "name": "ROVO Befehl",
+    "method": "use",
+    "ret": "obj",
+    "paytoqs": "ignore",
+    "url": "",
+    "persist": false,
+    "senderr": false,
+    "headers": [],
+    "x": 640,
+    "y": 180,
+    "wires": [
+      [
+        "cmdclean"
+      ]
+    ]
+  },
+  {
+    "id": "cmdclean",
+    "type": "function",
+    "z": "rf",
+    "name": "Nur Ergebnis an Client",
+    "func": "return {_client:msg._client,payload:msg.payload?.schema===\"rovo.result.v1\"?msg.payload:{spoken_reply:\"Backend nicht erreichbar.\",status:\"error\",ok:false}};",
+    "outputs": 1,
+    "x": 870,
+    "y": 180,
+    "wires": [
+      [
+        "widget-overview",
+        "widget-motion",
+        "widget-camera",
+        "widget-display",
+        "widget-chat",
+        "widget-assistant",
+        "widget-system"
+      ]
+    ]
+  },
+  {
+    "id": "catch",
+    "type": "catch",
+    "z": "rf",
+    "name": "Bridge-Fehler",
+    "scope": null,
+    "uncaught": false,
+    "x": 140,
+    "y": 300,
+    "wires": [
+      [
+        "offline"
+      ]
+    ]
+  },
+  {
+    "id": "offline",
+    "type": "function",
+    "z": "rf",
+    "name": "Offline statt Dummywerte",
+    "func": "return {payload:{offline:true,updated_at_utc:new Date().toISOString()}};",
+    "outputs": 1,
+    "x": 420,
+    "y": 300,
+    "wires": [
+      [
+        "widget-overview",
+        "widget-motion",
+        "widget-camera",
+        "widget-display",
+        "widget-chat",
+        "widget-assistant",
+        "widget-system"
+      ]
+    ]
+  },
+  {
+    "id": "page-overview",
+    "type": "ui-page",
+    "name": "Übersicht",
+    "ui": "rb",
+    "path": "/overview",
+    "icon": "smart_toy",
+    "layout": "grid",
+    "theme": "rt",
+    "order": 1,
+    "className": "",
+    "visible": true,
+    "disabled": false,
+    "breakpoints": [
+      {
+        "name": "Default",
+        "px": "0",
+        "cols": "3"
+      },
+      {
+        "name": "Tablet",
+        "px": "576",
+        "cols": "6"
+      },
+      {
+        "name": "Desktop",
+        "px": "1024",
+        "cols": "12"
+      }
+    ]
+  },
+  {
+    "id": "group-overview",
+    "type": "ui-group",
+    "name": "Übersicht",
+    "page": "page-overview",
+    "width": "12",
+    "height": "1",
+    "order": 1,
+    "showTitle": false,
+    "className": "",
+    "visible": true,
+    "disabled": false,
+    "groupType": "default"
+  },
+  {
+    "id": "widget-overview",
+    "type": "ui-template",
+    "z": "rf",
+    "group": "group-overview",
+    "name": "Übersicht",
+    "order": 1,
+    "width": "12",
+    "height": "0",
+    "storeOutMessages": false,
+    "passthru": false,
+    "resendOnRefresh": false,
+    "templateScope": "local",
+    "className": "",
+    "x": 1190,
+    "y": 60,
+    "wires": [
+      [
+        "cmdreq"
+      ]
+    ],
+    "format": "<template><section class=\"rovo-panel\"><h2>Willkommen bei Rovo</h2><p>Alle wichtigen Funktionen auf einen Blick.</p><small>Robotic Observation and Voice Operator</small><div class=\"rovo-eyes\"><i></i><i></i></div><p>Augen: Browseranimation. Gerätewerte: siehe Status.</p><p v-if=\"result\" role=\"status\"><strong>{{result.status}}</strong> · {{result.spoken_reply}}</p><p v-if=\"snapshot.offline\">Backend offline – Status unbekannt.</p><p v-if=\"snapshot.simulation\" style=\"color:#f4cd77\">SIMULATION – keine Hardwaremessung</p><p v-if=\"age>8\" style=\"color:#ff8c8c\">Status veraltet. Verbindung prüfen.</p><details><summary>Status und Fähigkeiten</summary><pre>{{JSON.stringify(snapshot,null,2)}}</pre></details><details v-if=\"result\"><summary>Ergebnisdaten</summary><pre>{{JSON.stringify(result.data,null,2)}}</pre></details></section></template>\n<script>\nexport default{\ndata(){return{text:\"\",snapshot:{offline:true},result:null,now:Date.now(),clock:null,faces:[\"NEUTRAL\",\"LISTENING\",\"THINKING\",\"TALKING\",\"HAPPY\",\"CURIOUS\",\"SLEEPY\",\"SURPRISED\",\"ERROR\",\"SAD\",\"ANGRY\",\"CONFUSED\",\"LAUGHING\",\"WINK\",\"BLINK\",\"LOVE\"]}},\ncomputed:{age(){return this.snapshot.updated_at_utc?(this.now-Date.parse(this.snapshot.updated_at_utc))/1000:999}},\nwatch:{msg:{deep:true,handler(m){const p=m?.payload;if(!p)return;if(p.schema===\"rovo.status.v1\"||p.offline)this.snapshot=p;if(p.schema===\"rovo.result.v1\"||p.spoken_reply)this.result=p}}},\nmounted(){this.clock=setInterval(()=>this.now=Date.now(),1000)},unmounted(){clearInterval(this.clock)},\nmethods:{cmd(type,args={}){this.send({payload:{type,args}})},submit(){if(this.text.trim()){this.cmd(\"text\",{text:this.text});this.text=\"\"}}}}\n</script>\n<style>.rovo-panel{padding:14px;color:#e7f1fa}.rovo-panel pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px}.rovo-panel .v-btn{margin:6px}.rovo-eyes{display:flex;gap:30px;justify-content:center;background:#070e17;padding:35px;margin:22px auto;border-radius:24px;max-width:360px}.rovo-eyes i{width:95px;height:65px;background:#39d6c8;border-radius:24px;animation:rovo-blink 4.7s infinite}@keyframes rovo-blink{0%,94%,100%{transform:scaleY(1)}96%{transform:scaleY(.08)}}</style>"
+  },
+  {
+    "id": "page-motion",
+    "type": "ui-page",
+    "name": "Bewegung",
+    "ui": "rb",
+    "path": "/motion",
+    "icon": "smart_toy",
+    "layout": "grid",
+    "theme": "rt",
+    "order": 2,
+    "className": "",
+    "visible": true,
+    "disabled": false,
+    "breakpoints": [
+      {
+        "name": "Default",
+        "px": "0",
+        "cols": "3"
+      },
+      {
+        "name": "Tablet",
+        "px": "576",
+        "cols": "6"
+      },
+      {
+        "name": "Desktop",
+        "px": "1024",
+        "cols": "12"
+      }
+    ]
+  },
+  {
+    "id": "group-motion",
+    "type": "ui-group",
+    "name": "Bewegung",
+    "page": "page-motion",
+    "width": "12",
+    "height": "1",
+    "order": 1,
+    "showTitle": false,
+    "className": "",
+    "visible": true,
+    "disabled": false,
+    "groupType": "default"
+  },
+  {
+    "id": "widget-motion",
+    "type": "ui-template",
+    "z": "rf",
+    "group": "group-motion",
+    "name": "Bewegung",
+    "order": 1,
+    "width": "12",
+    "height": "0",
+    "storeOutMessages": false,
+    "passthru": false,
+    "resendOnRefresh": false,
+    "templateScope": "local",
+    "className": "",
+    "x": 1190,
+    "y": 130,
+    "wires": [
+      [
+        "cmdreq"
+      ]
+    ],
+    "format": "<template><section class=\"rovo-panel\"><h2>Kopfbewegung</h2><p>Ohne bestätigte Kalibrierung gesperrt. Winkel sind Sollwerte.</p><v-btn @click=\"cmd('motion.home')\">Home anfordern</v-btn><v-btn color=\"error\" @click=\"cmd('stop')\">STOPP</v-btn><div><v-btn @click=\"cmd('motion.relative',{axis:'pan',delta:-3})\">Links</v-btn><v-btn @click=\"cmd('motion.relative',{axis:'pan',delta:3})\">Rechts</v-btn><v-btn @click=\"cmd('motion.relative',{axis:'tilt',delta:-3})\">Oben</v-btn><v-btn @click=\"cmd('motion.relative',{axis:'tilt',delta:3})\">Unten</v-btn></div><p v-if=\"result\" role=\"status\"><strong>{{result.status}}</strong> · {{result.spoken_reply}}</p><p v-if=\"snapshot.offline\">Backend offline – Status unbekannt.</p><p v-if=\"snapshot.simulation\" style=\"color:#f4cd77\">SIMULATION – keine Hardwaremessung</p><p v-if=\"age>8\" style=\"color:#ff8c8c\">Status veraltet. Verbindung prüfen.</p><details><summary>Status und Fähigkeiten</summary><pre>{{JSON.stringify(snapshot,null,2)}}</pre></details><details v-if=\"result\"><summary>Ergebnisdaten</summary><pre>{{JSON.stringify(result.data,null,2)}}</pre></details></section></template>\n<script>\nexport default{\ndata(){return{text:\"\",snapshot:{offline:true},result:null,now:Date.now(),clock:null,faces:[\"NEUTRAL\",\"LISTENING\",\"THINKING\",\"TALKING\",\"HAPPY\",\"CURIOUS\",\"SLEEPY\",\"SURPRISED\",\"ERROR\",\"SAD\",\"ANGRY\",\"CONFUSED\",\"LAUGHING\",\"WINK\",\"BLINK\",\"LOVE\"]}},\ncomputed:{age(){return this.snapshot.updated_at_utc?(this.now-Date.parse(this.snapshot.updated_at_utc))/1000:999}},\nwatch:{msg:{deep:true,handler(m){const p=m?.payload;if(!p)return;if(p.schema===\"rovo.status.v1\"||p.offline)this.snapshot=p;if(p.schema===\"rovo.result.v1\"||p.spoken_reply)this.result=p}}},\nmounted(){this.clock=setInterval(()=>this.now=Date.now(),1000)},unmounted(){clearInterval(this.clock)},\nmethods:{cmd(type,args={}){this.send({payload:{type,args}})},submit(){if(this.text.trim()){this.cmd(\"text\",{text:this.text});this.text=\"\"}}}}\n</script>\n<style>.rovo-panel{padding:14px;color:#e7f1fa}.rovo-panel pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px}.rovo-panel .v-btn{margin:6px}.rovo-eyes{display:flex;gap:30px;justify-content:center;background:#070e17;padding:35px;margin:22px auto;border-radius:24px;max-width:360px}.rovo-eyes i{width:95px;height:65px;background:#39d6c8;border-radius:24px;animation:rovo-blink 4.7s infinite}@keyframes rovo-blink{0%,94%,100%{transform:scaleY(1)}96%{transform:scaleY(.08)}}</style>"
+  },
+  {
+    "id": "page-camera",
+    "type": "ui-page",
+    "name": "Kamera",
+    "ui": "rb",
+    "path": "/camera",
+    "icon": "smart_toy",
+    "layout": "grid",
+    "theme": "rt",
+    "order": 3,
+    "className": "",
+    "visible": true,
+    "disabled": false,
+    "breakpoints": [
+      {
+        "name": "Default",
+        "px": "0",
+        "cols": "3"
+      },
+      {
+        "name": "Tablet",
+        "px": "576",
+        "cols": "6"
+      },
+      {
+        "name": "Desktop",
+        "px": "1024",
+        "cols": "12"
+      }
+    ]
+  },
+  {
+    "id": "group-camera",
+    "type": "ui-group",
+    "name": "Kamera",
+    "page": "page-camera",
+    "width": "12",
+    "height": "1",
+    "order": 1,
+    "showTitle": false,
+    "className": "",
+    "visible": true,
+    "disabled": false,
+    "groupType": "default"
+  },
+  {
+    "id": "widget-camera",
+    "type": "ui-template",
+    "z": "rf",
+    "group": "group-camera",
+    "name": "Kamera",
+    "order": 1,
+    "width": "12",
+    "height": "0",
+    "storeOutMessages": false,
+    "passthru": false,
+    "resendOnRefresh": false,
+    "templateScope": "local",
+    "className": "",
+    "x": 1190,
+    "y": 200,
+    "wires": [
+      [
+        "cmdreq"
+      ]
+    ],
+    "format": "<template><section class=\"rovo-panel\"><h2>Kamera und Tracking</h2><v-btn @click=\"cmd('camera.enable')\">Kamera starten</v-btn><v-btn @click=\"cmd('camera.disable')\">Kamera aus</v-btn><v-btn @click=\"cmd('tracking.enable')\">Tracking an</v-btn><v-btn @click=\"cmd('tracking.disable')\">Tracking aus</v-btn><p>Gesichtszahl nur bei aktuellem Bild. Personenidentifikation fehlt. JPEG-Endpunkt für einen geschützten serverseitigen Proxy vorhanden.</p><p v-if=\"result\" role=\"status\"><strong>{{result.status}}</strong> · {{result.spoken_reply}}</p><p v-if=\"snapshot.offline\">Backend offline – Status unbekannt.</p><p v-if=\"snapshot.simulation\" style=\"color:#f4cd77\">SIMULATION – keine Hardwaremessung</p><p v-if=\"age>8\" style=\"color:#ff8c8c\">Status veraltet. Verbindung prüfen.</p><details><summary>Status und Fähigkeiten</summary><pre>{{JSON.stringify(snapshot,null,2)}}</pre></details><details v-if=\"result\"><summary>Ergebnisdaten</summary><pre>{{JSON.stringify(result.data,null,2)}}</pre></details></section></template>\n<script>\nexport default{\ndata(){return{text:\"\",snapshot:{offline:true},result:null,now:Date.now(),clock:null,faces:[\"NEUTRAL\",\"LISTENING\",\"THINKING\",\"TALKING\",\"HAPPY\",\"CURIOUS\",\"SLEEPY\",\"SURPRISED\",\"ERROR\",\"SAD\",\"ANGRY\",\"CONFUSED\",\"LAUGHING\",\"WINK\",\"BLINK\",\"LOVE\"]}},\ncomputed:{age(){return this.snapshot.updated_at_utc?(this.now-Date.parse(this.snapshot.updated_at_utc))/1000:999}},\nwatch:{msg:{deep:true,handler(m){const p=m?.payload;if(!p)return;if(p.schema===\"rovo.status.v1\"||p.offline)this.snapshot=p;if(p.schema===\"rovo.result.v1\"||p.spoken_reply)this.result=p}}},\nmounted(){this.clock=setInterval(()=>this.now=Date.now(),1000)},unmounted(){clearInterval(this.clock)},\nmethods:{cmd(type,args={}){this.send({payload:{type,args}})},submit(){if(this.text.trim()){this.cmd(\"text\",{text:this.text});this.text=\"\"}}}}\n</script>\n<style>.rovo-panel{padding:14px;color:#e7f1fa}.rovo-panel pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px}.rovo-panel .v-btn{margin:6px}.rovo-eyes{display:flex;gap:30px;justify-content:center;background:#070e17;padding:35px;margin:22px auto;border-radius:24px;max-width:360px}.rovo-eyes i{width:95px;height:65px;background:#39d6c8;border-radius:24px;animation:rovo-blink 4.7s infinite}@keyframes rovo-blink{0%,94%,100%{transform:scaleY(1)}96%{transform:scaleY(.08)}}</style>"
+  },
+  {
+    "id": "page-display",
+    "type": "ui-page",
+    "name": "Display",
+    "ui": "rb",
+    "path": "/display",
+    "icon": "smart_toy",
+    "layout": "grid",
+    "theme": "rt",
+    "order": 4,
+    "className": "",
+    "visible": true,
+    "disabled": false,
+    "breakpoints": [
+      {
+        "name": "Default",
+        "px": "0",
+        "cols": "3"
+      },
+      {
+        "name": "Tablet",
+        "px": "576",
+        "cols": "6"
+      },
+      {
+        "name": "Desktop",
+        "px": "1024",
+        "cols": "12"
+      }
+    ]
+  },
+  {
+    "id": "group-display",
+    "type": "ui-group",
+    "name": "Display",
+    "page": "page-display",
+    "width": "12",
+    "height": "1",
+    "order": 1,
+    "showTitle": false,
+    "className": "",
+    "visible": true,
+    "disabled": false,
+    "groupType": "default"
+  },
+  {
+    "id": "widget-display",
+    "type": "ui-template",
+    "z": "rf",
+    "group": "group-display",
+    "name": "Display",
+    "order": 1,
+    "width": "12",
+    "height": "0",
+    "storeOutMessages": false,
+    "passthru": false,
+    "resendOnRefresh": false,
+    "templateScope": "local",
+    "className": "",
+    "x": 1190,
+    "y": 270,
+    "wires": [
+      [
+        "cmdreq"
+      ]
+    ],
+    "format": "<template><section class=\"rovo-panel\"><h2>Gesichtsausdrücke</h2><v-btn v-for=\"f in faces\" :key=\"f\" @click=\"cmd('display.face',{face:f})\">{{f}}</v-btn><p>Simulation wird im Ergebnis ausgewiesen. TFT-Animationen sind in der Firmware enthalten.</p><p v-if=\"result\" role=\"status\"><strong>{{result.status}}</strong> · {{result.spoken_reply}}</p><p v-if=\"snapshot.offline\">Backend offline – Status unbekannt.</p><p v-if=\"snapshot.simulation\" style=\"color:#f4cd77\">SIMULATION – keine Hardwaremessung</p><p v-if=\"age>8\" style=\"color:#ff8c8c\">Status veraltet. Verbindung prüfen.</p><details><summary>Status und Fähigkeiten</summary><pre>{{JSON.stringify(snapshot,null,2)}}</pre></details><details v-if=\"result\"><summary>Ergebnisdaten</summary><pre>{{JSON.stringify(result.data,null,2)}}</pre></details></section></template>\n<script>\nexport default{\ndata(){return{text:\"\",snapshot:{offline:true},result:null,now:Date.now(),clock:null,faces:[\"NEUTRAL\",\"LISTENING\",\"THINKING\",\"TALKING\",\"HAPPY\",\"CURIOUS\",\"SLEEPY\",\"SURPRISED\",\"ERROR\",\"SAD\",\"ANGRY\",\"CONFUSED\",\"LAUGHING\",\"WINK\",\"BLINK\",\"LOVE\"]}},\ncomputed:{age(){return this.snapshot.updated_at_utc?(this.now-Date.parse(this.snapshot.updated_at_utc))/1000:999}},\nwatch:{msg:{deep:true,handler(m){const p=m?.payload;if(!p)return;if(p.schema===\"rovo.status.v1\"||p.offline)this.snapshot=p;if(p.schema===\"rovo.result.v1\"||p.spoken_reply)this.result=p}}},\nmounted(){this.clock=setInterval(()=>this.now=Date.now(),1000)},unmounted(){clearInterval(this.clock)},\nmethods:{cmd(type,args={}){this.send({payload:{type,args}})},submit(){if(this.text.trim()){this.cmd(\"text\",{text:this.text});this.text=\"\"}}}}\n</script>\n<style>.rovo-panel{padding:14px;color:#e7f1fa}.rovo-panel pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px}.rovo-panel .v-btn{margin:6px}.rovo-eyes{display:flex;gap:30px;justify-content:center;background:#070e17;padding:35px;margin:22px auto;border-radius:24px;max-width:360px}.rovo-eyes i{width:95px;height:65px;background:#39d6c8;border-radius:24px;animation:rovo-blink 4.7s infinite}@keyframes rovo-blink{0%,94%,100%{transform:scaleY(1)}96%{transform:scaleY(.08)}}</style>"
+  },
+  {
+    "id": "page-chat",
+    "type": "ui-page",
+    "name": "KI & Sprache",
+    "ui": "rb",
+    "path": "/chat",
+    "icon": "smart_toy",
+    "layout": "grid",
+    "theme": "rt",
+    "order": 5,
+    "className": "",
+    "visible": true,
+    "disabled": false,
+    "breakpoints": [
+      {
+        "name": "Default",
+        "px": "0",
+        "cols": "3"
+      },
+      {
+        "name": "Tablet",
+        "px": "576",
+        "cols": "6"
+      },
+      {
+        "name": "Desktop",
+        "px": "1024",
+        "cols": "12"
+      }
+    ]
+  },
+  {
+    "id": "group-chat",
+    "type": "ui-group",
+    "name": "KI & Sprache",
+    "page": "page-chat",
+    "width": "12",
+    "height": "1",
+    "order": 1,
+    "showTitle": false,
+    "className": "",
+    "visible": true,
+    "disabled": false,
+    "groupType": "default"
+  },
+  {
+    "id": "widget-chat",
+    "type": "ui-template",
+    "z": "rf",
+    "group": "group-chat",
+    "name": "KI & Sprache",
+    "order": 1,
+    "width": "12",
+    "height": "0",
+    "storeOutMessages": false,
+    "passthru": false,
+    "resendOnRefresh": false,
+    "templateScope": "local",
+    "className": "",
+    "x": 1190,
+    "y": 340,
+    "wires": [
+      [
+        "cmdreq"
+      ]
+    ],
+    "format": "<template><section class=\"rovo-panel\"><h2>Lokaler Textdialog</h2><v-text-field v-model=\"text\" label=\"Was ist fünfundzwanzig mal siebzehn?\" @keyup.enter=\"submit\"></v-text-field><v-btn @click=\"submit\">Senden</v-btn><p>Lokale Antworten zuerst, Textmodell nach Einrichtung. Diese Seite startet kein Browsermikrofon.</p><p v-if=\"result\" role=\"status\"><strong>{{result.status}}</strong> · {{result.spoken_reply}}</p><p v-if=\"snapshot.offline\">Backend offline – Status unbekannt.</p><p v-if=\"snapshot.simulation\" style=\"color:#f4cd77\">SIMULATION – keine Hardwaremessung</p><p v-if=\"age>8\" style=\"color:#ff8c8c\">Status veraltet. Verbindung prüfen.</p><details><summary>Status und Fähigkeiten</summary><pre>{{JSON.stringify(snapshot,null,2)}}</pre></details><details v-if=\"result\"><summary>Ergebnisdaten</summary><pre>{{JSON.stringify(result.data,null,2)}}</pre></details></section></template>\n<script>\nexport default{\ndata(){return{text:\"\",snapshot:{offline:true},result:null,now:Date.now(),clock:null,faces:[\"NEUTRAL\",\"LISTENING\",\"THINKING\",\"TALKING\",\"HAPPY\",\"CURIOUS\",\"SLEEPY\",\"SURPRISED\",\"ERROR\",\"SAD\",\"ANGRY\",\"CONFUSED\",\"LAUGHING\",\"WINK\",\"BLINK\",\"LOVE\"]}},\ncomputed:{age(){return this.snapshot.updated_at_utc?(this.now-Date.parse(this.snapshot.updated_at_utc))/1000:999}},\nwatch:{msg:{deep:true,handler(m){const p=m?.payload;if(!p)return;if(p.schema===\"rovo.status.v1\"||p.offline)this.snapshot=p;if(p.schema===\"rovo.result.v1\"||p.spoken_reply)this.result=p}}},\nmounted(){this.clock=setInterval(()=>this.now=Date.now(),1000)},unmounted(){clearInterval(this.clock)},\nmethods:{cmd(type,args={}){this.send({payload:{type,args}})},submit(){if(this.text.trim()){this.cmd(\"text\",{text:this.text});this.text=\"\"}}}}\n</script>\n<style>.rovo-panel{padding:14px;color:#e7f1fa}.rovo-panel pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px}.rovo-panel .v-btn{margin:6px}.rovo-eyes{display:flex;gap:30px;justify-content:center;background:#070e17;padding:35px;margin:22px auto;border-radius:24px;max-width:360px}.rovo-eyes i{width:95px;height:65px;background:#39d6c8;border-radius:24px;animation:rovo-blink 4.7s infinite}@keyframes rovo-blink{0%,94%,100%{transform:scaleY(1)}96%{transform:scaleY(.08)}}</style>"
+  },
+  {
+    "id": "page-assistant",
+    "type": "ui-page",
+    "name": "Assistent & Musik",
+    "ui": "rb",
+    "path": "/assistant",
+    "icon": "smart_toy",
+    "layout": "grid",
+    "theme": "rt",
+    "order": 6,
+    "className": "",
+    "visible": true,
+    "disabled": false,
+    "breakpoints": [
+      {
+        "name": "Default",
+        "px": "0",
+        "cols": "3"
+      },
+      {
+        "name": "Tablet",
+        "px": "576",
+        "cols": "6"
+      },
+      {
+        "name": "Desktop",
+        "px": "1024",
+        "cols": "12"
+      }
+    ]
+  },
+  {
+    "id": "group-assistant",
+    "type": "ui-group",
+    "name": "Assistent & Musik",
+    "page": "page-assistant",
+    "width": "12",
+    "height": "1",
+    "order": 1,
+    "showTitle": false,
+    "className": "",
+    "visible": true,
+    "disabled": false,
+    "groupType": "default"
+  },
+  {
+    "id": "widget-assistant",
+    "type": "ui-template",
+    "z": "rf",
+    "group": "group-assistant",
+    "name": "Assistent & Musik",
+    "order": 1,
+    "width": "12",
+    "height": "0",
+    "storeOutMessages": false,
+    "passthru": false,
+    "resendOnRefresh": false,
+    "templateScope": "local",
+    "className": "",
+    "x": 1190,
+    "y": 410,
+    "wires": [
+      [
+        "cmdreq"
+      ]
+    ],
+    "format": "<template><section class=\"rovo-panel\"><h2>Timer, Notizen, Musik</h2><v-text-field v-model=\"text\" label=\"Timer auf fünf Minuten / Merk dir, dass …\" @keyup.enter=\"submit\"></v-text-field><v-btn @click=\"submit\">Senden</v-btn><v-btn @click=\"cmd('timer.status')\">Timer anzeigen</v-btn><v-btn @click=\"cmd('notes.list')\">Notizen anzeigen</v-btn><v-btn @click=\"cmd('music.pause')\">Musik pausieren</v-btn><v-btn @click=\"cmd('music.resume')\">Musik fortsetzen</v-btn><v-btn @click=\"cmd('music.stop')\">Musik stoppen</v-btn><p>Lokale Datei per API music.play aus data/music auswählen. Spotify fehlt.</p><p v-if=\"result\" role=\"status\"><strong>{{result.status}}</strong> · {{result.spoken_reply}}</p><p v-if=\"snapshot.offline\">Backend offline – Status unbekannt.</p><p v-if=\"snapshot.simulation\" style=\"color:#f4cd77\">SIMULATION – keine Hardwaremessung</p><p v-if=\"age>8\" style=\"color:#ff8c8c\">Status veraltet. Verbindung prüfen.</p><details><summary>Status und Fähigkeiten</summary><pre>{{JSON.stringify(snapshot,null,2)}}</pre></details><details v-if=\"result\"><summary>Ergebnisdaten</summary><pre>{{JSON.stringify(result.data,null,2)}}</pre></details></section></template>\n<script>\nexport default{\ndata(){return{text:\"\",snapshot:{offline:true},result:null,now:Date.now(),clock:null,faces:[\"NEUTRAL\",\"LISTENING\",\"THINKING\",\"TALKING\",\"HAPPY\",\"CURIOUS\",\"SLEEPY\",\"SURPRISED\",\"ERROR\",\"SAD\",\"ANGRY\",\"CONFUSED\",\"LAUGHING\",\"WINK\",\"BLINK\",\"LOVE\"]}},\ncomputed:{age(){return this.snapshot.updated_at_utc?(this.now-Date.parse(this.snapshot.updated_at_utc))/1000:999}},\nwatch:{msg:{deep:true,handler(m){const p=m?.payload;if(!p)return;if(p.schema===\"rovo.status.v1\"||p.offline)this.snapshot=p;if(p.schema===\"rovo.result.v1\"||p.spoken_reply)this.result=p}}},\nmounted(){this.clock=setInterval(()=>this.now=Date.now(),1000)},unmounted(){clearInterval(this.clock)},\nmethods:{cmd(type,args={}){this.send({payload:{type,args}})},submit(){if(this.text.trim()){this.cmd(\"text\",{text:this.text});this.text=\"\"}}}}\n</script>\n<style>.rovo-panel{padding:14px;color:#e7f1fa}.rovo-panel pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px}.rovo-panel .v-btn{margin:6px}.rovo-eyes{display:flex;gap:30px;justify-content:center;background:#070e17;padding:35px;margin:22px auto;border-radius:24px;max-width:360px}.rovo-eyes i{width:95px;height:65px;background:#39d6c8;border-radius:24px;animation:rovo-blink 4.7s infinite}@keyframes rovo-blink{0%,94%,100%{transform:scaleY(1)}96%{transform:scaleY(.08)}}</style>"
+  },
+  {
+    "id": "page-system",
+    "type": "ui-page",
+    "name": "System & Datenschutz",
+    "ui": "rb",
+    "path": "/system",
+    "icon": "smart_toy",
+    "layout": "grid",
+    "theme": "rt",
+    "order": 7,
+    "className": "",
+    "visible": true,
+    "disabled": false,
+    "breakpoints": [
+      {
+        "name": "Default",
+        "px": "0",
+        "cols": "3"
+      },
+      {
+        "name": "Tablet",
+        "px": "576",
+        "cols": "6"
+      },
+      {
+        "name": "Desktop",
+        "px": "1024",
+        "cols": "12"
+      }
+    ]
+  },
+  {
+    "id": "group-system",
+    "type": "ui-group",
+    "name": "System & Datenschutz",
+    "page": "page-system",
+    "width": "12",
+    "height": "1",
+    "order": 1,
+    "showTitle": false,
+    "className": "",
+    "visible": true,
+    "disabled": false,
+    "groupType": "default"
+  },
+  {
+    "id": "widget-system",
+    "type": "ui-template",
+    "z": "rf",
+    "group": "group-system",
+    "name": "System & Datenschutz",
+    "order": 1,
+    "width": "12",
+    "height": "0",
+    "storeOutMessages": false,
+    "passthru": false,
+    "resendOnRefresh": false,
+    "templateScope": "local",
+    "className": "",
+    "x": 1190,
+    "y": 480,
+    "wires": [
+      [
+        "cmdreq"
+      ]
+    ],
+    "format": "<template><section class=\"rovo-panel\"><h2>System und Datenschutz</h2><v-btn @click=\"cmd('privacy.enable')\">Privatsphäre aktivieren</v-btn><v-btn @click=\"cmd('privacy.disable')\">Privatsphäre aufheben</v-btn><v-btn color=\"error\" @click=\"cmd('stop')\">Alles stoppen</v-btn><p>Keine Akkudaten ohne Sensor. Fehlende Werte erscheinen als null. Keine Neustart- oder Flashfunktion.</p><p v-if=\"result\" role=\"status\"><strong>{{result.status}}</strong> · {{result.spoken_reply}}</p><p v-if=\"snapshot.offline\">Backend offline – Status unbekannt.</p><p v-if=\"snapshot.simulation\" style=\"color:#f4cd77\">SIMULATION – keine Hardwaremessung</p><p v-if=\"age>8\" style=\"color:#ff8c8c\">Status veraltet. Verbindung prüfen.</p><details><summary>Status und Fähigkeiten</summary><pre>{{JSON.stringify(snapshot,null,2)}}</pre></details><details v-if=\"result\"><summary>Ergebnisdaten</summary><pre>{{JSON.stringify(result.data,null,2)}}</pre></details></section></template>\n<script>\nexport default{\ndata(){return{text:\"\",snapshot:{offline:true},result:null,now:Date.now(),clock:null,faces:[\"NEUTRAL\",\"LISTENING\",\"THINKING\",\"TALKING\",\"HAPPY\",\"CURIOUS\",\"SLEEPY\",\"SURPRISED\",\"ERROR\",\"SAD\",\"ANGRY\",\"CONFUSED\",\"LAUGHING\",\"WINK\",\"BLINK\",\"LOVE\"]}},\ncomputed:{age(){return this.snapshot.updated_at_utc?(this.now-Date.parse(this.snapshot.updated_at_utc))/1000:999}},\nwatch:{msg:{deep:true,handler(m){const p=m?.payload;if(!p)return;if(p.schema===\"rovo.status.v1\"||p.offline)this.snapshot=p;if(p.schema===\"rovo.result.v1\"||p.spoken_reply)this.result=p}}},\nmounted(){this.clock=setInterval(()=>this.now=Date.now(),1000)},unmounted(){clearInterval(this.clock)},\nmethods:{cmd(type,args={}){this.send({payload:{type,args}})},submit(){if(this.text.trim()){this.cmd(\"text\",{text:this.text});this.text=\"\"}}}}\n</script>\n<style>.rovo-panel{padding:14px;color:#e7f1fa}.rovo-panel pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px}.rovo-panel .v-btn{margin:6px}.rovo-eyes{display:flex;gap:30px;justify-content:center;background:#070e17;padding:35px;margin:22px auto;border-radius:24px;max-width:360px}.rovo-eyes i{width:95px;height:65px;background:#39d6c8;border-radius:24px;animation:rovo-blink 4.7s infinite}@keyframes rovo-blink{0%,94%,100%{transform:scaleY(1)}96%{transform:scaleY(.08)}}</style>"
+  }
+]

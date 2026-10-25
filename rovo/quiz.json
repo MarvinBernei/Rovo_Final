@@ -1,0 +1,22 @@
+[
+ {"question":"Wie viele Planeten hat unser Sonnensystem?","options":["Sieben","Acht","Neun"],"answer":1,"explanation":"Pluto zählt zu den Zwergplaneten."},
+ {"question":"Welches Gas nehmen Pflanzen bei der Fotosynthese auf?","options":["Sauerstoff","Helium","Kohlenstoffdioxid"],"answer":2,"explanation":"Aus Wasser und Kohlenstoffdioxid entstehen mit Licht energiereiche Stoffe."},
+ {"question":"Wie viele Bits bilden ein Byte?","options":["Vier","Acht","Sechzehn"],"answer":1,"explanation":"Ein Byte besteht aus acht Bits."},
+ {"question":"Was ist die Hauptstadt von Frankreich?","options":["Paris","Lyon","Marseille"],"answer":0,"explanation":"Paris ist die französische Hauptstadt."},
+ {"question":"Wie viele Seiten hat ein Sechseck?","options":["Fünf","Sechs","Sieben"],"answer":1,"explanation":"Die Zahl steckt bereits im Namen."},
+ {"question":"Welcher Planet ist der Sonne am nächsten?","options":["Venus","Mars","Merkur"],"answer":2,"explanation":"Merkur ist der innerste Planet."},
+ {"question":"Welches Organ pumpt Blut durch den Körper?","options":["Die Lunge","Das Herz","Die Leber"],"answer":1,"explanation":"Das Herz treibt den Blutkreislauf an."},
+ {"question":"Wie viele Minuten hat eine Stunde?","options":["Sechzig","Hundert","Dreißig"],"answer":0,"explanation":"Eine Stunde besteht aus sechzig Minuten."},
+ {"question":"Welches Tier ist ein Säugetier?","options":["Hai","Delfin","Forelle"],"answer":1,"explanation":"Delfine atmen Luft und säugen ihren Nachwuchs."},
+ {"question":"Was misst ein Thermometer?","options":["Luftdruck","Geschwindigkeit","Temperatur"],"answer":2,"explanation":"Thermometer zeigen Temperaturen an."},
+ {"question":"Wie viele Grad hat ein rechter Winkel?","options":["Neunzig","Hundertachtzig","Fünfundvierzig"],"answer":0,"explanation":"Ein rechter Winkel entspricht einem Viertelkreis."},
+ {"question":"Welches Metall ist bei gewöhnlicher Raumtemperatur flüssig?","options":["Eisen","Quecksilber","Kupfer"],"answer":1,"explanation":"Quecksilber ist bei gewöhnlicher Raumtemperatur flüssig."},
+ {"question":"Welche Einheit wird für elektrische Spannung verwendet?","options":["Volt","Watt","Ampere"],"answer":0,"explanation":"Volt misst Spannung, Ampere Strom und Watt Leistung."},
+ {"question":"Wie heißt die kleinste Primzahl?","options":["Eins","Zwei","Drei"],"answer":1,"explanation":"Zwei hat genau zwei positive Teiler."},
+ {"question":"Welcher Kontinent liegt am Südpol?","options":["Australien","Afrika","Antarktika"],"answer":2,"explanation":"Der geografische Südpol liegt auf Antarktika."},
+ {"question":"Woraus besteht ein Wassermolekül?","options":["Zwei Wasserstoffatome und ein Sauerstoffatom","Zwei Sauerstoffatome und ein Wasserstoffatom","Nur Wasserstoff"],"answer":0,"explanation":"Die chemische Formel von Wasser lautet H2O."},
+ {"question":"Was ist die Quadratwurzel aus 81?","options":["Sieben","Neun","Elf"],"answer":1,"explanation":"Neun mal neun ergibt einundachtzig."},
+ {"question":"Was bedeutet CPU?","options":["Central Processing Unit","Computer Power Utility","Control Program User"],"answer":0,"explanation":"Die CPU ist die zentrale Verarbeitungseinheit."},
+ {"question":"Wie nennt man Tiere, die hauptsächlich Pflanzen fressen?","options":["Pflanzenfresser","Fleischfresser","Allesfresser"],"answer":0,"explanation":"Pflanzenfresser ernähren sich überwiegend von Pflanzen."},
+ {"question":"Was misst man in Hertz?","options":["Masse","Frequenz","Länge"],"answer":1,"explanation":"Ein Hertz bedeutet eine Wiederholung pro Sekunde."}
+]

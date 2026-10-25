@@ -1,0 +1,13 @@
+{
+  "enabled": false,
+  "interface": "wlan0",
+  "ssid": "ROVO-Einrichtung",
+  "grace_seconds": 60,
+  "poll_seconds": 5,
+  "activity_timeout_seconds": 600,
+  "retry_seconds": 60,
+  "wifi_connect": "/usr/local/sbin/wifi-connect",
+  "nmcli": "/usr/bin/nmcli",
+  "ui_directory": "/usr/local/share/wifi-connect/ui",
+  "passphrase_file": "/etc/rovo/network-passphrase"
+}

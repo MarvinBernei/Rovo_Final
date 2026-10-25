@@ -1,0 +1,62 @@
+<div class="rx"><section class="rx-panel">
+<h2>Core-Laufzeitdaten und Steuerung</h2>
+<p class="rx-small">Bestätigte Zustände; Änderungen gelten für diese Sitzung. Mechanische Grenzen und Zugangsdaten bleiben geschützt.</p>
+<p v-if="!runtimeState">Noch kein aktueller Core-Status empfangen.</p>
+<template v-if="runtimeState">
+<div v-if="runtimeSection==='system'">
+ <h3>Einstellungen dauerhaft sichern</h3><p>{{runtimeState.settings.error || (runtimeState.settings.saved?'Gespeicherter Stand vorhanden.':'Noch kein gespeicherter Stand.')}}</p>
+ <button class="rx-button" :disabled="!bridgeFresh || !runtimeState.settings.available" @click="runtimeSend('settings.save',{})">Aktuelle Einstellungen speichern</button>
+ <label><input type="checkbox" v-model="runtimeRestoreConfirmed"/> Wiederherstellung bestätigen; laufende Bewegung wird gestoppt.</label>
+ <select class="rx-input" v-model="runtimeRestoreSource"><option value="saved">Gespeicherter Stand</option><option value="previous">Vorheriger Stand</option><option value="defaults">Startwerte</option></select>
+ <button class="rx-button" :disabled="!bridgeFresh || !runtimeRestoreConfirmed" @click="runtimeSend('settings.restore',{source:runtimeRestoreSource,confirm:runtimeRestoreConfirmed});runtimeRestoreConfirmed=false">Wiederherstellen</button>
+</div>
+<div v-if="runtimeSection==='motion'">
+ <p>Sollposition: Pan {{runtimeState.motion.pan_target_deg ?? 'unbekannt'}}°, Tilt {{runtimeState.motion.tilt_target_deg ?? 'unbekannt'}}°. Keine gemessene Istposition.</p>
+ <label>Geschwindigkeit °/s <input class="rx-input" type="number" min="2" max="20" v-model.number="runtimeEdit.speed" @input="runtimeDirty=true"/></label>
+ <label>Beschleunigung °/s² <input class="rx-input" type="number" min="4" max="40" v-model.number="runtimeEdit.acceleration" @input="runtimeDirty=true"/></label>
+ <button class="rx-button" :disabled="!bridgeFresh || !bridgeInfo.motion_available" @click="runtimeApply('motion')">Bewegungsprofil übernehmen</button>
+ <button class="rx-button" :disabled="!bridgeFresh" @click="runtimeSend('motion.sequence',{name:'nod'})">Nicken</button>
+ <button class="rx-button" :disabled="!bridgeFresh" @click="runtimeSend('motion.sequence',{name:'shake'})">Kopfschütteln</button>
+ <h3>Geführte Prüfung der Softwaregrenzen</h3>
+ <p>Keine Anschlagerkennung. Hardwaregrenzen, Home und Richtung müssen bereits bestätigt sein. Mechanik in kleinen Schritten beobachten; Sicherheitsabstand einhalten. Neue Grenzen dürfen die Hardwarehülle nicht erweitern.</p>
+ <button class="rx-button" :disabled="!bridgeFresh || !bridgeInfo.motion_available" @click="runtimeSend('motion.home',{})">1. Bewusst Home anfordern</button>
+ <button class="rx-button" :disabled="!bridgeFresh || !bridgeInfo.motion_available" @click="runtimeSend('motion.relative',{axis:'pan',delta:-1})">Pan −1°</button><button class="rx-button" :disabled="!bridgeFresh || !bridgeInfo.motion_available" @click="runtimeSend('motion.relative',{axis:'pan',delta:1})">Pan +1°</button>
+ <button class="rx-button" :disabled="!bridgeFresh || !bridgeInfo.motion_available" @click="runtimeSend('motion.relative',{axis:'tilt',delta:-1})">Tilt −1°</button><button class="rx-button" :disabled="!bridgeFresh || !bridgeInfo.motion_available" @click="runtimeSend('motion.relative',{axis:'tilt',delta:1})">Tilt +1°</button>
+ <label>Pan min <input class="rx-input" type="number" v-model.number="runtimeEdit.panMin" @input="runtimeDirty=true"/></label><label>Pan max <input class="rx-input" type="number" v-model.number="runtimeEdit.panMax" @input="runtimeDirty=true"/></label>
+ <label>Tilt min <input class="rx-input" type="number" v-model.number="runtimeEdit.tiltMin" @input="runtimeDirty=true"/></label><label>Tilt max <input class="rx-input" type="number" v-model.number="runtimeEdit.tiltMax" @input="runtimeDirty=true"/></label>
+ <label><input type="checkbox" v-model="runtimeLimitsConfirmed"/> Grenzen visuell geprüft und Sicherheitsabstand berücksichtigt.</label>
+ <button class="rx-button" :disabled="!bridgeFresh || !bridgeInfo.calibrated || !runtimeLimitsConfirmed" @click="runtimeApply('limits')">Softwaregrenzen übernehmen und stoppen</button>
+</div>
+<div v-if="runtimeSection==='audio'">
+ <p>TTS eingerichtet: {{runtimeState.audio.tts_online?'ja':'nein'}} · Anrede-Modus: {{runtimeState.audio.wakeword_online?'aktiv':'aus'}} · Musik: {{runtimeState.audio.music_state}}</p>
+ <label>Sprachlautstärke % <input class="rx-input" type="number" min="0" max="100" v-model.number="runtimeEdit.speech_volume" @input="runtimeDirty=true"/></label>
+ <label>Sprechtempo <input class="rx-input" type="number" min="0.5" max="1.5" step="0.05" v-model.number="runtimeEdit.speech_rate" @input="runtimeDirty=true"/></label>
+ <label>Musiklautstärke % <input class="rx-input" type="number" min="0" max="100" v-model.number="runtimeEdit.music_volume" @input="runtimeDirty=true"/></label>
+ <button class="rx-button" :disabled="!bridgeFresh" @click="runtimeApply('audio')">Audio übernehmen</button>
+</div>
+<div v-if="runtimeSection==='camera'">
+ <p>Gesichter: {{runtimeState.camera.face_count ?? 'unbekannt'}} · Tracking: {{runtimeState.camera.tracking?'an':'aus'}}</p>
+ <label>Totzone <input class="rx-input" type="number" min="0" max="0.4" step="0.01" v-model.number="runtimeEdit.deadzone" @input="runtimeDirty=true"/></label>
+ <label>Nachführverstärkung <input class="rx-input" type="number" min="0.1" max="5" step="0.1" v-model.number="runtimeEdit.gain" @input="runtimeDirty=true"/></label>
+ <button class="rx-button" :disabled="!bridgeFresh" @click="runtimeApply('camera')">Trackingparameter übernehmen</button>
+ <button class="rx-button" :disabled="!bridgeFresh" @click="runtimeSend('behavior.gaze',{enabled:!runtimeState.behavior.social_gaze})">Aufmerksamkeitsblicke {{runtimeState.behavior.social_gaze?'ausschalten':'einschalten'}}</button>
+</div>
+<div v-if="runtimeSection==='display'"><p>Bestätigte Displayvorgabe: <strong>{{runtimeState.display.emotion}}</strong></p>
+ <label>Helligkeit % <input class="rx-input" type="number" min="0" max="100" v-model.number="runtimeEdit.brightness" @input="runtimeDirty=true"/></label>
+ <p class="rx-small">Pixeldimmung; bei null Hintergrundbeleuchtung aus. Aktualisierte Firmware erforderlich.</p>
+ <select class="rx-input" v-model="runtimeEdit.displayMode" @change="runtimeDirty=true"><option value="automatic">Automatische Mimik</option><option value="manual">Manuelles Gesicht</option><option value="off">Display aus</option></select>
+ <select class="rx-input" v-model="runtimeEdit.displayFace" @change="runtimeDirty=true"><option v-for="face in runtimeFaces" :key="face" :value="face">{{face}}</option></select>
+ <button class="rx-button" :disabled="!bridgeFresh" @click="runtimeApply('display')">Display übernehmen</button>
+</div>
+<div v-if="runtimeSection==='connections'">
+ <p>Spotify eingerichtet: {{runtimeState.spotify.configured?'ja':'nein'}} · Wiedergabe: {{runtimeState.spotify.state}} · Quelle: {{runtimeState.spotify.source}}. Kein laufender Kontoverbindungstest.</p>
+ <input class="rx-input" v-model="runtimeQuery" maxlength="120" placeholder="Titel oder Interpret"/>
+ <button class="rx-button" :disabled="!bridgeFresh || !runtimeState.spotify.configured" @click="runtimeSend('music.spotify',{query:runtimeQuery})">Auf Spotify spielen</button>
+ <button class="rx-button" :disabled="!bridgeFresh" @click="runtimeSend('music.pause',{})">Pause</button>
+ <button class="rx-button" :disabled="!bridgeFresh" @click="runtimeSend('music.resume',{})">Fortsetzen</button>
+ <button class="rx-button" :disabled="!bridgeFresh" @click="runtimeSend('music.stop',{})">Musik stoppen</button>
+ <p>Textmodell: {{runtimeState.llm.model || 'nicht eingerichtet'}} · Aufrufe: {{runtimeState.llm.calls}}</p>
+</div>
+<div v-if="runtimeSection==='system'"><p>Akkuquelle: {{runtimeState.power.source || 'unbekannt'}} · letzter Lesezeitpunkt: {{runtimeState.power.measured_at_unix || 'unbekannt'}}</p></div>
+</template>
+</section></div>

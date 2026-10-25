@@ -1,0 +1,1 @@
+"""Anwendungsabläufe auf den gemeinsam besessenen Core-Ressourcen."""

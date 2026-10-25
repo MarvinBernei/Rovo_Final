@@ -1,0 +1,11 @@
+user rovo-core
+topic read rovo/v1/command
+topic write rovo/v1/reply
+topic write rovo/v1/status
+topic write rovo/v1/availability
+
+user rovo-nodered
+topic write rovo/v1/command
+topic read rovo/v1/reply
+topic read rovo/v1/status
+topic read rovo/v1/availability

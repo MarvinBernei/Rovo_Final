@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "mqtt": {"enabled": false, "host": "127.0.0.1", "port": 1883, "prefix": "rovo/v1"},
+  "timezone": "Europe/Berlin",
+  "safe_mode": true,
+  "simulation": true,
+  "serial_port": null,
+  "motion": {
+    "calibrated": false,
+    "calibration_id": null,
+    "pan": {"min": null, "max": null, "home": null, "direction": null},
+    "tilt": {"min": null, "max": null, "home": null, "direction": null}
+  },
+  "audio": {"enabled": false, "piper": "piper", "voice": null, "output_device": "default"},
+  "llm": {"enabled": false, "endpoint": null, "model": null, "allow_cloud": false},
+  "camera": {"enabled": false, "backend": "opencv", "index": 0, "width": 640, "height": 480, "deadzone": 0.1, "gain": 2.0},
+  "behavior": {"social_gaze": false, "gaze_seconds": 1.5, "gaze_interval_seconds": 8},
+  "weather": {"enabled": false, "latitude": null, "longitude": null, "label": "lokaler Standort"},
+  "power": {"supply": null, "driver": "sysfs", "i2c_bus": 1, "i2c_address": 45},
+  "people": {"enabled": false, "detector_model": null, "recognizer_model": null,
+    "recognition_verified": false, "known_threshold": 0.55, "unknown_threshold": 0.30,
+    "match_margin": 0.08, "samples_per_pose": 40, "store_images": false,
+    "offer_enrollment": true, "greet_daily": true, "liveness_required": false,
+    "liveness_timeout_seconds": 20},
+  "api": {"host": "127.0.0.1", "port": 1891}
+}

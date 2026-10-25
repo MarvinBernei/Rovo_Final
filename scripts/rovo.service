@@ -1,0 +1,20 @@
+[Unit]
+Description=ROVO lokaler Core (sichere Simulation)
+After=network.target
+
+[Service]
+Type=simple
+# Benutzer und Pfade vor manueller Installation anpassen.
+User=rovo
+WorkingDirectory=/home/rovo/rovo
+EnvironmentFile=/home/rovo/.config/rovo/core.env
+ExecStart=/home/rovo/rovo/.venv/bin/python -m rovo serve --config config/default.json
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=10
+NoNewPrivileges=true
+PrivateTmp=true
+UMask=0077
+
+[Install]
+WantedBy=multi-user.target
